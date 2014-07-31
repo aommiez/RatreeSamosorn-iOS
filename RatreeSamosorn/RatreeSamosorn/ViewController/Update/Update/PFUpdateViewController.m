@@ -1,22 +1,22 @@
 //
-//  PFContactViewController.m
+//  PFUpdateViewController.m
 //  ราตรีสโมสร
 //
 //  Created by Pariwat on 7/30/14.
 //  Copyright (c) 2014 platwofusion. All rights reserved.
 //
 
-#import "PFContactViewController.h"
+#import "PFUpdateViewController.h"
 
-@interface PFContactViewController ()
+@interface PFUpdateViewController ()
 
 @end
 
-@implementation PFContactViewController
+@implementation PFUpdateViewController
 
-BOOL loadContact;
-BOOL noDataContact;
-BOOL refreshDataContact;
+BOOL loadUpdate;
+BOOL noDataUpdate;
+BOOL refreshDataUpdate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,68 +45,68 @@ BOOL refreshDataContact;
     [[self.navController navigationBar] setTranslucent:YES];
     [self.view addSubview:self.navController.view];
     
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Setting_icon"] style:UIBarButtonItemStyleDone target:self action:@selector(account)];
+    
+    //notification if (noti = 0) else
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Notification_icon"] style:UIBarButtonItemStyleDone target:self action:@selector(notify)];
+    
+    self.navItem.leftBarButtonItem = leftButton;
+    self.navItem.rightBarButtonItem = rightButton;
+    
     self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
     self.RatreeSamosornApi.delegate = self;
     
     if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
-        self.navItem.title = @"Contact Us";
+        self.navItem.title = @"Update";
     } else {
-        self.navItem.title = @"ติดต่อ";
+        self.navItem.title = @"ข่าวสาร";
     }
     
-    self.tableView.tableHeaderView = self.headerView;
+    UIView *fv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 54)];
+    self.tableView.tableFooterView = fv;
     
-    CALayer *mapView = [self.mapView layer];
-    [mapView setMasksToBounds:YES];
-    [mapView setCornerRadius:7.0f];
-    
-    CALayer *mapImage = [self.mapImage layer];
-    [mapImage setMasksToBounds:YES];
-    [mapImage setCornerRadius:7.0f];
-    
-    NSString *urlmap = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@",@"http://maps.googleapis.com/maps/api/staticmap?center=",@"18.789622",@",",@"98.982788",@"&zoom=16&size=6400x280&sensor=false&markers=color:red%7Clabel:Satit%7C",@"18.789622",@",",@"98.982788"];
-    
-    [DLImageLoader loadImageFromURL:urlmap
-                          completed:^(NSError *error, NSData *imgData) {
-                              self.mapImage.image = [UIImage imageWithData:imgData];
-                          }];
-    
-    loadContact = NO;
-    noDataContact = NO;
-    refreshDataContact = NO;
+    loadUpdate = NO;
+    noDataUpdate = NO;
+    refreshDataUpdate = NO;
+
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(NSUInteger)supportedInterfaceOrientations{
     return UIInterfaceOrientationMaskPortrait;
 }
 
+- (void)account {
+    
+}
+
+- (void)notify {
+
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return 3;
 }
 
-- (IBAction)mapTapped:(id)sender{
-    
-    [self.delegate HideTabbar];
-    
-    PFMapViewController *mapView = [[PFMapViewController alloc] init];
-    if(IS_WIDESCREEN) {
-        mapView = [[PFMapViewController alloc] initWithNibName:@"PFMapViewController_Wide" bundle:nil];
-    } else {
-        mapView = [[PFMapViewController alloc] initWithNibName:@"PFMapViewController" bundle:nil];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 306;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    PFUpdateCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PFUpdateCell"];
+    if(cell == nil) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PFUpdateCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
     }
-    mapView.delegate = self;
-    [self.navController pushViewController:mapView animated:YES];
-}
-
-- (IBAction)powerbyTapped:(id)sender{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://pla2fusion.com/"]];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
 }
 
 #pragma mark -
@@ -133,18 +133,18 @@ BOOL refreshDataContact;
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
     //NSLog(@"%f",scrollView.contentOffset.y);
     if (scrollView.contentOffset.y < -60.0f ) {
-        refreshDataContact = YES;
+        refreshDataUpdate = YES;
         
         /*
-        self.mingmitrSDK = [[PFMingMitrSDK alloc] init];
-        self.mingmitrSDK.delegate = self;
-        
-        [self.mingmitrSDK getNews:@"5" next:@"NO"];
-        */
+         self.mingmitrSDK = [[PFMingMitrSDK alloc] init];
+         self.mingmitrSDK.delegate = self;
          
+         [self.mingmitrSDK getNews:@"5" next:@"NO"];
+         */
+        
         //if ([[self.obj objectForKey:@"total"] intValue] == 0) {
-            //self.loadLabel.text = @"";
-            //self.act.alpha = 0;
+        //self.loadLabel.text = @"";
+        //self.act.alpha = 0;
         //}
     } else {
         //self.loadLabel.text = @"";
@@ -157,13 +157,13 @@ BOOL refreshDataContact;
     if ( scrollView.contentOffset.y < -100.0f ) {
         [UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.2];
-        self.tableView.frame = CGRectMake(0, 70, 320, self.tableView.frame.size.height);
+        self.tableView.frame = CGRectMake(0, 60, 320, self.tableView.frame.size.height);
 		[UIView commitAnimations];
         [self performSelector:@selector(resizeTable) withObject:nil afterDelay:2];
         
         //if ([[self.obj objectForKey:@"total"] intValue] == 0) {
-            //self.loadLabel.text = @"";
-            //self.act.alpha = 0;
+        //self.loadLabel.text = @"";
+        //self.act.alpha = 0;
         //}
     } else {
         //self.loadLabel.text = @"";
@@ -175,14 +175,14 @@ BOOL refreshDataContact;
 {
     float offset = (scrollView.contentOffset.y - (scrollView.contentSize.height - scrollView.frame.size.height));
     if (offset >= 0 && offset <= 5) {
-        if (!noDataContact) {
-            refreshDataContact = NO;
+        if (!noDataUpdate) {
+            refreshDataUpdate = NO;
             
             /*
-            self.mingmitrSDK = [[PFMingMitrSDK alloc] init];
-            self.mingmitrSDK.delegate = self;
-            
-            [self.mingmitrSDK getNews:@"NO" next:self.paging];
+             self.mingmitrSDK = [[PFMingMitrSDK alloc] init];
+             self.mingmitrSDK.delegate = self;
+             
+             [self.mingmitrSDK getNews:@"NO" next:self.paging];
              */
         }
     }
@@ -193,10 +193,6 @@ BOOL refreshDataContact;
     [UIView setAnimationDuration:0.2];
     self.tableView.frame = CGRectMake(0, 0, 320, self.tableView.frame.size.height);
     [UIView commitAnimations];
-}
-
-- (void)PFMapViewControllerBack {
-    [self.delegate ShowTabbar];
 }
 
 @end
