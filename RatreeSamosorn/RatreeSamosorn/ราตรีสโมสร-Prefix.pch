@@ -17,7 +17,6 @@
     #import "AsyncImageView.h"
     #import "ScrollView.h"
     #import "UILabel+UILabelDynamicHeight.h"
-    #import "CRGradientNavigationBar.h"
     #import "DLImageLoader.h"
     #import "PFMapView.h"
     #import "CMMapLauncher.h"

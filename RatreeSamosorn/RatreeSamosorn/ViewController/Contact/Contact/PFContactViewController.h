@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CRGradientNavigationBar.h"
 
 #import "PFRatreeSamosornApi.h"
 

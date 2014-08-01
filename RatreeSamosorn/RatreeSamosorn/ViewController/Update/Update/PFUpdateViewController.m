@@ -76,7 +76,7 @@ BOOL refreshDataUpdate;
     [super didReceiveMemoryWarning];
 }
 
--(NSUInteger)supportedInterfaceOrientations{
+- (NSUInteger)supportedInterfaceOrientations{
     return UIInterfaceOrientationMaskPortrait;
 }
 
@@ -109,18 +109,32 @@ BOOL refreshDataUpdate;
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self.delegate HideTabbar];
+    
+    PFDetailViewController *detail = [[PFDetailViewController alloc] init];
+    
+    if(IS_WIDESCREEN){
+        detail = [[PFDetailViewController alloc] initWithNibName:@"PFDetailViewController_Wide" bundle:nil];
+    } else {
+        detail = [[PFDetailViewController alloc] initWithNibName:@"PFDetailViewController" bundle:nil];
+    }
+    //detail.obj = [self.arrObj objectAtIndex:indexPath.row];
+    detail.delegate = self;
+    [self.navController pushViewController:detail animated:YES];
+}
+
 #pragma mark -
 #pragma mark UIScrollViewDelegate Methods
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-	//NSLog(@"%f",scrollView.contentOffset.y);
-	//[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
     
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     if ( scrollView.contentOffset.y < 0.0f ) {
-        //NSLog(@"refreshData < 0.0f");
+        
         [NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehaviorDefault];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterShortStyle];
@@ -131,24 +145,8 @@ BOOL refreshDataUpdate;
 }
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    //NSLog(@"%f",scrollView.contentOffset.y);
     if (scrollView.contentOffset.y < -60.0f ) {
         refreshDataUpdate = YES;
-        
-        /*
-         self.mingmitrSDK = [[PFMingMitrSDK alloc] init];
-         self.mingmitrSDK.delegate = self;
-         
-         [self.mingmitrSDK getNews:@"5" next:@"NO"];
-         */
-        
-        //if ([[self.obj objectForKey:@"total"] intValue] == 0) {
-        //self.loadLabel.text = @"";
-        //self.act.alpha = 0;
-        //}
-    } else {
-        //self.loadLabel.text = @"";
-        //self.act.alpha = 0;
     }
 }
 
@@ -157,17 +155,9 @@ BOOL refreshDataUpdate;
     if ( scrollView.contentOffset.y < -100.0f ) {
         [UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.2];
-        self.tableView.frame = CGRectMake(0, 60, 320, self.tableView.frame.size.height);
+        self.tableView.frame = CGRectMake(0, 50, 320, self.tableView.frame.size.height);
 		[UIView commitAnimations];
         [self performSelector:@selector(resizeTable) withObject:nil afterDelay:2];
-        
-        //if ([[self.obj objectForKey:@"total"] intValue] == 0) {
-        //self.loadLabel.text = @"";
-        //self.act.alpha = 0;
-        //}
-    } else {
-        //self.loadLabel.text = @"";
-        //self.act.alpha = 0;
     }
 }
 
@@ -193,6 +183,10 @@ BOOL refreshDataUpdate;
     [UIView setAnimationDuration:0.2];
     self.tableView.frame = CGRectMake(0, 0, 320, self.tableView.frame.size.height);
     [UIView commitAnimations];
+}
+
+- (void)PFDetailViewControllerBack {
+    [self.delegate ShowTabbar];
 }
 
 @end

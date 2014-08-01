@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CRGradientNavigationBar.h"
 
 #import "PFRatreeSamosornApi.h"
 
 #import "PFUpdateCell.h"
+#import "PFDetailViewController.h"
 
 @protocol PFUpdateViewControllerDelegate <NSObject>
 

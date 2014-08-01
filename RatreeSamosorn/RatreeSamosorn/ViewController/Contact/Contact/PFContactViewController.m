@@ -82,7 +82,7 @@ BOOL refreshDataContact;
     // Dispose of any resources that can be recreated.
 }
 
--(NSUInteger)supportedInterfaceOrientations{
+- (NSUInteger)supportedInterfaceOrientations{
     return UIInterfaceOrientationMaskPortrait;
 }
 
@@ -113,14 +113,12 @@ BOOL refreshDataContact;
 #pragma mark UIScrollViewDelegate Methods
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-	//NSLog(@"%f",scrollView.contentOffset.y);
-	//[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
     
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     if ( scrollView.contentOffset.y < 0.0f ) {
-        //NSLog(@"refreshData < 0.0f");
+        
         [NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehaviorDefault];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterShortStyle];
@@ -131,24 +129,8 @@ BOOL refreshDataContact;
 }
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    //NSLog(@"%f",scrollView.contentOffset.y);
     if (scrollView.contentOffset.y < -60.0f ) {
         refreshDataContact = YES;
-        
-        /*
-        self.mingmitrSDK = [[PFMingMitrSDK alloc] init];
-        self.mingmitrSDK.delegate = self;
-        
-        [self.mingmitrSDK getNews:@"5" next:@"NO"];
-        */
-         
-        //if ([[self.obj objectForKey:@"total"] intValue] == 0) {
-            //self.loadLabel.text = @"";
-            //self.act.alpha = 0;
-        //}
-    } else {
-        //self.loadLabel.text = @"";
-        //self.act.alpha = 0;
     }
 }
 
@@ -157,17 +139,9 @@ BOOL refreshDataContact;
     if ( scrollView.contentOffset.y < -100.0f ) {
         [UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.2];
-        self.tableView.frame = CGRectMake(0, 70, 320, self.tableView.frame.size.height);
+        self.tableView.frame = CGRectMake(0, 60, 320, self.tableView.frame.size.height);
 		[UIView commitAnimations];
         [self performSelector:@selector(resizeTable) withObject:nil afterDelay:2];
-        
-        //if ([[self.obj objectForKey:@"total"] intValue] == 0) {
-            //self.loadLabel.text = @"";
-            //self.act.alpha = 0;
-        //}
-    } else {
-        //self.loadLabel.text = @"";
-        //self.act.alpha = 0;
     }
 }
 
