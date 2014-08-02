@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PFMapView.h"
+#import "CMMapLauncher.h"
 
 #import "PFRatreeSamosornApi.h"
 
