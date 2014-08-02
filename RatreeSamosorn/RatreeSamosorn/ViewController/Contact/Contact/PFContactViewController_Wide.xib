@@ -7,15 +7,25 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PFContactViewController">
             <connections>
                 <outlet property="act" destination="VO2-ao-3CN" id="kcC-qM-NKi"/>
+                <outlet property="buttonView" destination="dFR-NY-hgw" id="TcM-dO-ZMX"/>
+                <outlet property="contentTxt" destination="q8e-c6-2Sk" id="ewd-Io-zEi"/>
+                <outlet property="contentView" destination="xdN-aQ-KaN" id="ALJ-5d-UJE"/>
+                <outlet property="emailTxt" destination="Gqo-eY-dSk" id="Csp-hZ-myF"/>
                 <outlet property="headerView" destination="kuO-AP-jRb" id="Jcz-qC-3pv"/>
                 <outlet property="loadLabel" destination="DdQ-yL-waP" id="7iA-Z0-NfQ"/>
+                <outlet property="locationTxt" destination="9n8-qS-b8F" id="UPo-aP-S6g"/>
                 <outlet property="mapImage" destination="Coe-6H-zDO" id="re7-qf-In7"/>
                 <outlet property="mapView" destination="4AH-ER-VN1" id="hcd-0y-XPl"/>
                 <outlet property="navBar" destination="yLc-o5-3oZ" id="Feq-G5-kbu"/>
                 <outlet property="navController" destination="il4-Q8-fb9" id="4dO-jl-95j"/>
                 <outlet property="navItem" destination="c9c-VZ-XdR" id="nIS-V0-yFp"/>
+                <outlet property="phoneTxt" destination="ml7-uR-Kpw" id="yhG-ZW-9vR"/>
+                <outlet property="popupwaitView" destination="bMb-pR-lLK" id="c9t-OL-LUH"/>
+                <outlet property="powerbyView" destination="Yc3-YA-ssR" id="fsi-Vw-i3q"/>
                 <outlet property="tableView" destination="N68-eg-8D3" id="Fph-R6-fnj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="waitView" destination="5J5-2o-xav" id="G9h-Hh-cDl"/>
+                <outlet property="websiteTxt" destination="43W-8O-9gI" id="kDT-N6-d6L"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -102,7 +112,7 @@
             </viewControllers>
         </navigationController>
         <view contentMode="scaleToFill" id="kuO-AP-jRb">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="670"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="649"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="0vk-7f-QNb">
@@ -114,22 +124,22 @@
                     <rect key="frame" x="0.0" y="180" width="320" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q8e-c6-2Sk" customClass="UILabel_UILabelDynamicHeight">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q8e-c6-2Sk" customClass="UILabel_UILabelDynamicHeight">
                             <rect key="frame" x="10" y="8" width="300" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="4AH-ER-VN1">
-                    <rect key="frame" x="10" y="227" width="300" height="203"/>
+                    <rect key="frame" x="10" y="227" width="300" height="182"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="d5S-ky-o98">
-                            <rect key="frame" x="0.0" y="0.0" width="300" height="203"/>
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="182"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -141,8 +151,8 @@
                             <rect key="frame" x="10" y="10" width="280" height="120"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location Info" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9n8-qS-b8F" customClass="UILabel_UILabelDynamicHeight">
-                            <rect key="frame" x="10" y="135" width="280" height="63"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9n8-qS-b8F" customClass="UILabel_UILabelDynamicHeight">
+                            <rect key="frame" x="10" y="135" width="280" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="highlightedColor"/>
@@ -151,7 +161,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="dFR-NY-hgw">
-                    <rect key="frame" x="10" y="440" width="300" height="137"/>
+                    <rect key="frame" x="10" y="419" width="300" height="137"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7S8-kH-Hgs">
@@ -161,6 +171,9 @@
                             <state key="normal" image="chapter01.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="phoneTapped:" destination="-1" eventType="touchUpInside" id="YNT-IV-iIo"/>
+                            </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_phone.png" id="WuP-89-XFT">
                             <rect key="frame" x="10" y="10" width="25" height="25"/>
@@ -170,7 +183,7 @@
                             <rect key="frame" x="60" y="12" width="230" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.5450980392" green="0.36862745099999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GfZ-AE-vpb">
@@ -180,6 +193,9 @@
                             <state key="normal" image="chapter02.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="websiteTapped:" destination="-1" eventType="touchUpInside" id="dzx-hQ-mf3"/>
+                            </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_website.png" id="W4Z-qv-9Lh">
                             <rect key="frame" x="10" y="56" width="25" height="25"/>
@@ -189,7 +205,7 @@
                             <rect key="frame" x="60" y="58" width="230" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.5450980392" green="0.36862745099999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QTm-dP-Now">
@@ -199,6 +215,9 @@
                             <state key="normal" image="chapter03.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="emailTapped:" destination="-1" eventType="touchUpInside" id="bjG-Yy-57L"/>
+                            </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_mail.png" id="TEs-fX-ydi">
                             <rect key="frame" x="10" y="102" width="25" height="25"/>
@@ -208,26 +227,33 @@
                             <rect key="frame" x="60" y="104" width="230" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.5450980392" green="0.36862745099999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zrl-ca-y98">
-                    <rect key="frame" x="0.0" y="577" width="320" height="40"/>
+                <view contentMode="scaleToFill" id="Yc3-YA-ssR">
+                    <rect key="frame" x="0.0" y="556" width="320" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="powerbyTapped:" destination="-1" eventType="touchUpInside" id="FZB-3N-hIN"/>
-                    </connections>
-                </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Powered.png" id="ueS-T6-c3Z">
-                    <rect key="frame" x="60" y="585" width="200" height="25"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                </imageView>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zrl-ca-y98">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="powerbyTapped:" destination="-1" eventType="touchUpInside" id="FZB-3N-hIN"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Powered.png" id="ueS-T6-c3Z">
+                            <rect key="frame" x="60" y="7" width="200" height="25"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

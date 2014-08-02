@@ -108,7 +108,7 @@ BOOL refreshDataMenu;
         return 0;
     }
     if ([self.menu isEqualToString:@"Gallery"]) {
-        return 100;
+        return 110;
     }
     return 0;
 }

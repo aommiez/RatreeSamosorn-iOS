@@ -9,6 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 
+@protocol PFRatreeSamosornApiDelegate <NSObject>
+
+#pragma mark - Contact Protocal Delegate
+- (void)PFRatreeSamosornApi:(id)sender getContactResponse:(NSDictionary *)response;
+- (void)PFRatreeSamosornApi:(id)sender getContactErrorResponse:(NSString *)errorResponse;
+
+@end
+
 @interface PFRatreeSamosornApi : NSObject
 
 #pragma mark - Property
@@ -19,5 +27,8 @@
 #pragma mark - App Language
 - (void)saveLanguage:(NSString *)language;
 - (NSString *)getLanguage;
+
+#pragma mark - Contact
+- (void)getContact;
 
 @end
