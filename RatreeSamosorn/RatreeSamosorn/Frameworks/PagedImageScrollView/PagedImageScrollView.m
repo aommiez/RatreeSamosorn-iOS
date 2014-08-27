@@ -54,6 +54,7 @@ NSString *removeBreckets;
 - (void)setDefaults
 {
     self.pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
+    //self.pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:146.0f/255.0f green:90.0f/255.0f blue:202.0f/255.0f alpha:1.0f];
     self.pageControl.hidesForSinglePage = YES;
     self.scrollView.pagingEnabled = YES;
     self.scrollView.showsVerticalScrollIndicator = NO;
@@ -84,7 +85,7 @@ NSString *removeBreckets;
 }
 
 - (void)changePage:(UIPageControl *)sender
-{    
+{
     CGRect frame = self.scrollView.frame;
     frame.origin.x = frame.size.width * self.pageControl.currentPage;
     frame.origin.y = 0;
@@ -113,10 +114,19 @@ NSString *removeBreckets;
     removeBreckets = @"0";
     
     NSString *contentOffSet = [NSString stringWithFormat:@"%@", NSStringFromCGPoint(self.scrollView.contentOffset)];
-    removeBreckets = [contentOffSet stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"{ ,0}"]];
+    
+    NSString *newStr;
+    if (contentOffSet.length == 8) {
+        newStr = [contentOffSet substringWithRange:NSMakeRange(contentOffSet.length -7, 2)];
+    } else if (contentOffSet.length == 9) {
+        newStr = [contentOffSet substringWithRange:NSMakeRange(contentOffSet.length -8, 3)];
+    } else if (contentOffSet.length == 10) {
+        newStr = [contentOffSet substringWithRange:NSMakeRange(contentOffSet.length -9, 4)];
+    }
+    
+    removeBreckets = newStr;
     
     [self.delegate PagedImageScrollView:self current:removeBreckets];
-
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView

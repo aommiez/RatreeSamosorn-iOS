@@ -13,6 +13,7 @@
 
 #import "PFFoodsCell.h"
 #import "PFGalleryCell.h"
+#import "PFActivityCalendarViewController.h"
 
 @protocol PFMenuViewControllerDelegate <NSObject>
 
@@ -39,6 +40,7 @@
 @property (strong, nonatomic) IBOutlet UINavigationItem *navItem;
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIView *CalendarView;
 
 @property (strong, nonatomic) IBOutlet UIButton *foodsBt;
 @property (strong, nonatomic) IBOutlet UIButton *drinksBt;

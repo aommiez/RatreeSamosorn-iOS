@@ -14,16 +14,13 @@
 
 @implementation PFContactViewController
 
-BOOL loadContact;
-BOOL noDataContact;
-BOOL refreshDataContact;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        self.contactOffline = [NSUserDefaults standardUserDefaults];
     }
     return self;
 }
@@ -31,12 +28,6 @@ BOOL refreshDataContact;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self.view addSubview:self.waitView];
-    
-    CALayer *popup = [self.popupwaitView layer];
-    [popup setMasksToBounds:YES];
-    [popup setCornerRadius:7.0f];
     
     // Navbar setup
     UIColor *firstColor = [UIColor colorWithRed:255.0f/255.0f green:0.0f/255.0f blue:107.0f/255.0f alpha:1.0f];
@@ -51,6 +42,8 @@ BOOL refreshDataContact;
     [[self.navController navigationBar] setTranslucent:YES];
     [self.view addSubview:self.navController.view];
     
+    [self.view addSubview:self.waitView];
+    
     self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
     self.RatreeSamosornApi.delegate = self;
     
@@ -60,6 +53,9 @@ BOOL refreshDataContact;
         self.navItem.title = @"ติดต่อ";
     }
     
+    self.ArrImgs = [[NSMutableArray alloc] init];
+    self.arrcontactimg = [[NSMutableArray alloc] init];
+    
     CALayer *mapView = [self.mapView layer];
     [mapView setMasksToBounds:YES];
     [mapView setCornerRadius:7.0f];
@@ -68,21 +64,14 @@ BOOL refreshDataContact;
     [mapImage setMasksToBounds:YES];
     [mapImage setCornerRadius:7.0f];
     
-    NSString *urlmap = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@",@"http://maps.googleapis.com/maps/api/staticmap?center=",@"18.789622",@",",@"98.982788",@"&zoom=16&size=6400x280&sensor=false&markers=color:red%7Clabel:Satit%7C",@"18.789622",@",",@"98.982788"];
+    //[self.RatreeSamosornApi getContact];
+    [self.RatreeSamosornApi getContactGallery];
     
-    [DLImageLoader loadImageFromURL:urlmap
-                          completed:^(NSError *error, NSData *imgData) {
-                              self.mapImage.image = [UIImage imageWithData:imgData];
-                          }];
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
+    [self.imgscrollview addGestureRecognizer:singleTap];
     
-    loadContact = NO;
-    noDataContact = NO;
-    refreshDataContact = NO;
-    
-    [self.RatreeSamosornApi getContact];
-    
-    self.locationTxt.text = @"12/21 หมู่ 4 ถ.เชียงใหม่ - ลำปาง ต.ท่าศาลา อ.เมือง จ.เชียงใหม่ 50000";
-    //12/21 หมู่ 4 ถ.เชียงใหม่ - ลำปาง ต.ท่าศาลา อ.เมือง จ.เชียงใหม่ 50000
+    self.current = @"0";
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -95,42 +84,79 @@ BOOL refreshDataContact;
     return UIInterfaceOrientationMaskPortrait;
 }
 
+- (void)PagedImageScrollView:(id)sender current:(NSString *)current{
+    self.current = current;
+}
+
+- (void)singleTapGestureCaptured:(UITapGestureRecognizer *)gesture
+{
+    int sum;
+    sum = [self.current intValue]/32;
+    NSString *num = [NSString stringWithFormat:@"%d",sum];
+    [self.delegate PFGalleryViewController:self sum:self.arrcontactimg current:num];
+    
+}
+
+- (NSArray *)imageToArray:(NSDictionary *)images {
+    int countPicture = [[images objectForKey:@"data"] count];
+    for (int i = 0; i < countPicture; i++) {
+        NSString *urlStr = [[NSString alloc] initWithFormat:@"%@%@",[[[images objectForKey:@"data"] objectAtIndex:i] objectForKey:@"url"],@"custom/320/180/"];
+        NSURL *url = [[NSURL alloc] initWithString:urlStr];
+        NSData *data = [NSData dataWithContentsOfURL : url];
+        UIImage *image = [UIImage imageWithData: data];
+        [self.ArrImgs addObject:image];
+    }
+    return self.ArrImgs;
+}
+
+- (void)PFRatreeSamosornApi:(id)sender getContactGalleryResponse:(NSDictionary *)response {
+    //NSLog(@"%@",response);
+    
+    for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
+        [self.arrcontactimg addObject:[[[response objectForKey:@"data"] objectAtIndex:i] objectForKey:@"url"]];
+    }
+    
+    self.pageScrollView = [[PagedImageScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 180)];
+    self.pageScrollView.delegate = self;
+    [self.pageScrollView setScrollViewContents:[self imageToArray:response]];
+    self.pageScrollView.pageControlPos = PageControlPositionCenterBottom;
+    [self.imgscrollview addSubview:self.pageScrollView];
+
+    [self.RatreeSamosornApi getContact];
+
+}
+
+- (void)PFRatreeSamosornApi:(id)sender getContactGalleryErrorResponse:(NSString *)errorResponse {
+    NSLog(@"%@",errorResponse);
+    
+    [self.RatreeSamosornApi getContact];
+}
+
 - (void)PFRatreeSamosornApi:(id)sender getContactResponse:(NSDictionary *)response {
     self.obj = response;
-    NSLog(@"%@",response);
+    //NSLog(@"%@",response);
+    
+    [self.contactOffline setObject:response forKey:@"contactOffline"];
+    [self.contactOffline synchronize];
     
     [self.waitView removeFromSuperview];
     
     //Content Label
-    self.contentTxt.text = [self.obj objectForKey:@"info"];
+    self.contentTxt.text = [response objectForKey:@"info"];
     CGRect frame = self.contentTxt.frame;
     frame.size = [self.contentTxt sizeOfMultiLineLabel];
     [self.contentTxt sizeOfMultiLineLabel];
     [self.contentTxt setFrame:frame];
     int lines = self.contentTxt.frame.size.height/15;
-    
-    if (lines > 2) {
-        self.contentTxt.numberOfLines = 2;
-        UILabel *descText = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 6.0f, 300.0f, 42.0f)];
-        descText.text = self.contentTxt.text;
-        descText.numberOfLines = 2;
-        [descText setFont:[UIFont systemFontOfSize:15]];
-        descText.textColor = [UIColor colorWithRed:104.0/255.0 green:71.0/255.0 blue:56.0/255.0 alpha:1.0];
-        self.contentTxt.alpha = 0;
-        [self.contentView addSubview:descText];
-        self.contentView.frame = CGRectMake(self.contentView.frame.origin.x, self.contentView.frame.origin.y, self.contentView.frame.size.width, 54);
-        
-    } else {
-        self.contentTxt.numberOfLines = lines;
-        UILabel *descText = [[UILabel alloc] initWithFrame:frame];
-        descText.text = self.contentTxt.text;
-        descText.numberOfLines = lines;
-        [descText setFont:[UIFont systemFontOfSize:15]];
-        descText.textColor = [UIColor colorWithRed:104.0/255.0 green:71.0/255.0 blue:56.0/255.0 alpha:1.0];
-        self.contentTxt.alpha = 0;
-        [self.contentView addSubview:descText];
-        self.contentView.frame = CGRectMake(self.contentView.frame.origin.x, self.contentView.frame.origin.y, self.contentView.frame.size.width, descText.frame.size.height+18);
-    }
+    self.contentTxt.numberOfLines = lines;
+    UILabel *descText = [[UILabel alloc] initWithFrame:frame];
+    descText.text = self.contentTxt.text;
+    descText.numberOfLines = lines;
+    [descText setFont:[UIFont systemFontOfSize:15]];
+    descText.textColor = [UIColor colorWithRed:128.0/255.0 green:128.0/255.0 blue:128.0/255.0 alpha:1.0];
+    self.contentTxt.alpha = 0;
+    [self.contentView addSubview:descText];
+    self.contentView.frame = CGRectMake(self.contentView.frame.origin.x, self.contentView.frame.origin.y, self.contentView.frame.size.width, descText.frame.size.height+18);
     
     self.mapView.frame = CGRectMake(self.mapView.frame.origin.x, self.mapView.frame.origin.y+self.contentView.frame.size.height-37, self.mapView.frame.size.width, self.mapView.frame.size.height);
     
@@ -139,6 +165,15 @@ BOOL refreshDataContact;
     self.powerbyView.frame = CGRectMake(self.powerbyView.frame.origin.x, self.powerbyView.frame.origin.y+self.contentView.frame.size.height-37, self.powerbyView.frame.size.width, self.powerbyView.frame.size.height);
     
     self.headerView.frame = CGRectMake(self.headerView.frame.origin.x, self.headerView.frame.origin.y, self.headerView.frame.size.width, self.headerView.frame.size.height+self.contentView.frame.size.height-37);
+    
+    NSString *urlmap = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@",@"http://maps.googleapis.com/maps/api/staticmap?center=",[[response objectForKey:@"location"] objectForKey:@"lat"],@",",[[response objectForKey:@"location"] objectForKey:@"lng"],@"&zoom=16&size=560x240&sensor=false&markers=color:red%7Clabel:Satit%7C",[[response objectForKey:@"location"] objectForKey:@"lat"],@",",[[response objectForKey:@"location"] objectForKey:@"lng"]];
+    
+    [DLImageLoader loadImageFromURL:urlmap
+                          completed:^(NSError *error, NSData *imgData) {
+                              self.mapImage.image = [UIImage imageWithData:imgData];
+                          }];
+    
+    self.locationTxt.text = @"12/21 หมู่ 4 ถ.เชียงใหม่ - ลำปาง ต.ท่าศาลา อ.เมือง จ.เชียงใหม่ 50000";
     
     self.phoneTxt.text = [response objectForKey:@"phone"];
     self.websiteTxt.text = [response objectForKey:@"website"];
@@ -151,6 +186,49 @@ BOOL refreshDataContact;
 - (void)PFRatreeSamosornApi:(id)sender getContactErrorResponse:(NSString *)errorResponse {
     NSLog(@"%@",errorResponse);
     
+    [self.waitView removeFromSuperview];
+    
+    self.obj = [self.contactOffline objectForKey:@"contactOffline"];
+    
+    //Content Label
+    self.contentTxt.text = [[self.contactOffline objectForKey:@"contactOffline"] objectForKey:@"info"];
+    CGRect frame = self.contentTxt.frame;
+    frame.size = [self.contentTxt sizeOfMultiLineLabel];
+    [self.contentTxt sizeOfMultiLineLabel];
+    [self.contentTxt setFrame:frame];
+    int lines = self.contentTxt.frame.size.height/15;
+    self.contentTxt.numberOfLines = lines;
+    UILabel *descText = [[UILabel alloc] initWithFrame:frame];
+    descText.text = self.contentTxt.text;
+    descText.numberOfLines = lines;
+    [descText setFont:[UIFont systemFontOfSize:15]];
+    descText.textColor = [UIColor colorWithRed:128.0/255.0 green:128.0/255.0 blue:128.0/255.0 alpha:1.0];
+    self.contentTxt.alpha = 0;
+    [self.contentView addSubview:descText];
+    self.contentView.frame = CGRectMake(self.contentView.frame.origin.x, self.contentView.frame.origin.y, self.contentView.frame.size.width, descText.frame.size.height+18);
+    
+    self.mapView.frame = CGRectMake(self.mapView.frame.origin.x, self.mapView.frame.origin.y+self.contentView.frame.size.height-37, self.mapView.frame.size.width, self.mapView.frame.size.height);
+    
+    self.buttonView.frame = CGRectMake(self.buttonView.frame.origin.x, self.buttonView.frame.origin.y+self.contentView.frame.size.height-37, self.buttonView.frame.size.width, self.buttonView.frame.size.height);
+    
+    self.powerbyView.frame = CGRectMake(self.powerbyView.frame.origin.x, self.powerbyView.frame.origin.y+self.contentView.frame.size.height-37, self.powerbyView.frame.size.width, self.powerbyView.frame.size.height);
+    
+    self.headerView.frame = CGRectMake(self.headerView.frame.origin.x, self.headerView.frame.origin.y, self.headerView.frame.size.width, self.headerView.frame.size.height+self.contentView.frame.size.height-37);
+    
+    NSString *urlmap = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@",@"http://maps.googleapis.com/maps/api/staticmap?center=",[[[self.contactOffline objectForKey:@"contactOffline"] objectForKey:@"location"] objectForKey:@"lat"],@",",[[[self.contactOffline objectForKey:@"contactOffline"] objectForKey:@"location"] objectForKey:@"lng"],@"&zoom=16&size=560x240&sensor=false&markers=color:red%7Clabel:Satit%7C",[[[self.contactOffline objectForKey:@"contactOffline"] objectForKey:@"location"] objectForKey:@"lat"],@",",[[[self.contactOffline objectForKey:@"contactOffline"] objectForKey:@"location"] objectForKey:@"lng"]];
+    
+    [DLImageLoader loadImageFromURL:urlmap
+                          completed:^(NSError *error, NSData *imgData) {
+                              self.mapImage.image = [UIImage imageWithData:imgData];
+                          }];
+    
+    self.locationTxt.text = @"12/21 หมู่ 4 ถ.เชียงใหม่ - ลำปาง ต.ท่าศาลา อ.เมือง จ.เชียงใหม่ 50000";
+    
+    self.phoneTxt.text = [[self.contactOffline objectForKey:@"contactOffline"] objectForKey:@"phone"];
+    self.websiteTxt.text = [[self.contactOffline objectForKey:@"contactOffline"] objectForKey:@"website"];
+    self.emailTxt.text = [[self.contactOffline objectForKey:@"contactOffline"] objectForKey:@"email"];
+    
+    self.tableView.tableHeaderView = self.headerView;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -169,6 +247,8 @@ BOOL refreshDataContact;
         mapView = [[PFMapViewController alloc] initWithNibName:@"PFMapViewController" bundle:nil];
     }
     mapView.delegate = self;
+    mapView.lat = [[self.obj objectForKey:@"location"] objectForKey:@"lat"];
+    mapView.lng = [[self.obj objectForKey:@"location"] objectForKey:@"lng"];
     [self.navController pushViewController:mapView animated:YES];
 }
 
@@ -257,66 +337,6 @@ BOOL refreshDataContact;
 
 - (IBAction)powerbyTapped:(id)sender{
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://pla2fusion.com/"]];
-}
-
-#pragma mark -
-#pragma mark UIScrollViewDelegate Methods
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    if ( scrollView.contentOffset.y < 0.0f ) {
-        
-        [NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehaviorDefault];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-        self.loadLabel.text = [NSString stringWithFormat:@"Last Updated: %@", [dateFormatter stringFromDate:[NSDate date]]];
-        self.act.alpha =1;
-    }
-}
-
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    if (scrollView.contentOffset.y < -60.0f ) {
-        refreshDataContact = YES;
-    }
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    
-    if ( scrollView.contentOffset.y < -100.0f ) {
-        [UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.2];
-        self.tableView.frame = CGRectMake(0, 60, 320, self.tableView.frame.size.height);
-		[UIView commitAnimations];
-        [self performSelector:@selector(resizeTable) withObject:nil afterDelay:2];
-    }
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    float offset = (scrollView.contentOffset.y - (scrollView.contentSize.height - scrollView.frame.size.height));
-    if (offset >= 0 && offset <= 5) {
-        if (!noDataContact) {
-            refreshDataContact = NO;
-            
-            /*
-            self.mingmitrSDK = [[PFMingMitrSDK alloc] init];
-            self.mingmitrSDK.delegate = self;
-            
-            [self.mingmitrSDK getNews:@"NO" next:self.paging];
-             */
-        }
-    }
-}
-
-- (void)resizeTable {
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.2];
-    self.tableView.frame = CGRectMake(0, 0, 320, self.tableView.frame.size.height);
-    [UIView commitAnimations];
 }
 
 - (void)PFMapViewControllerBack {

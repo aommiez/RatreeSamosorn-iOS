@@ -6,13 +6,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PFContactViewController">
             <connections>
-                <outlet property="act" destination="VO2-ao-3CN" id="kcC-qM-NKi"/>
                 <outlet property="buttonView" destination="dFR-NY-hgw" id="TcM-dO-ZMX"/>
                 <outlet property="contentTxt" destination="q8e-c6-2Sk" id="ewd-Io-zEi"/>
                 <outlet property="contentView" destination="xdN-aQ-KaN" id="ALJ-5d-UJE"/>
                 <outlet property="emailTxt" destination="Gqo-eY-dSk" id="Csp-hZ-myF"/>
                 <outlet property="headerView" destination="kuO-AP-jRb" id="Jcz-qC-3pv"/>
-                <outlet property="loadLabel" destination="DdQ-yL-waP" id="7iA-Z0-NfQ"/>
+                <outlet property="imgscrollview" destination="0vk-7f-QNb" id="Hy4-Hu-rkR"/>
                 <outlet property="locationTxt" destination="9n8-qS-b8F" id="UPo-aP-S6g"/>
                 <outlet property="mapImage" destination="Coe-6H-zDO" id="re7-qf-In7"/>
                 <outlet property="mapView" destination="4AH-ER-VN1" id="hcd-0y-XPl"/>
@@ -20,7 +19,6 @@
                 <outlet property="navController" destination="il4-Q8-fb9" id="4dO-jl-95j"/>
                 <outlet property="navItem" destination="c9c-VZ-XdR" id="nIS-V0-yFp"/>
                 <outlet property="phoneTxt" destination="ml7-uR-Kpw" id="yhG-ZW-9vR"/>
-                <outlet property="popupwaitView" destination="bMb-pR-lLK" id="c9t-OL-LUH"/>
                 <outlet property="powerbyView" destination="Yc3-YA-ssR" id="fsi-Vw-i3q"/>
                 <outlet property="tableView" destination="N68-eg-8D3" id="Fph-R6-fnj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -33,24 +31,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="bMb-pR-lLK">
-                    <rect key="frame" x="115" y="239" width="90" height="90"/>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" id="Yih-E4-NrZ">
+                    <rect key="frame" x="150" y="274" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" id="lld-mt-74d">
-                            <rect key="frame" x="35" y="23" width="20" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </activityIndicatorView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fyP-YI-S6L">
-                            <rect key="frame" x="6" y="57" width="76" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
+                    <color key="color" red="1" green="0.0" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -58,19 +43,6 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DdQ-yL-waP">
-                    <rect key="frame" x="70" y="81" width="225" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" id="VO2-ao-3CN">
-                    <rect key="frame" x="45" y="82" width="20" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </activityIndicatorView>
-            </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -118,7 +90,7 @@
                 <view contentMode="scaleToFill" id="0vk-7f-QNb">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.98431372549999996" green="1" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="xdN-aQ-KaN">
                     <rect key="frame" x="0.0" y="180" width="320" height="37"/>

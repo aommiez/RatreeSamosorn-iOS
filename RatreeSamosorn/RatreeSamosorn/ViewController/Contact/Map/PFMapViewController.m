@@ -75,8 +75,8 @@
     }
     
     CLLocationCoordinate2D location;
-    location.latitude = 18.789622;
-	location.longitude = 98.982788;
+    location.latitude = [self.lat doubleValue];
+	location.longitude = [self.lng doubleValue];
     
     MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
     point.coordinate = location;
@@ -120,8 +120,8 @@
     self.currentLocation = newLocation;
     CLLocationCoordinate2D location;
     
-	location.latitude = 18.789622;
-	location.longitude = 98.982788;
+	location.latitude = [self.lat doubleValue];
+	location.longitude = [self.lng doubleValue];
     [self.locationManager stopUpdatingLocation];
     [CMMapLauncher launchMapApp:CMMapAppAppleMaps
               forDirectionsFrom:[CMMapPoint mapPointWithName:@"Origin"

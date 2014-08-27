@@ -59,14 +59,16 @@ BOOL refreshDataMenu;
     UIView *fv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 54)];
     self.tableView.tableFooterView = fv;
     
+    self.CalendarView.hidden = YES;
+    
     self.foodsBt.backgroundColor = [UIColor clearColor];
-    self.foodsBt.tintColor = [UIColor whiteColor];
-    self.drinksBt.backgroundColor = [UIColor colorWithRed:241 green:241 blue:242 alpha:1];
-    self.drinksBt.tintColor = [UIColor blackColor];
-    self.activityBt.backgroundColor = [UIColor colorWithRed:241 green:241 blue:242 alpha:1];
-    self.activityBt.tintColor = [UIColor blackColor];
-    self.galleryBt.backgroundColor = [UIColor colorWithRed:241 green:241 blue:242 alpha:1];
-    self.galleryBt.tintColor = [UIColor blackColor];
+    [self.foodsBt.titleLabel setTextColor:[UIColor whiteColor]];
+    self.drinksBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+    [self.drinksBt.titleLabel setTextColor:RGB(109, 110, 113)];
+    self.activityBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+    [self.activityBt.titleLabel setTextColor:RGB(109, 110, 113)];
+    self.galleryBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+    [self.galleryBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.menu = @"Foods";
 
 }
@@ -154,56 +156,67 @@ BOOL refreshDataMenu;
 
 //food
 - (IBAction)foodsTapped:(id)sender{
+    self.tableView.hidden = NO;
+    self.CalendarView.hidden = YES;
     self.foodsBt.backgroundColor = [UIColor clearColor];
-    self.foodsBt.tintColor = [UIColor whiteColor];
-    self.drinksBt.backgroundColor = [UIColor colorWithRed:241 green:241 blue:242 alpha:1];
-    self.drinksBt.tintColor = [UIColor blackColor];
-    self.activityBt.backgroundColor = [UIColor colorWithRed:241 green:241 blue:242 alpha:1];
-    self.activityBt.tintColor = [UIColor blackColor];
-    self.galleryBt.backgroundColor = [UIColor colorWithRed:241 green:241 blue:242 alpha:1];
-    self.galleryBt.tintColor = [UIColor blackColor];
+    [self.foodsBt.titleLabel setTextColor:[UIColor whiteColor]];
+    self.drinksBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+    [self.drinksBt.titleLabel setTextColor:RGB(109, 110, 113)];
+    self.activityBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+    [self.activityBt.titleLabel setTextColor:RGB(109, 110, 113)];
+    self.galleryBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+    [self.galleryBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.menu = @"Foods";
     [self.tableView reloadData];
 }
 
 //drink
 - (IBAction)drinksTapped:(id)sender{
-    self.foodsBt.backgroundColor = [UIColor colorWithRed:241 green:241 blue:242 alpha:1];
-    self.foodsBt.tintColor = [UIColor blackColor];
+    self.tableView.hidden = NO;
+    self.CalendarView.hidden = YES;
+    self.foodsBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+    [self.foodsBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.drinksBt.backgroundColor = [UIColor clearColor];
-    self.drinksBt.tintColor = [UIColor whiteColor];
-    self.activityBt.backgroundColor = [UIColor colorWithRed:241 green:241 blue:242 alpha:1];
-    self.activityBt.tintColor = [UIColor blackColor];
-    self.galleryBt.backgroundColor = [UIColor colorWithRed:241 green:241 blue:242 alpha:1];
-    self.galleryBt.tintColor = [UIColor blackColor];
+    [self.drinksBt.titleLabel setTextColor:[UIColor whiteColor]];
+    self.activityBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+    [self.activityBt.titleLabel setTextColor:RGB(109, 110, 113)];
+    self.galleryBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+    [self.galleryBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.menu = @"Drinks";
     [self.tableView reloadData];
 }
 
 //activity
 - (IBAction)activityTapped:(id)sender{
-    self.foodsBt.backgroundColor = [UIColor colorWithRed:241 green:241 blue:242 alpha:1];
-    self.foodsBt.tintColor = [UIColor blackColor];
-    self.drinksBt.backgroundColor = [UIColor colorWithRed:241 green:241 blue:242 alpha:1];
-    self.drinksBt.tintColor = [UIColor blackColor];
+    self.tableView.hidden = YES;
+    self.CalendarView.hidden = NO;
+    self.foodsBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+    [self.foodsBt.titleLabel setTextColor:RGB(109, 110, 113)];
+    self.drinksBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+    [self.drinksBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.activityBt.backgroundColor = [UIColor clearColor];
-    self.activityBt.tintColor = [UIColor whiteColor];
-    self.galleryBt.backgroundColor = [UIColor colorWithRed:241 green:241 blue:242 alpha:1];
-    self.galleryBt.tintColor = [UIColor blackColor];
+    [self.activityBt.titleLabel setTextColor:[UIColor whiteColor]];
+    self.galleryBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+    [self.galleryBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.menu = @"Activity";
-    [self.tableView reloadData];
+    
+    PFActivityCalendarViewController *actCalendar = [PFActivityCalendarViewController alloc];
+    actCalendar.delegate = self;
+    [self.CalendarView addSubview:actCalendar.view];
 }
 
 //gallery
 - (IBAction)galleryTapped:(id)sender{
-    self.foodsBt.backgroundColor = [UIColor colorWithRed:241 green:241 blue:242 alpha:1];
-    self.foodsBt.tintColor = [UIColor blackColor];
-    self.drinksBt.backgroundColor = [UIColor colorWithRed:241 green:241 blue:242 alpha:1];
-    self.drinksBt.tintColor = [UIColor blackColor];
-    self.activityBt.backgroundColor = [UIColor colorWithRed:241 green:241 blue:242 alpha:1];
-    self.activityBt.tintColor = [UIColor blackColor];
+    self.tableView.hidden = NO;
+    self.CalendarView.hidden = YES;
+    self.foodsBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+    [self.foodsBt.titleLabel setTextColor:RGB(109, 110, 113)];
+    self.drinksBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+    [self.drinksBt.titleLabel setTextColor:RGB(109, 110, 113)];
+    self.activityBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+    [self.activityBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.galleryBt.backgroundColor = [UIColor clearColor];
-    self.galleryBt.tintColor = [UIColor whiteColor];
+    [self.galleryBt.titleLabel setTextColor:[UIColor whiteColor]];
     self.menu = @"Gallery";
     [self.tableView reloadData];
 }

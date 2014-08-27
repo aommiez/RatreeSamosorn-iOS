@@ -81,11 +81,50 @@ BOOL refreshDataUpdate;
 }
 
 - (void)account {
-    
+    if ([self.RatreeSamosornApi checkLogin] == false){
+        
+        self.loginView = [PFLoginViewController alloc];
+        self.loginView.menu = @"account";
+        self.loginView.delegate = self;
+        [self.view addSubview:self.loginView.view];
+        
+    }else{
+        NSLog(@"Login");
+        
+        [self.delegate HideTabbar];
+        
+        PFAccountViewController *account = [[PFAccountViewController alloc] init];
+        
+        if(IS_WIDESCREEN) {
+            account = [[PFAccountViewController alloc] initWithNibName:@"PFAccountViewController_Wide" bundle:nil];
+        } else {
+            account = [[PFAccountViewController alloc] initWithNibName:@"PFAccountViewController" bundle:nil];
+        }
+        
+        account.delegate = self;
+        [self.navController pushViewController:account animated:YES];
+    }
 }
 
 - (void)notify {
 
+}
+
+- (void)PFAccountViewController:(id)sender{
+    
+    [self.delegate HideTabbar];
+    
+    PFAccountViewController *account = [[PFAccountViewController alloc] init];
+    
+    if(IS_WIDESCREEN) {
+        account = [[PFAccountViewController alloc] initWithNibName:@"PFAccountViewController_Wide" bundle:nil];
+    } else {
+        account = [[PFAccountViewController alloc] initWithNibName:@"PFAccountViewController" bundle:nil];
+    }
+    
+    account.delegate = self;
+    [self.navController pushViewController:account animated:YES];
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -185,7 +224,15 @@ BOOL refreshDataUpdate;
     [UIView commitAnimations];
 }
 
+- (void)PFAccountViewController:(id)sender viewPicture:(NSString *)link{
+    [self.delegate PFImageViewController:self viewPicture:link];
+}
+
 - (void)PFDetailViewControllerBack {
+    [self.delegate ShowTabbar];
+}
+
+- (void)PFAccountViewControllerBack {
     [self.delegate ShowTabbar];
 }
 

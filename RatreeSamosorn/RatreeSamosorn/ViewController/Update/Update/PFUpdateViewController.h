@@ -14,10 +14,13 @@
 #import "PFUpdateCell.h"
 #import "PFDetailViewController.h"
 
+#import "PFLoginViewController.h"
+#import "PFAccountViewController.h"
+
 @protocol PFUpdateViewControllerDelegate <NSObject>
 
 //- (void)PFGalleryViewController:(id)sender sum:(NSMutableArray *)sum current:(NSString *)current;
-//- (void)PFImageViewController:(id)sender viewPicture:(NSString *)link;
+- (void)PFImageViewController:(id)sender viewPicture:(NSString *)link;
 - (void)HideTabbar;
 - (void)ShowTabbar;
 
@@ -28,8 +31,9 @@
 @property (assign, nonatomic) id delegate;
 @property (strong, nonatomic) PFRatreeSamosornApi *RatreeSamosornApi;
 
+@property (strong, nonatomic) PFLoginViewController *loginView;
+
 @property (strong, nonatomic) IBOutlet UIView *waitView;
-@property (strong, nonatomic) IBOutlet UIView *popupwaitView;
 
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *act;
 @property (strong, nonatomic) IBOutlet UILabel *loadLabel;
