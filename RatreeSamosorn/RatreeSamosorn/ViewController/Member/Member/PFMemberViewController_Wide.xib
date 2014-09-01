@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PFMemberViewController">
             <connections>
+                <outlet property="NoInternetView" destination="KyG-AS-6aQ" id="sgE-I1-Pjs"/>
                 <outlet property="addAmountButton" destination="GOX-Lb-nCX" id="RII-wv-CY0"/>
                 <outlet property="addButton" destination="XZ3-KJ-fmd" id="gXF-HT-VOs"/>
                 <outlet property="addPointView" destination="uDv-TU-jFO" id="vgf-dN-Wwd"/>
@@ -47,6 +48,7 @@
                 <outlet property="num8" destination="hVU-4H-4zy" id="MIT-ZV-hwG"/>
                 <outlet property="num9" destination="I6w-jU-EF4" id="QpH-Qp-HdM"/>
                 <outlet property="password" destination="7CB-nD-424" id="6rI-ij-Ebg"/>
+                <outlet property="popupwaitView" destination="eOv-Eb-dM0" id="2gu-2E-d9p"/>
                 <outlet property="postermember" destination="Egt-pG-YEs" id="4wc-82-Bpe"/>
                 <outlet property="posternomember" destination="pcC-2D-ufT" id="xcD-vU-XAT"/>
                 <outlet property="removeAmountButton" destination="kcZ-BN-FjF" id="QAl-A9-Fxn"/>
@@ -73,11 +75,24 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" id="STg-pH-7m7">
-                    <rect key="frame" x="150" y="274" width="20" height="20"/>
+                <view contentMode="scaleToFill" id="eOv-Eb-dM0">
+                    <rect key="frame" x="115" y="239" width="90" height="90"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="color" red="1" green="0.0" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
-                </activityIndicatorView>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" id="Z1I-Uq-CL2">
+                            <rect key="frame" x="35" y="23" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hc8-G2-DZu">
+                            <rect key="frame" x="6" y="57" width="76" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -456,7 +471,7 @@
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MiZ-5h-0FU">
                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -564,6 +579,21 @@
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+        </view>
+        <view alpha="0.75" contentMode="scaleToFill" id="KyG-AS-6aQ">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B3A-Pc-omN">
+                    <rect key="frame" x="10" y="5" width="300" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
     <resources>

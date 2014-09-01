@@ -1,8 +1,8 @@
 //
 //  PEActivityCalendarViewController.m
-//  SatitCMU
+//  ราตรีสโมสร
 //
-//  Created by MRG on 2/17/2557 BE.
+//  Created by Pariwat on 7/30/14.
 //  Copyright (c) 2557 Platwo fusion. All rights reserved.
 //
 
@@ -103,6 +103,17 @@
 	
     return cell;
 	
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+//    NSArray *ar = self.dataDictionary[[self.monthView dateSelected]];
+//    
+//    PFActivityDetailViewController *activitiesDetailViewController = [[PFActivityDetailViewController alloc] initWithNibName:@"PFActivityDetailViewController_Wide" bundle:nil];
+//    activitiesDetailViewController.obj = ar[indexPath.row];
+//    activitiesDetailViewController.delegate = self;
+//    [self.navigationController pushViewController:activitiesDetailViewController animated:YES];
+    
 }
 
 - (void)testItem:(NSDate*)start endDate:(NSDate*)end{

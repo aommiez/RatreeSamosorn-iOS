@@ -25,6 +25,11 @@
 @property (strong, nonatomic) PFRatreeSamosornApi *RatreeSamosornApi;
 @property (strong, nonatomic) NSMutableArray *arrObj;
 
+@property NSUserDefaults *historyOffline;
+
+@property (strong, nonatomic) IBOutlet UIView *waitView;
+@property (strong, nonatomic) IBOutlet UIView *popupwaitView;
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) IBOutlet UIView *headerView;

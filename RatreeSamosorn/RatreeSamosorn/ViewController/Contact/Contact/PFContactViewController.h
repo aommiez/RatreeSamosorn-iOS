@@ -34,6 +34,10 @@
 @property NSUserDefaults *contactOffline;
 
 @property (strong, nonatomic) IBOutlet UIView *waitView;
+@property (strong, nonatomic) IBOutlet UIView *popupwaitView;
+
+@property (strong, nonatomic) IBOutlet UIView *NoInternetView;
+@property (strong, nonatomic) NSString *checkinternet;
 
 @property (strong, nonatomic) IBOutlet UINavigationController *navController;
 @property (strong, nonatomic) IBOutlet CRGradientNavigationBar *navBar;

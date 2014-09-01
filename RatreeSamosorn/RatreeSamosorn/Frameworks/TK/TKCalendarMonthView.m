@@ -812,7 +812,7 @@ static UIImage *tileImage;
 - (void) _tileSelectedWithData:(NSArray*)ar{
 	
 	if(ar.count < 2){
-        
+		
 		if([self.delegate respondsToSelector:@selector(calendarMonthView:didSelectDate:)])
 			[self.delegate calendarMonthView:self didSelectDate:[self dateSelected]];
 		

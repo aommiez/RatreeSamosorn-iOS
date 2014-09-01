@@ -30,6 +30,10 @@
     
     [self.view addSubview:self.waitView];
     
+    CALayer *popup = [self.popupwaitView layer];
+    [popup setMasksToBounds:YES];
+    [popup setCornerRadius:7.0f];
+    
     self.navigationItem.title = @"Profile";
     
     self.tableView.tableHeaderView = self.headerView;

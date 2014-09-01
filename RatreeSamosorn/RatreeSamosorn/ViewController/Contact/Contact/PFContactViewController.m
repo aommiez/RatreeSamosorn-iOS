@@ -14,6 +14,9 @@
 
 @implementation PFContactViewController
 
+int contactInt;
+NSTimer *timmer;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -29,6 +32,12 @@
 {
     [super viewDidLoad];
     
+    [self.view addSubview:self.waitView];
+    
+    CALayer *popup = [self.popupwaitView layer];
+    [popup setMasksToBounds:YES];
+    [popup setCornerRadius:7.0f];
+    
     // Navbar setup
     UIColor *firstColor = [UIColor colorWithRed:255.0f/255.0f green:0.0f/255.0f blue:107.0f/255.0f alpha:1.0f];
     UIColor *secondColor = [UIColor colorWithRed:255.0f/255.0f green:102.0f/255.0f blue:0.0f/255.0f alpha:1.0f];
@@ -41,8 +50,6 @@
     
     [[self.navController navigationBar] setTranslucent:YES];
     [self.view addSubview:self.navController.view];
-    
-    [self.view addSubview:self.waitView];
     
     self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
     self.RatreeSamosornApi.delegate = self;
@@ -64,7 +71,6 @@
     [mapImage setMasksToBounds:YES];
     [mapImage setCornerRadius:7.0f];
     
-    //[self.RatreeSamosornApi getContact];
     [self.RatreeSamosornApi getContactGallery];
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
@@ -101,9 +107,11 @@
     int countPicture = [[images objectForKey:@"data"] count];
     for (int i = 0; i < countPicture; i++) {
         NSString *urlStr = [[NSString alloc] initWithFormat:@"%@%@",[[[images objectForKey:@"data"] objectAtIndex:i] objectForKey:@"url"],@"custom/320/180/"];
+        
         NSURL *url = [[NSURL alloc] initWithString:urlStr];
         NSData *data = [NSData dataWithContentsOfURL : url];
         UIImage *image = [UIImage imageWithData: data];
+        
         [self.ArrImgs addObject:image];
     }
     return self.ArrImgs;
@@ -140,6 +148,8 @@
     [self.contactOffline synchronize];
     
     [self.waitView removeFromSuperview];
+    [self.NoInternetView removeFromSuperview];
+    self.checkinternet = @"connect";
     
     //Content Label
     self.contentTxt.text = [response objectForKey:@"info"];
@@ -187,6 +197,12 @@
     NSLog(@"%@",errorResponse);
     
     [self.waitView removeFromSuperview];
+    self.checkinternet = @"error";
+    self.NoInternetView.frame = CGRectMake(0, 64, self.NoInternetView.frame.size.width, self.NoInternetView.frame.size.height);
+    [self.view addSubview:self.NoInternetView];
+    
+    contactInt = 5;
+    timmer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
     
     self.obj = [self.contactOffline objectForKey:@"contactOffline"];
     
@@ -229,6 +245,13 @@
     self.emailTxt.text = [[self.contactOffline objectForKey:@"contactOffline"] objectForKey:@"email"];
     
     self.tableView.tableHeaderView = self.headerView;
+}
+
+- (void)countDown {
+    contactInt -= 1;
+    if (contactInt == 0) {
+        [self.NoInternetView removeFromSuperview];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

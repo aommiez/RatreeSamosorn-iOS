@@ -28,6 +28,7 @@
 @property (strong, nonatomic) PFRatreeSamosornApi *RatreeSamosornApi;
 
 @property (strong, nonatomic) IBOutlet UIView *waitView;
+@property (strong, nonatomic) IBOutlet UIView *popupwaitView;
 
 @property (strong, nonatomic) NSDictionary *objAccount;
 

@@ -34,8 +34,6 @@
 - (void)logOut {
     [self.userDefaults removeObjectForKey:@"access_token"];
     [self.userDefaults removeObjectForKey:@"user_id"];
-    
-    self.userDefaults = nil;
 }
 
 #pragma mark - User ID
@@ -79,15 +77,14 @@
 }
 
 #pragma mark - Register
-- (void)registerWithUsername:(NSString *)username password:(NSString *)password email:(NSString *)email birth_date:(NSString *)birth_date gender:(NSString *)gender picture:(NSString *)picture {
-    
-//    self.urlStr = [[NSString alloc] initWithFormat:@"%@user/register",API_URL];
-//    NSDictionary *parameters = @{@"username":username , @"password":password , @"email":email ,@"birth_date":birth_date , @"gender":gender  , @"picture":picture};
-//    [self.manager POST:urlStr parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        [self.delegate DCManager:self registerWithUsernameResponse:responseObject];
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [self.delegate DCManager:self registerWithUsernameErrorResponse:[error localizedDescription]];
-//    }];
+- (void)registerWithUsername:(NSString *)username password:(NSString *)password email:(NSString *)email birth_date:(NSString *)birth_date gender:(NSString *)gender {
+    self.urlStr = [[NSString alloc] initWithFormat:@"%@register",API_URL];
+    NSDictionary *parameters = @{@"username":username , @"password":password , @"email":email ,@"birth_date":birth_date , @"gender":gender};
+    [self.manager POST:self.urlStr parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self registerWithUsernameResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self registerWithUsernameErrorResponse:[error localizedDescription]];
+    }];
 }
 
 #pragma mark - Me
@@ -233,6 +230,15 @@
         [self.delegate PFRatreeSamosornApi:self getHistoryResponse:responseObject];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.delegate PFRatreeSamosornApi:self getHistoryErrorResponse:[error localizedDescription]];
+    }];
+}
+
+- (void)getReward {
+    self.urlStr = [[NSString alloc] initWithFormat:@"%@reward",API_URL];
+    [self.manager GET:self.urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self getRewardResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self getRewardErrorResponse:[error localizedDescription]];
     }];
 }
 

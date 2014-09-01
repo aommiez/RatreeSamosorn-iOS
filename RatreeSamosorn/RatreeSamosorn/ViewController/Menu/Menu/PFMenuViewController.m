@@ -70,7 +70,10 @@ BOOL refreshDataMenu;
     self.galleryBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
     [self.galleryBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.menu = @"Foods";
-
+    
+    //self.viewController = [PFActivityCalendarViewController new];
+    //[self.CalendarView addSubview:self.viewController.view];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -199,10 +202,6 @@ BOOL refreshDataMenu;
     self.galleryBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
     [self.galleryBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.menu = @"Activity";
-    
-    PFActivityCalendarViewController *actCalendar = [PFActivityCalendarViewController alloc];
-    actCalendar.delegate = self;
-    [self.CalendarView addSubview:actCalendar.view];
 }
 
 //gallery

@@ -22,6 +22,7 @@ BOOL refreshDataHistory;
     if (self) {
         // Custom initialization
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        self.historyOffline = [NSUserDefaults standardUserDefaults];
     }
     return self;
 }
@@ -29,6 +30,12 @@ BOOL refreshDataHistory;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.view addSubview:self.waitView];
+    
+    CALayer *popup = [self.popupwaitView layer];
+    [popup setMasksToBounds:YES];
+    [popup setCornerRadius:7.0f];
     
     self.navigationItem.title = @"History";
     
@@ -74,6 +81,8 @@ BOOL refreshDataHistory;
 - (void)PFRatreeSamosornApi:(id)sender getHistoryResponse:(NSDictionary *)response {
     //NSLog(@"Member History %@",response);
     
+    [self.waitView removeFromSuperview];
+    
     if (!refreshDataHistory) {
         for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
             [self.arrObj addObject:[[response objectForKey:@"data"] objectAtIndex:i]];
@@ -85,11 +94,29 @@ BOOL refreshDataHistory;
         }
     }
     
+    [self.historyOffline setObject:response forKey:@"historyArray"];
+    [self.historyOffline synchronize];
+    
     [self reloadData:YES];
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getHistoryErrorResponse:(NSString *)errorResponse {
     NSLog(@"%@",errorResponse);
+    
+    [self.waitView removeFromSuperview];
+    
+    if (!refreshDataHistory) {
+        for (int i=0; i<[[[self.historyOffline objectForKey:@"historyArray"] objectForKey:@"data"] count]; ++i) {
+            [self.arrObj addObject:[[[self.historyOffline objectForKey:@"historyArray"] objectForKey:@"data"] objectAtIndex:i]];
+        }
+    } else {
+        [self.arrObj removeAllObjects];
+        for (int i=0; i<[[[self.historyOffline objectForKey:@"historyArray"] objectForKey:@"data"] count]; ++i) {
+            [self.arrObj addObject:[[[self.historyOffline objectForKey:@"historyArray"] objectForKey:@"data"] objectAtIndex:i]];
+        }
+    }
+    
+    [self reloadData:YES];
 }
 
 - (void)reloadData:(BOOL)animated

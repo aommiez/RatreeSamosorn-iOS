@@ -32,6 +32,10 @@ BOOL newMedia;
     
     [self.view addSubview:self.waitView];
     
+    CALayer *popup = [self.popupwaitView layer];
+    [popup setMasksToBounds:YES];
+    [popup setCornerRadius:7.0f];
+    
     self.navItem.title = @"";
     
     // Navbar setup
@@ -276,14 +280,6 @@ BOOL newMedia;
 - (void) useCameraRoll
 {
     [self.view addSubview:self.waitView];
-    
-//     // Navbar setup
-//     UIColor *firstColor = [UIColor colorWithRed:255.0f/255.0f green:0.0f/255.0f blue:107.0f/255.0f alpha:1.0f];
-//     UIColor *secondColor = [UIColor colorWithRed:255.0f/255.0f green:102.0f/255.0f blue:0.0f/255.0f alpha:1.0f];
-//     
-//     NSArray *colors = [NSArray arrayWithObjects:(id)firstColor.CGColor, (id)secondColor.CGColor, nil];
-//     
-//     [UINavigationBar setBarTintGradientColors:colors];
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:255.0f/255.0f green:0.0f/255.0f blue:107.0f/255.0f alpha:1.0f]];
     

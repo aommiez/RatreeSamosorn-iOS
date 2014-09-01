@@ -13,6 +13,7 @@
                 <outlet property="footerView" destination="kyA-Dl-qRp" id="B41-c2-n7q"/>
                 <outlet property="headerView" destination="kmW-zk-hMF" id="YFq-DV-P1q"/>
                 <outlet property="logoutButton" destination="e5g-6S-Zf3" id="YGd-O1-HjK"/>
+                <outlet property="popupwaitView" destination="DDe-ub-NLu" id="gqs-xo-kOa"/>
                 <outlet property="switchMessage" destination="9Wt-Eh-Ehw" id="3Rx-Uy-pQQ"/>
                 <outlet property="switchNews" destination="7g0-iu-9hc" id="e0s-GO-MPJ"/>
                 <outlet property="tableView" destination="UEi-ir-rHP" id="uNd-7u-L5a"/>
@@ -26,11 +27,24 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" id="Nqe-te-MkQ">
-                    <rect key="frame" x="150" y="274" width="20" height="20"/>
+                <view contentMode="scaleToFill" id="DDe-ub-NLu">
+                    <rect key="frame" x="115" y="239" width="90" height="90"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="color" red="1" green="0.0" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
-                </activityIndicatorView>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" id="bh1-X4-rXX">
+                            <rect key="frame" x="35" y="23" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HIt-jS-KJ0">
+                            <rect key="frame" x="6" y="57" width="76" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

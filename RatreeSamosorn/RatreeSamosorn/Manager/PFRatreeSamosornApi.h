@@ -53,6 +53,9 @@
 - (void)PFRatreeSamosornApi:(id)sender getHistoryResponse:(NSDictionary *)response;
 - (void)PFRatreeSamosornApi:(id)sender getHistoryErrorResponse:(NSString *)errorResponse;
 
+- (void)PFRatreeSamosornApi:(id)sender getRewardResponse:(NSDictionary *)response;
+- (void)PFRatreeSamosornApi:(id)sender getRewardErrorResponse:(NSString *)errorResponse;
+
 #pragma mark - Contact Protocal Delegate
 - (void)PFRatreeSamosornApi:(id)sender getContactResponse:(NSDictionary *)response;
 - (void)PFRatreeSamosornApi:(id)sender getContactErrorResponse:(NSString *)errorResponse;
@@ -70,6 +73,13 @@
 @property NSUserDefaults *userDefaults;
 @property NSString *urlStr;
 
+#pragma mark - 
+- (void)saveUserId:(NSString *)user_id;
+- (void)saveAccessToken:(NSString *)access_token;
+
+- (NSString *)getUserId;
+- (NSString *)getAccessToken;
+
 #pragma mark - Check Login
 - (BOOL)checkLogin;
 
@@ -81,7 +91,7 @@
 - (void)logOut;
 
 #pragma mark - Register
-- (void)registerWithUsername:(NSString *)username password:(NSString *)password email:(NSString *)email birth_date:(NSString *)birth_date gender:(NSString *)gender picture:(NSString *)picture;
+- (void)registerWithUsername:(NSString *)username password:(NSString *)password email:(NSString *)email birth_date:(NSString *)birth_date gender:(NSString *)gender;
 
 #pragma mark - User
 - (void)me;
@@ -104,6 +114,7 @@
 - (void)getStamp;
 - (void)addPoint:(NSString *)point password:(NSString *)password;
 - (void)history;
+- (void)getReward;
 
 #pragma mark - Contact
 - (void)getContact;

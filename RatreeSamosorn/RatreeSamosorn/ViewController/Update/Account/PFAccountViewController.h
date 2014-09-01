@@ -27,6 +27,9 @@
 @property (assign, nonatomic) id delegate;
 @property (strong, nonatomic) PFRatreeSamosornApi *RatreeSamosornApi;
 
+@property (strong, nonatomic) IBOutlet UIView *waitView;
+@property (strong, nonatomic) IBOutlet UIView *popupwaitView;
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) IBOutlet UIView *headerView;
@@ -36,8 +39,6 @@
 @property (strong, nonatomic) NSDictionary *obj;
 
 @property (strong, nonatomic) NSString *rowCount;
-
-@property (strong, nonatomic) IBOutlet UIView *waitView;
 
 @property (strong, nonatomic) IBOutlet UIView *bgnewsView;
 @property (strong, nonatomic) IBOutlet UIView *bgmessageView;

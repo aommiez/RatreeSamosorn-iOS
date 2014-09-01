@@ -134,7 +134,11 @@ NSString *password;
                      animations:^ {
                          
                          NSDateFormatter *date = [[NSDateFormatter alloc] init];
-                         date.dateFormat = @"yyyy/MM/dd";
+                         date.dateFormat = @"yyyy-MM-dd";
+                         
+                         NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+                         [date setLocale:enUSPOSIXLocale];
+                         
                          NSArray *temp = [[NSString stringWithFormat:@"%@",[date stringFromDate:self.pick.date]] componentsSeparatedByString:@""];
                          NSString *dateString = [[NSString alloc] init];
                          dateString = [[NSString alloc] initWithString:[temp objectAtIndex:0]];
@@ -225,13 +229,14 @@ NSString *password;
                          self.pickDone.alpha = 1;
                          [self.view addSubview:self.pickDone];
                          self.pick.alpha = 1;
+                         
                          [self.pick setFrame:CGRectMake(0,200,320,120)];
                          self.pick.backgroundColor = [UIColor whiteColor];
                          self.pick.hidden = NO;
                          self.pick.datePickerMode = UIDatePickerModeDate;
+                         
                          self.pick.tintColor = [UIColor whiteColor];
                          [self.view addSubview:self.pick];
-                         //[self.scrollView setAlpha:0];
                      }
                      completion:^(BOOL finished) {
                          
@@ -249,9 +254,9 @@ NSString *password;
 }
 - (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        self.gender.text = @"Male";
+        self.gender.text = @"male";
     } else if (buttonIndex == 2) {
-        self.gender.text = @"Female";
+        self.gender.text = @"female";
     }
 }
 - (IBAction)closedateTapped:(id)sender {
@@ -305,7 +310,7 @@ NSString *password;
         [message show];
         return;
     } else {
-        [self.RatreeSamosornApi registerWithUsername:self.username.text password:self.passwordSignUp.text email:self.emailSignUp.text birth_date:self.dateOfBirthSignUp.text gender:self.gender.text picture:@""];
+        [self.RatreeSamosornApi registerWithUsername:self.username.text password:self.passwordSignUp.text email:self.emailSignUp.text birth_date:self.dateOfBirthSignUp.text gender:self.gender.text];
     }
 }
 #pragma mark - Demo Api Delegate

@@ -27,6 +27,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.view addSubview:self.waitView];
+    
+    CALayer *popup = [self.popupwaitView layer];
+    [popup setMasksToBounds:YES];
+    [popup setCornerRadius:7.0f];
+    
+    self.navigationItem.title = @"Reward";
+    
+    self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
+    self.RatreeSamosornApi.delegate = self;
+
+    
+    self.token = [self.RatreeSamosornApi getAccessToken];
+    self.user_id = [self.RatreeSamosornApi getUserId];
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@%@%@%@%@%@",@"http://app.pla2.com/webview/stamp/page2.php?id=",self.reward_id,@"&user=",self.user_id,@"&domain=coffee&token=",self.token];
+    NSURLRequest *req = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    self.webView.delegate = self;
+    self.webView.scalesPageToFit = YES;
+    [self.webView loadRequest:req];
+    
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.google.com"]];
+    if (data) {
+        [self.NoInternetView removeFromSuperview];
+    } else {
+        self.NoInternetView.frame = CGRectMake(0, 64, self.NoInternetView.frame.size.width, self.NoInternetView.frame.size.height);
+        [self.view addSubview:self.NoInternetView];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,6 +66,18 @@
 
 - (NSUInteger)supportedInterfaceOrientations{
     return UIInterfaceOrientationMaskPortrait;
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [self.view addSubview:self.waitView];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self.waitView removeFromSuperview];
+    [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
+    [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
