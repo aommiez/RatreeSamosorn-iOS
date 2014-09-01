@@ -21,6 +21,24 @@
     return self;
 }
 
+#pragma mark - Reset
+- (void)saveReset:(NSString *)reset {
+    [self.userDefaults setObject:reset forKey:@"reset"];
+}
+
+- (NSString *)getReset {
+    return [self.userDefaults objectForKey:@"reset"];
+}
+
+#pragma mark - App Language
+- (void)saveLanguage:(NSString *)language {
+    [self.userDefaults setObject:language forKey:@"language"];
+}
+
+- (NSString *)getLanguage {
+    return [self.userDefaults objectForKey:@"language"];
+}
+
 #pragma mark - Check Log in
 - (BOOL)checkLogin {
     if ([self.userDefaults objectForKey:@"user_id"] != nil || [self.userDefaults objectForKey:@"access_token"] != nil) {
@@ -56,13 +74,13 @@
 
 #pragma mark - Login
 - (void)loginWithFacebookToken:(NSString *)fb_token ios_device_token:(NSString *)ios_device_token {
-    
-    self.urlStr = [[NSString alloc] initWithFormat:@"%@/oauth/facebook",API_URL];
-//    [self.manager GET:self.urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        [self.delegate PFRatreeSamosornApi:self loginWithFacebookTokenResponse:responseObject];
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [self.delegate PFRatreeSamosornApi:self loginWithFacebookTokenErrorResponse:[error localizedDescription]];
-//    }];
+    self.urlStr = [[NSString alloc] initWithFormat:@"%@oauth/facebook",API_URL];
+    NSDictionary *parameters = @{@"facebook_token":fb_token};
+    [self.manager POST:self.urlStr parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self loginWithFacebookTokenResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self loginWithFacebookTokenErrorResponse:[error localizedDescription]];
+    }];
     
 }
 
@@ -186,13 +204,32 @@
     }];
 }
 
-#pragma mark - App Language
-- (void)saveLanguage:(NSString *)language {
-    [self.userDefaults setObject:language forKey:@"language"];
+#pragma mark - Menu
+- (void)getFoods {
+    self.urlStr = [[NSString alloc] initWithFormat:@"%@node/food",API_URL];
+    [self.manager GET:self.urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self getFoodsResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self getFoodsErrorResponse:[error localizedDescription]];
+    }];
 }
 
-- (NSString *)getLanguage {
-    return [self.userDefaults objectForKey:@"language"];
+- (void)getDrinks {
+    self.urlStr = [[NSString alloc] initWithFormat:@"%@node/drink",API_URL];
+    [self.manager GET:self.urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self getDrinksResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self getDrinksErrorResponse:[error localizedDescription]];
+    }];
+}
+
+- (void)getGallery {
+    self.urlStr = [[NSString alloc] initWithFormat:@"%@node/gallery",API_URL];
+    [self.manager GET:self.urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self getGalleryResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self getGalleryErrorResponse:[error localizedDescription]];
+    }];
 }
 
 #pragma mark - Member

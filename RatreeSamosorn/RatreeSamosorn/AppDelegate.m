@@ -14,6 +14,9 @@ BOOL newMedia;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
+    self.RatreeSamosornApi.delegate = self;
+    
     // Override point for customization after application launch.
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -44,42 +47,82 @@ BOOL newMedia;
     self.member.delegate = self;
     self.contact.delegate = self;
     
-    if(IS_WIDESCREEN){
-        
-        PFTabBarItemButton *item0 = [self.tabBarViewController.itemButtons objectAtIndex:0];
-        [item0 setHighlightedImage:[UIImage imageNamed:@"en_update_on"]];
-        [item0 setStanbyImage:[UIImage imageNamed:@"en_update_off"]];
-        
-        PFTabBarItemButton *item1 = [self.tabBarViewController.itemButtons objectAtIndex:1];
-        [item1 setHighlightedImage:[UIImage imageNamed:@"en_menu_on"]];
-        [item1 setStanbyImage:[UIImage imageNamed:@"en_menu_off"]];
-        
-        PFTabBarItemButton *item2 = [self.tabBarViewController.itemButtons objectAtIndex:2];
-        [item2 setHighlightedImage:[UIImage imageNamed:@"en_member_on"]];
-        [item2 setStanbyImage:[UIImage imageNamed:@"en_member_off"]];
-        
-        PFTabBarItemButton *item3 = [self.tabBarViewController.itemButtons objectAtIndex:3];
-        [item3 setHighlightedImage:[UIImage imageNamed:@"en_contact_on"]];
-        [item3 setStanbyImage:[UIImage imageNamed:@"en_contact_off"]];
-        
-    }else{
-        
-        PFTabBarItemButton *item0 = [self.tabBarViewController.itemButtons objectAtIndex:0];
-        [item0 setHighlightedImage:[UIImage imageNamed:@"en_update_on"]];
-        [item0 setStanbyImage:[UIImage imageNamed:@"en_update_off"]];
-        
-        PFTabBarItemButton *item1 = [self.tabBarViewController.itemButtons objectAtIndex:1];
-        [item1 setHighlightedImage:[UIImage imageNamed:@"en_menu_on"]];
-        [item1 setStanbyImage:[UIImage imageNamed:@"en_menu_off"]];
-        
-        PFTabBarItemButton *item2 = [self.tabBarViewController.itemButtons objectAtIndex:2];
-        [item2 setHighlightedImage:[UIImage imageNamed:@"en_member_on"]];
-        [item2 setStanbyImage:[UIImage imageNamed:@"en_member_off"]];
-        
-        PFTabBarItemButton *item3 = [self.tabBarViewController.itemButtons objectAtIndex:3];
-        [item3 setHighlightedImage:[UIImage imageNamed:@"en_contact_on"]];
-        [item3 setStanbyImage:[UIImage imageNamed:@"en_contact_off"]];
-        
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        if(IS_WIDESCREEN){
+            
+            PFTabBarItemButton *item0 = [self.tabBarViewController.itemButtons objectAtIndex:0];
+            [item0 setHighlightedImage:[UIImage imageNamed:@"en_update_on"]];
+            [item0 setStanbyImage:[UIImage imageNamed:@"en_update_off"]];
+            
+            PFTabBarItemButton *item1 = [self.tabBarViewController.itemButtons objectAtIndex:1];
+            [item1 setHighlightedImage:[UIImage imageNamed:@"en_menu_on"]];
+            [item1 setStanbyImage:[UIImage imageNamed:@"en_menu_off"]];
+            
+            PFTabBarItemButton *item2 = [self.tabBarViewController.itemButtons objectAtIndex:2];
+            [item2 setHighlightedImage:[UIImage imageNamed:@"en_member_on"]];
+            [item2 setStanbyImage:[UIImage imageNamed:@"en_member_off"]];
+            
+            PFTabBarItemButton *item3 = [self.tabBarViewController.itemButtons objectAtIndex:3];
+            [item3 setHighlightedImage:[UIImage imageNamed:@"en_contact_on"]];
+            [item3 setStanbyImage:[UIImage imageNamed:@"en_contact_off"]];
+            
+        }else{
+            
+            PFTabBarItemButton *item0 = [self.tabBarViewController.itemButtons objectAtIndex:0];
+            [item0 setHighlightedImage:[UIImage imageNamed:@"en_update_on"]];
+            [item0 setStanbyImage:[UIImage imageNamed:@"en_update_off"]];
+            
+            PFTabBarItemButton *item1 = [self.tabBarViewController.itemButtons objectAtIndex:1];
+            [item1 setHighlightedImage:[UIImage imageNamed:@"en_menu_on"]];
+            [item1 setStanbyImage:[UIImage imageNamed:@"en_menu_off"]];
+            
+            PFTabBarItemButton *item2 = [self.tabBarViewController.itemButtons objectAtIndex:2];
+            [item2 setHighlightedImage:[UIImage imageNamed:@"en_member_on"]];
+            [item2 setStanbyImage:[UIImage imageNamed:@"en_member_off"]];
+            
+            PFTabBarItemButton *item3 = [self.tabBarViewController.itemButtons objectAtIndex:3];
+            [item3 setHighlightedImage:[UIImage imageNamed:@"en_contact_on"]];
+            [item3 setStanbyImage:[UIImage imageNamed:@"en_contact_off"]];
+            
+        }
+    } else {
+        if(IS_WIDESCREEN){
+            
+            PFTabBarItemButton *item0 = [self.tabBarViewController.itemButtons objectAtIndex:0];
+            [item0 setHighlightedImage:[UIImage imageNamed:@"th_update_on"]];
+            [item0 setStanbyImage:[UIImage imageNamed:@"th_update_off"]];
+            
+            PFTabBarItemButton *item1 = [self.tabBarViewController.itemButtons objectAtIndex:1];
+            [item1 setHighlightedImage:[UIImage imageNamed:@"th_menu_on"]];
+            [item1 setStanbyImage:[UIImage imageNamed:@"th_menu_off"]];
+            
+            PFTabBarItemButton *item2 = [self.tabBarViewController.itemButtons objectAtIndex:2];
+            [item2 setHighlightedImage:[UIImage imageNamed:@"th_member_on"]];
+            [item2 setStanbyImage:[UIImage imageNamed:@"th_member_off"]];
+            
+            PFTabBarItemButton *item3 = [self.tabBarViewController.itemButtons objectAtIndex:3];
+            [item3 setHighlightedImage:[UIImage imageNamed:@"th_contact_on"]];
+            [item3 setStanbyImage:[UIImage imageNamed:@"th_contact_off"]];
+            
+        }else{
+            
+            PFTabBarItemButton *item0 = [self.tabBarViewController.itemButtons objectAtIndex:0];
+            [item0 setHighlightedImage:[UIImage imageNamed:@"th_update_on"]];
+            [item0 setStanbyImage:[UIImage imageNamed:@"th_update_off"]];
+            
+            PFTabBarItemButton *item1 = [self.tabBarViewController.itemButtons objectAtIndex:1];
+            [item1 setHighlightedImage:[UIImage imageNamed:@"th_menu_on"]];
+            [item1 setStanbyImage:[UIImage imageNamed:@"th_menu_off"]];
+            
+            PFTabBarItemButton *item2 = [self.tabBarViewController.itemButtons objectAtIndex:2];
+            [item2 setHighlightedImage:[UIImage imageNamed:@"th_member_on"]];
+            [item2 setStanbyImage:[UIImage imageNamed:@"th_member_off"]];
+            
+            PFTabBarItemButton *item3 = [self.tabBarViewController.itemButtons objectAtIndex:3];
+            [item3 setHighlightedImage:[UIImage imageNamed:@"th_contact_on"]];
+            [item3 setStanbyImage:[UIImage imageNamed:@"th_contact_off"]];
+            
+        }
     }
     
     [self.tabBarViewController setSelectedIndex:3];
@@ -130,6 +173,128 @@ BOOL newMedia;
 
 - (void)ShowTabbar {
     [self.tabBarViewController showTabBarWithAnimation:YES];
+}
+
+- (void)resetApp {
+    [self.RatreeSamosornApi saveReset:@"NO"];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    self.update = [[PFUpdateViewController alloc] init];
+    self.menu = [[PFMenuViewController alloc] init];
+    self.member = [[PFMemberViewController alloc] init];
+    self.contact = [[PFContactViewController alloc] init];
+    
+    if (IS_WIDESCREEN) {
+        self.update = [[PFUpdateViewController alloc] initWithNibName:@"PFUpdateViewController_Wide" bundle:nil];
+        self.menu = [[PFMenuViewController alloc] initWithNibName:@"PFMenuViewController_Wide" bundle:nil];
+        self.member = [[PFMemberViewController alloc] initWithNibName:@"PFMemberViewController_Wide" bundle:nil];
+        self.contact = [[PFContactViewController alloc] initWithNibName:@"PFContactViewController_Wide" bundle:nil];
+        
+    } else {
+        self.update = [[PFUpdateViewController alloc] initWithNibName:@"PFUpdateViewController" bundle:nil];
+        self.menu = [[PFMenuViewController alloc] initWithNibName:@"PFMenuViewController" bundle:nil];
+        self.member = [[PFMemberViewController alloc] initWithNibName:@"PFMemberViewController" bundle:nil];
+        self.contact = [[PFContactViewController alloc] initWithNibName:@"PFContactViewController" bundle:nil];
+        
+    }
+    
+    self.tabBarViewController = [[PFTabBarViewController alloc] initWithBackgroundImage:nil viewControllers:self.update,self.menu,self.member,self.contact,nil];
+    
+    self.update.delegate = self;
+    self.menu.delegate = self;
+    self.member.delegate = self;
+    self.contact.delegate = self;
+    
+    self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
+    self.RatreeSamosornApi.delegate = self;
+    
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        if(IS_WIDESCREEN){
+            
+            PFTabBarItemButton *item0 = [self.tabBarViewController.itemButtons objectAtIndex:0];
+            [item0 setHighlightedImage:[UIImage imageNamed:@"en_update_on"]];
+            [item0 setStanbyImage:[UIImage imageNamed:@"en_update_off"]];
+            
+            PFTabBarItemButton *item1 = [self.tabBarViewController.itemButtons objectAtIndex:1];
+            [item1 setHighlightedImage:[UIImage imageNamed:@"en_menu_on"]];
+            [item1 setStanbyImage:[UIImage imageNamed:@"en_menu_off"]];
+            
+            PFTabBarItemButton *item2 = [self.tabBarViewController.itemButtons objectAtIndex:2];
+            [item2 setHighlightedImage:[UIImage imageNamed:@"en_member_on"]];
+            [item2 setStanbyImage:[UIImage imageNamed:@"en_member_off"]];
+            
+            PFTabBarItemButton *item3 = [self.tabBarViewController.itemButtons objectAtIndex:3];
+            [item3 setHighlightedImage:[UIImage imageNamed:@"en_contact_on"]];
+            [item3 setStanbyImage:[UIImage imageNamed:@"en_contact_off"]];
+            
+        }else{
+            
+            PFTabBarItemButton *item0 = [self.tabBarViewController.itemButtons objectAtIndex:0];
+            [item0 setHighlightedImage:[UIImage imageNamed:@"en_update_on"]];
+            [item0 setStanbyImage:[UIImage imageNamed:@"en_update_off"]];
+            
+            PFTabBarItemButton *item1 = [self.tabBarViewController.itemButtons objectAtIndex:1];
+            [item1 setHighlightedImage:[UIImage imageNamed:@"en_menu_on"]];
+            [item1 setStanbyImage:[UIImage imageNamed:@"en_menu_off"]];
+            
+            PFTabBarItemButton *item2 = [self.tabBarViewController.itemButtons objectAtIndex:2];
+            [item2 setHighlightedImage:[UIImage imageNamed:@"en_member_on"]];
+            [item2 setStanbyImage:[UIImage imageNamed:@"en_member_off"]];
+            
+            PFTabBarItemButton *item3 = [self.tabBarViewController.itemButtons objectAtIndex:3];
+            [item3 setHighlightedImage:[UIImage imageNamed:@"en_contact_on"]];
+            [item3 setStanbyImage:[UIImage imageNamed:@"en_contact_off"]];
+            
+        }
+    } else {
+        if(IS_WIDESCREEN){
+            
+            PFTabBarItemButton *item0 = [self.tabBarViewController.itemButtons objectAtIndex:0];
+            [item0 setHighlightedImage:[UIImage imageNamed:@"th_update_on"]];
+            [item0 setStanbyImage:[UIImage imageNamed:@"th_update_off"]];
+            
+            PFTabBarItemButton *item1 = [self.tabBarViewController.itemButtons objectAtIndex:1];
+            [item1 setHighlightedImage:[UIImage imageNamed:@"th_menu_on"]];
+            [item1 setStanbyImage:[UIImage imageNamed:@"th_menu_off"]];
+            
+            PFTabBarItemButton *item2 = [self.tabBarViewController.itemButtons objectAtIndex:2];
+            [item2 setHighlightedImage:[UIImage imageNamed:@"th_member_on"]];
+            [item2 setStanbyImage:[UIImage imageNamed:@"th_member_off"]];
+            
+            PFTabBarItemButton *item3 = [self.tabBarViewController.itemButtons objectAtIndex:3];
+            [item3 setHighlightedImage:[UIImage imageNamed:@"th_contact_on"]];
+            [item3 setStanbyImage:[UIImage imageNamed:@"th_contact_off"]];
+            
+        }else{
+            
+            PFTabBarItemButton *item0 = [self.tabBarViewController.itemButtons objectAtIndex:0];
+            [item0 setHighlightedImage:[UIImage imageNamed:@"th_update_on"]];
+            [item0 setStanbyImage:[UIImage imageNamed:@"th_update_off"]];
+            
+            PFTabBarItemButton *item1 = [self.tabBarViewController.itemButtons objectAtIndex:1];
+            [item1 setHighlightedImage:[UIImage imageNamed:@"th_menu_on"]];
+            [item1 setStanbyImage:[UIImage imageNamed:@"th_menu_off"]];
+            
+            PFTabBarItemButton *item2 = [self.tabBarViewController.itemButtons objectAtIndex:2];
+            [item2 setHighlightedImage:[UIImage imageNamed:@"th_member_on"]];
+            [item2 setStanbyImage:[UIImage imageNamed:@"th_member_off"]];
+            
+            PFTabBarItemButton *item3 = [self.tabBarViewController.itemButtons objectAtIndex:3];
+            [item3 setHighlightedImage:[UIImage imageNamed:@"th_contact_on"]];
+            [item3 setStanbyImage:[UIImage imageNamed:@"th_contact_off"]];
+            
+        }
+    }
+    
+    [self.tabBarViewController setSelectedIndex:3];
+    [self.tabBarViewController setSelectedIndex:2];
+    [self.tabBarViewController setSelectedIndex:1];
+    [self.tabBarViewController setSelectedIndex:0];
+    
+    [self.window setRootViewController:self.tabBarViewController];
+    [self.window makeKeyAndVisible];
+    
 }
 
 - (void)PFImageViewController:(id)sender viewPicture:(NSString *)link{
@@ -340,6 +505,21 @@ BOOL newMedia;
     UIGraphicsEndImageContext();
     
     return newImage;
+}
+
+// In order to process the response you get from interacting with the Facebook login process,
+// you need to override application:openURL:sourceApplication:annotation:
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    
+    // Call FBAppCall's handleOpenURL:sourceApplication to handle Facebook app responses
+    BOOL wasHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+    
+    // You can add your app-specific url handling code here if needed
+    
+    return wasHandled;
 }
 
 @end

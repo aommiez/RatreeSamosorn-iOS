@@ -61,6 +61,17 @@ BOOL refreshDataMenu;
     
     self.CalendarView.hidden = YES;
     
+    refreshDataMenu = YES;
+    
+    self.objFood = [[NSDictionary alloc] init];
+    self.arrObjFood = [[NSMutableArray alloc] init];
+    
+    self.objDrink = [[NSDictionary alloc] init];
+    self.arrObjDrink = [[NSMutableArray alloc] init];
+    
+    self.objGallery = [[NSDictionary alloc] init];
+    self.arrObjGallery = [[NSMutableArray alloc] init];
+    
     self.foodsBt.backgroundColor = [UIColor clearColor];
     [self.foodsBt.titleLabel setTextColor:[UIColor whiteColor]];
     self.drinksBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
@@ -70,9 +81,10 @@ BOOL refreshDataMenu;
     self.galleryBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
     [self.galleryBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.menu = @"Foods";
+    [self.RatreeSamosornApi getFoods];
     
-    //self.viewController = [PFActivityCalendarViewController new];
-    //[self.CalendarView addSubview:self.viewController.view];
+    self.viewController = [PFActivityCalendarViewController new];
+    [self.CalendarView addSubview:self.viewController.view];
     
 }
 
@@ -85,19 +97,87 @@ BOOL refreshDataMenu;
     return UIInterfaceOrientationMaskPortrait;
 }
 
+- (void)PFRatreeSamosornApi:(id)sender getFoodsResponse:(NSDictionary *)response {
+    NSLog(@"%@",response);
+    self.objFood = response;
+    
+    self.menu = @"Foods";
+    
+    if (!refreshDataMenu) {
+        for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
+            [self.arrObjFood addObject:[[response objectForKey:@"data"] objectAtIndex:i]];
+        }
+    } else {
+        [self.arrObjFood removeAllObjects];
+        for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
+            [self.arrObjFood addObject:[[response objectForKey:@"data"] objectAtIndex:i]];
+        }
+    }
+    
+    [self.tableView reloadData];
+}
+
+- (void)PFRatreeSamosornApi:(id)sender getFoodsErrorResponse:(NSString *)errorResponse {
+    NSLog(@"%@",errorResponse);
+}
+
+- (void)PFRatreeSamosornApi:(id)sender getDrinksResponse:(NSDictionary *)response {
+    NSLog(@"%@",response);
+    self.objDrink = response;
+    
+    if (!refreshDataMenu) {
+        for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
+            [self.arrObjDrink addObject:[[response objectForKey:@"data"] objectAtIndex:i]];
+        }
+    } else {
+        [self.arrObjDrink removeAllObjects];
+        for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
+            [self.arrObjDrink addObject:[[response objectForKey:@"data"] objectAtIndex:i]];
+        }
+    }
+    
+    [self.tableView reloadData];
+}
+
+- (void)PFRatreeSamosornApi:(id)sender getDrinksErrorResponse:(NSString *)errorResponse {
+    NSLog(@"%@",errorResponse);
+}
+
+- (void)PFRatreeSamosornApi:(id)sender getGalleryResponse:(NSDictionary *)response {
+    NSLog(@"%@",response);
+    self.objGallery = response;
+    
+    if (!refreshDataMenu) {
+        for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
+            [self.arrObjGallery addObject:[[response objectForKey:@"data"] objectAtIndex:i]];
+        }
+    } else {
+        [self.arrObjGallery removeAllObjects];
+        for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
+            [self.arrObjGallery addObject:[[response objectForKey:@"data"] objectAtIndex:i]];
+        }
+    }
+    
+    [self.tableView reloadData];
+}
+
+- (void)PFRatreeSamosornApi:(id)sender getGalleryErrorResponse:(NSString *)errorResponse {
+    NSLog(@"%@",errorResponse);
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if ([self.menu isEqualToString:@"Foods"]) {
-        return 5;
+        return [self.arrObjFood count];
     }
     if ([self.menu isEqualToString:@"Drinks"]) {
-        return 3;
+        return [self.arrObjDrink count];
     }
     if ([self.menu isEqualToString:@"Activity"]) {
         return 0;
     }
     if ([self.menu isEqualToString:@"Gallery"]) {
-        return 4;
+        return [self.arrObjGallery count];
     }
     return 0;
 }
@@ -131,16 +211,44 @@ BOOL refreshDataMenu;
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        NSString *img = [[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
+        NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/100/100/"];
+        
+        [DLImageLoader loadImageFromURL:urlimg
+                              completed:^(NSError *error, NSData *imgData) {
+                                  cell.image.image = [UIImage imageWithData:imgData];
+                              }];
+        
+        cell.name.text = [[NSString alloc] initWithString:[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"name"]];
+        cell.price.text = [[NSString alloc] initWithFormat:@"%@",[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"price"]];
+        
+        cell.detail.text = [[NSString alloc] initWithString:[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"detail"]];
+        
         return cell;
     }
     if ([self.menu isEqualToString:@"Drinks"]) {
-        PFFoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PFFoodsCell"];
+        PFDrinkCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PFDrinkCell"];
         if(cell == nil) {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PFFoodsCell" owner:self options:nil];
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PFDrinkCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        NSString *img = [[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
+        NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/100/100/"];
+        
+        [DLImageLoader loadImageFromURL:urlimg
+                              completed:^(NSError *error, NSData *imgData) {
+                                  cell.image.image = [UIImage imageWithData:imgData];
+                              }];
+        
+        cell.name.text = [[NSString alloc] initWithString:[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"name"]];
+        cell.price.text = [[NSString alloc] initWithFormat:@"%@",[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"price"]];
+        
+        cell.detail.text = [[NSString alloc] initWithString:[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"detail"]];
+        
         return cell;
     }
     if ([self.menu isEqualToString:@"Gallery"]) {
@@ -151,6 +259,18 @@ BOOL refreshDataMenu;
         }
     
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        NSString *img = [[[self.arrObjGallery objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
+        NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/79/79/"];
+        
+        [DLImageLoader loadImageFromURL:urlimg
+                              completed:^(NSError *error, NSData *imgData) {
+                                  cell.image.image = [UIImage imageWithData:imgData];
+                              }];
+        
+        cell.name.text = [[NSString alloc] initWithString:[[self.arrObjGallery objectAtIndex:indexPath.row] objectForKey:@"name"]];
+        cell.detail.text = [[NSString alloc] initWithString:[[self.arrObjGallery objectAtIndex:indexPath.row] objectForKey:@"detail"]];
+        
         return cell;
     }
     
@@ -170,7 +290,7 @@ BOOL refreshDataMenu;
     self.galleryBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
     [self.galleryBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.menu = @"Foods";
-    [self.tableView reloadData];
+    [self.RatreeSamosornApi getFoods];
 }
 
 //drink
@@ -186,7 +306,7 @@ BOOL refreshDataMenu;
     self.galleryBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
     [self.galleryBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.menu = @"Drinks";
-    [self.tableView reloadData];
+    [self.RatreeSamosornApi getDrinks];
 }
 
 //activity
@@ -217,7 +337,7 @@ BOOL refreshDataMenu;
     self.galleryBt.backgroundColor = [UIColor clearColor];
     [self.galleryBt.titleLabel setTextColor:[UIColor whiteColor]];
     self.menu = @"Gallery";
-    [self.tableView reloadData];
+    [self.RatreeSamosornApi getGallery];
 }
 
 #pragma mark -

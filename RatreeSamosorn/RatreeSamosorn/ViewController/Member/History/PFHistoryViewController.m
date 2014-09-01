@@ -37,7 +37,16 @@ BOOL refreshDataHistory;
     [popup setMasksToBounds:YES];
     [popup setCornerRadius:7.0f];
     
-    self.navigationItem.title = @"History";
+    self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
+    self.RatreeSamosornApi.delegate = self;
+    
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        self.navigationItem.title = @"History";
+        self.title_history.text = @"History";
+    } else {
+        self.navigationItem.title = @"ประวัติการใช้งาน";
+        self.title_history.text = @"ประวัติการใช้งาน";
+    }
     
     self.conditionnomember.text = self.detailhistory;
     
@@ -60,9 +69,7 @@ BOOL refreshDataHistory;
     self.headerView.frame = CGRectMake(self.headerView.frame.origin.x, self.headerView.frame.origin.y, self.headerView.frame.size.width, self.headerView.frame.size.height+descText.frame.size.height-25);
     
     self.tableView.tableHeaderView = self.headerView;
-    
-    self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
-    self.RatreeSamosornApi.delegate = self;
+
     [self.RatreeSamosornApi history];
     
     self.arrObj = [[NSMutableArray alloc] init];

@@ -35,6 +35,7 @@
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property (strong, nonatomic) IBOutlet UIView *historyView;
 @property (strong, nonatomic) IBOutlet UILabel_UILabelDynamicHeight *conditionnomember;
+@property (strong, nonatomic) IBOutlet UILabel *title_history;
 
 @property (strong, nonatomic) NSString *detailhistory;
 

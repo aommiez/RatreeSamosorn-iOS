@@ -19,6 +19,7 @@
 
 @protocol PFUpdateViewControllerDelegate <NSObject>
 
+- (void)resetApp;
 //- (void)PFGalleryViewController:(id)sender sum:(NSMutableArray *)sum current:(NSString *)current;
 - (void)PFImageViewController:(id)sender viewPicture:(NSString *)link;
 - (void)HideTabbar;

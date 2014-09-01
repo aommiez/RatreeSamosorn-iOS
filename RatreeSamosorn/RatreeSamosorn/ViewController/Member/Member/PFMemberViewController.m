@@ -1526,6 +1526,13 @@ NSTimer *timmer;
                               cell.image.image = [UIImage imageWithData:imgData];
                           }];
     
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        cell.free.text = @"Free";
+        cell.points.text = @"Points";
+    } else {
+        cell.free.text = @"ฟรี";
+        cell.points.text = @"คะแนน";
+    }
     
     cell.name.text = [[NSString alloc] initWithString:[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"name"]];
     NSString *point = [[NSString alloc] initWithFormat:@"%@",[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"point"]];
@@ -1556,13 +1563,14 @@ NSTimer *timmer;
             reward.delegate = self;
             reward.reward_id = [[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"id"];
             [self.navController pushViewController:reward animated:YES];
-        } else {
-            [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
-                                        message:@"แลกสินค้านี้ไม่ได้ เนื่องจากสแตมป์ของคุณมีน้อยกว่าเงื่อนไข"
-                                       delegate:nil
-                              cancelButtonTitle:@"ตกลง"
-                              otherButtonTitles:nil] show];
         }
+//        else {
+//            [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+//                                        message:@"แลกสินค้านี้ไม่ได้ เนื่องจากสแตมป์ของคุณมีน้อยกว่าเงื่อนไข"
+//                                       delegate:nil
+//                              cancelButtonTitle:@"ตกลง"
+//                              otherButtonTitles:nil] show];
+//        }
     } else {
         self.loginView = [PFLoginViewController alloc];
         self.loginView.menu = @"member";

@@ -26,7 +26,7 @@
                                 <rect key="frame" x="234" y="6" width="60" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOC-9r-i7b">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOC-9r-i7b">
                                         <rect key="frame" x="3" y="24" width="54" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -41,7 +41,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.94509803921568625" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Free" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9y-8L-Zqm">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9y-8L-Zqm">
                                 <rect key="frame" x="70" y="19" width="40" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -63,9 +63,11 @@
             <connections>
                 <outlet property="bgPoint" destination="mqB-3p-IlE" id="KwQ-KU-JB2"/>
                 <outlet property="bgView" destination="SqK-7n-pdj" id="p1c-pZ-jsm"/>
+                <outlet property="free" destination="W9y-8L-Zqm" id="qcF-eu-jFW"/>
                 <outlet property="image" destination="qRA-9t-pw1" id="lyQ-K0-Tb4"/>
                 <outlet property="name" destination="hhC-o3-6TA" id="Ska-KH-E5k"/>
                 <outlet property="point" destination="L4D-1y-xfh" id="LNq-ZO-yWp"/>
+                <outlet property="points" destination="lOC-9r-i7b" id="ahw-hb-FRl"/>
             </connections>
         </tableViewCell>
     </objects>

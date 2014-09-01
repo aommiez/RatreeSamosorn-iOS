@@ -41,6 +41,11 @@
                 </subviews>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="detail" destination="rE3-ah-VIN" id="Crx-nP-cyB"/>
+                <outlet property="image" destination="eCa-BY-4ZU" id="WK4-Ri-78Q"/>
+                <outlet property="name" destination="Wo2-aG-f26" id="uFb-3X-Ifs"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

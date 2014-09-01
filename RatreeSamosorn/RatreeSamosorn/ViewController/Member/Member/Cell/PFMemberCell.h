@@ -18,4 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *point;
 
+@property (weak, nonatomic) IBOutlet UILabel *free;
+@property (weak, nonatomic) IBOutlet UILabel *points;
+
 @end

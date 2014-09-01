@@ -40,6 +40,16 @@
 - (void)PFRatreeSamosornApi:(id)sender changPasswordResponse:(NSDictionary *)response;
 - (void)PFRatreeSamosornApi:(id)sender changPasswordErrorResponse:(NSString *)errorResponse;
 
+#pragma mark - Menu Protocal Delegate
+- (void)PFRatreeSamosornApi:(id)sender getFoodsResponse:(NSDictionary *)response;
+- (void)PFRatreeSamosornApi:(id)sender getFoodsErrorResponse:(NSString *)errorResponse;
+
+- (void)PFRatreeSamosornApi:(id)sender getDrinksResponse:(NSDictionary *)response;
+- (void)PFRatreeSamosornApi:(id)sender getDrinksErrorResponse:(NSString *)errorResponse;
+
+- (void)PFRatreeSamosornApi:(id)sender getGalleryResponse:(NSDictionary *)response;
+- (void)PFRatreeSamosornApi:(id)sender getGalleryErrorResponse:(NSString *)errorResponse;
+
 #pragma mark - Member Protocal Delegate
 - (void)PFRatreeSamosornApi:(id)sender getStampStyleResponse:(NSDictionary *)response;
 - (void)PFRatreeSamosornApi:(id)sender getStampStyleErrorResponse:(NSString *)errorResponse;
@@ -73,7 +83,15 @@
 @property NSUserDefaults *userDefaults;
 @property NSString *urlStr;
 
-#pragma mark - 
+#pragma mark - Reset App
+- (void)saveReset:(NSString *)reset;
+- (NSString *)getReset;
+
+#pragma mark - App Language
+- (void)saveLanguage:(NSString *)language;
+- (NSString *)getLanguage;
+
+#pragma mark - User_id
 - (void)saveUserId:(NSString *)user_id;
 - (void)saveAccessToken:(NSString *)access_token;
 
@@ -105,9 +123,10 @@
 - (void)updateSetting:(NSString *)profilename email:(NSString *)email website:(NSString *)website tel:(NSString *)tel gender:(NSString *)gender birthday:(NSString *)birthday;
 - (void)changePassword:(NSString *)old_password new_password:(NSString *)new_password;
 
-#pragma mark - App Language
-- (void)saveLanguage:(NSString *)language;
-- (NSString *)getLanguage;
+#pragma mark - Menu
+- (void)getFoods;
+- (void)getDrinks;
+- (void)getGallery;
 
 #pragma mark - Member
 - (void)getStampStyle;

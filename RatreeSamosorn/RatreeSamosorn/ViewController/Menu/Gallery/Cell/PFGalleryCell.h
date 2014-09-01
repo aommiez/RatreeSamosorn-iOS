@@ -10,4 +10,8 @@
 
 @interface PFGalleryCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UIImageView *image;
+@property (strong, nonatomic) IBOutlet UILabel *name;
+@property (strong, nonatomic) IBOutlet UILabel *detail;
+
 @end

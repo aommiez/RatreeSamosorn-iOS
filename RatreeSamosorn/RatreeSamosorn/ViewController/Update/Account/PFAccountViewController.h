@@ -14,6 +14,7 @@
 
 #import "PFAccountCell.h"
 #import "PFProfileViewController.h"
+#import "PFLanguageViewController.h"
 
 @protocol PFAccountViewControllerDelegate <NSObject>
 

@@ -67,9 +67,11 @@ NSString *password;
     FBLoginView *fbView = [[FBLoginView alloc] init];
     fbView.delegate = self;
     fbView.frame = CGRectMake(20, 123, 240, 60);
-    //fbView.readPermissions = @[@"basic_info", @"email"];
-    FBSession *session = [[FBSession alloc] initWithPermissions:@[@"basic_info", @"email"]];
+    fbView.readPermissions = @[@"public_profile",@"email",@"user_birthday"];
+    
+    FBSession *session = [[FBSession alloc] initWithPermissions:[[NSArray alloc] initWithObjects:@"basic_info",@"email",@"user_birthday", nil]];
     [FBSession setActiveSession:session];
+    
     [self.loginView addSubview:fbView];
     
     self.registerView.frame = CGRectMake(20, 600, self.registerView.frame.size.width, self.registerView.frame.size.height);
@@ -384,7 +386,7 @@ NSString *password;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[response objectForKey:@"access_token"] forKey:@"access_token"];
-    [defaults setObject:[response objectForKey:@"id"] forKey:@"user_id"];
+    [defaults setObject:[response objectForKey:@"user_id"] forKey:@"user_id"];
     [defaults synchronize];
     
     [self closeBox];
@@ -419,10 +421,12 @@ NSString *password;
     NSString *fbAccessToken = [FBSession activeSession].accessTokenData.accessToken;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
+    NSLog(@"facebook %@",user);
+    
     NSLog(@"deviceToken %@",[defaults objectForKey:@"deviceToken"]);
     NSString *devicetoken = [NSString stringWithFormat:@"%@",[defaults objectForKey:@"deviceToken"]];
     
-    if ([devicetoken isEqualToString:@""]) {
+    if ([devicetoken isEqualToString:@""] || [devicetoken isEqualToString:@"(null)"]) {
         [self.RatreeSamosornApi loginWithFacebookToken:fbAccessToken ios_device_token:@""];
     } else {
         [self.RatreeSamosornApi loginWithFacebookToken:fbAccessToken ios_device_token:[defaults objectForKey:@"deviceToken"]];

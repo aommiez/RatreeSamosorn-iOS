@@ -11,6 +11,7 @@
                 <outlet property="historyView" destination="Uax-9j-bUx" id="dlX-3r-cYN"/>
                 <outlet property="popupwaitView" destination="YJW-sY-4d7" id="OEz-TI-0GJ"/>
                 <outlet property="tableView" destination="h3K-lU-imw" id="yq8-dg-uFg"/>
+                <outlet property="title_history" destination="fQ3-c9-Dwr" id="4pS-bt-Yom"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="waitView" destination="xwb-9h-XQP" id="SIy-eV-K14"/>
             </connections>
@@ -75,7 +76,7 @@
                     <rect key="frame" x="0.0" y="30" width="320" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fQ3-c9-Dwr">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fQ3-c9-Dwr">
                             <rect key="frame" x="20" y="14" width="280" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>

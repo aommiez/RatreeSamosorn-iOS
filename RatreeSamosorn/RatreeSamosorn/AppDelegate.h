@@ -15,6 +15,8 @@
 #import "PFMemberViewController.h"
 #import "PFContactViewController.h"
 
+#import "PFRatreeSamosornApi.h"
+
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "SDImageCache.h"
 #import "MWPhoto.h"
@@ -23,6 +25,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,MWPhotoBrowserDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) PFRatreeSamosornApi *RatreeSamosornApi;
 
 @property (strong, nonatomic) PFTabBarViewController *tabBarViewController;
 

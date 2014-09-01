@@ -76,6 +76,13 @@
 		5200F3DE198F83D900EAFEDE /* monthCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5200F3DA198F83D900EAFEDE /* monthCell.xib */; };
 		5200F3DF198F83D900EAFEDE /* PFActivityCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5200F3DC198F83D900EAFEDE /* PFActivityCalendarViewController.m */; };
 		5200F3E2198F84EE00EAFEDE /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5200F3E1198F84EE00EAFEDE /* NSDate+Helper.m */; };
+		5221875B19B45AA90064DC86 /* PFLanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5221875819B45AA90064DC86 /* PFLanguageViewController.m */; };
+		5221875D19B45AA90064DC86 /* PFLanguageViewController_Wide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5221875A19B45AA90064DC86 /* PFLanguageViewController_Wide.xib */; };
+		5221875F19B45B060064DC86 /* ic_corect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5221875E19B45B060064DC86 /* ic_corect@2x.png */; };
+		5221876219B45B3B0064DC86 /* bt_setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 5221876019B45B3B0064DC86 /* bt_setting.png */; };
+		5221876319B45B3B0064DC86 /* bt_setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5221876119B45B3B0064DC86 /* bt_setting@2x.png */; };
+		5221876E19B473FF0064DC86 /* PFDrinkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5221876C19B473FF0064DC86 /* PFDrinkCell.m */; };
+		5221876F19B473FF0064DC86 /* PFDrinkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5221876D19B473FF0064DC86 /* PFDrinkCell.xib */; };
 		52273D8D1988E83F0023F87A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52273D8C1988E83F0023F87A /* Foundation.framework */; };
 		52273D8F1988E83F0023F87A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52273D8E1988E83F0023F87A /* CoreGraphics.framework */; };
 		52273D911988E83F0023F87A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52273D901988E83F0023F87A /* UIKit.framework */; };
@@ -470,6 +477,15 @@
 		5200F3DC198F83D900EAFEDE /* PFActivityCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFActivityCalendarViewController.m; sourceTree = "<group>"; };
 		5200F3E0198F84EE00EAFEDE /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
 		5200F3E1198F84EE00EAFEDE /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
+		5221875719B45AA90064DC86 /* PFLanguageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLanguageViewController.h; sourceTree = "<group>"; };
+		5221875819B45AA90064DC86 /* PFLanguageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLanguageViewController.m; sourceTree = "<group>"; };
+		5221875A19B45AA90064DC86 /* PFLanguageViewController_Wide.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PFLanguageViewController_Wide.xib; sourceTree = "<group>"; };
+		5221875E19B45B060064DC86 /* ic_corect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_corect@2x.png"; sourceTree = "<group>"; };
+		5221876019B45B3B0064DC86 /* bt_setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_setting.png; sourceTree = "<group>"; };
+		5221876119B45B3B0064DC86 /* bt_setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_setting@2x.png"; sourceTree = "<group>"; };
+		5221876B19B473FF0064DC86 /* PFDrinkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFDrinkCell.h; sourceTree = "<group>"; };
+		5221876C19B473FF0064DC86 /* PFDrinkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFDrinkCell.m; sourceTree = "<group>"; };
+		5221876D19B473FF0064DC86 /* PFDrinkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PFDrinkCell.xib; sourceTree = "<group>"; };
 		52273D891988E83F0023F87A /* RatreeSamosorn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RatreeSamosorn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52273D8C1988E83F0023F87A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		52273D8E1988E83F0023F87A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -991,6 +1007,26 @@
 			path = TK;
 			sourceTree = "<group>";
 		};
+		5221875619B45AA90064DC86 /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				5221875719B45AA90064DC86 /* PFLanguageViewController.h */,
+				5221875819B45AA90064DC86 /* PFLanguageViewController.m */,
+				5221875A19B45AA90064DC86 /* PFLanguageViewController_Wide.xib */,
+			);
+			path = Language;
+			sourceTree = "<group>";
+		};
+		5221876A19B473F20064DC86 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5221876B19B473FF0064DC86 /* PFDrinkCell.h */,
+				5221876C19B473FF0064DC86 /* PFDrinkCell.m */,
+				5221876D19B473FF0064DC86 /* PFDrinkCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		52273D801988E83F0023F87A = {
 			isa = PBXGroup;
 			children = (
@@ -1487,6 +1523,7 @@
 			children = (
 				52B49C6B19AD9F8D0086DFFF /* Cell */,
 				52B49C6F19AD9F8D0086DFFF /* Images */,
+				5221875619B45AA90064DC86 /* Language */,
 				52B49C7D19AD9F8D0086DFFF /* PFAccountViewController.h */,
 				52B49C7E19AD9F8D0086DFFF /* PFAccountViewController.m */,
 				52B49C7F19AD9F8D0086DFFF /* PFAccountViewController_Wide.xib */,
@@ -1516,9 +1553,12 @@
 		52B49C6F19AD9F8D0086DFFF /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5221876019B45B3B0064DC86 /* bt_setting.png */,
+				5221876119B45B3B0064DC86 /* bt_setting@2x.png */,
 				52B49C7019AD9F8D0086DFFF /* checked.png */,
 				52B49C7119AD9F8D0086DFFF /* checked@2x.png */,
 				52B49C7219AD9F8D0086DFFF /* ic_birthday@2x.png */,
+				5221875E19B45B060064DC86 /* ic_corect@2x.png */,
 				52B49C7319AD9F8D0086DFFF /* ic_fb@2x.png */,
 				52B49C7419AD9F8D0086DFFF /* ic_gender@2x.png */,
 				52B49C7519AD9F8D0086DFFF /* ic_iphone@2x.png */,
@@ -1582,6 +1622,7 @@
 		52C4B7DB198C8790006D26B3 /* Drinks */ = {
 			isa = PBXGroup;
 			children = (
+				5221876A19B473F20064DC86 /* Cell */,
 			);
 			path = Drinks;
 			sourceTree = "<group>";
@@ -2035,6 +2076,7 @@
 				528C31A11991E1DD008670CD /* HeadDetailDZIp5@2x.png in Resources */,
 				52306177198B942D007D2F4F /* Login_Button.png in Resources */,
 				5200F39D198F83AB00EAFEDE /* TapkuLibrary.bundle in Resources */,
+				5221875D19B45AA90064DC86 /* PFLanguageViewController_Wide.xib in Resources */,
 				5230619E198B9621007D2F4F /* stamp.png in Resources */,
 				523061A2198B9707007D2F4F /* button_point.png in Resources */,
 				52273EB11988F0400023F87A /* en_menu_off@2x.png in Resources */,
@@ -2051,6 +2093,7 @@
 				52273EA31988F0380023F87A /* en_update_off.png in Resources */,
 				527E83AA1989FB7F00797DB3 /* Powered@2x.png in Resources */,
 				52B49C9519AD9F8D0086DFFF /* ic_lock@2x.png in Resources */,
+				5221876319B45B3B0064DC86 /* bt_setting@2x.png in Resources */,
 				527E83B31989FE0A00797DB3 /* ic_phone.png in Resources */,
 				52B49C9019AD9F8D0086DFFF /* checked@2x.png in Resources */,
 				52A67E30198B4B590056EC10 /* NotBoxReadedIp4@2x.png in Resources */,
@@ -2102,6 +2145,7 @@
 				52B49C9B19AD9F8D0086DFFF /* unchecked@2x.png in Resources */,
 				52273EBD1988F0490023F87A /* th_contact_off.png in Resources */,
 				52273EC01988F0490023F87A /* th_member_on.png in Resources */,
+				5221875F19B45B060064DC86 /* ic_corect@2x.png in Resources */,
 				52273EBF1988F0490023F87A /* th_member_off.png in Resources */,
 				527E83BE198A023000797DB3 /* chapter01@2x.png in Resources */,
 				52B49CAE19ADC6A30086DFFF /* PFEditViewController_Wide.xib in Resources */,
@@ -2118,6 +2162,7 @@
 				52306175198B942D007D2F4F /* Create_Button.png in Resources */,
 				5245F8F4198B429B00D40E4A /* PFDetailViewController_Wide.xib in Resources */,
 				52A67E2E198B4B590056EC10 /* NotBoxNoReadIp5@2x.png in Resources */,
+				5221876F19B473FF0064DC86 /* PFDrinkCell.xib in Resources */,
 				52B49C9219AD9F8D0086DFFF /* ic_fb@2x.png in Resources */,
 				523061A5198B975B007D2F4F /* glow@2x.png in Resources */,
 				527E83BF198A023000797DB3 /* chapter02.png in Resources */,
@@ -2127,6 +2172,7 @@
 				52273EAD1988F0400023F87A /* en_contact_off@2x.png in Resources */,
 				5245F8FA198B42F200D40E4A /* PFUpdateCell.xib in Resources */,
 				52B49CB319ADCC0F0086DFFF /* PFEditDetailViewController_Wide.xib in Resources */,
+				5221876219B45B3B0064DC86 /* bt_setting.png in Resources */,
 				52273EB01988F0400023F87A /* en_member_on@2x.png in Resources */,
 				527E83C0198A023000797DB3 /* chapter02@2x.png in Resources */,
 				527E83A61989FAC300797DB3 /* pin_map@2x.png in Resources */,
@@ -2228,6 +2274,7 @@
 				52273E1F1988E91A0023F87A /* PFTabBarViewController.m in Sources */,
 				5200F3B2198F83AB00EAFEDE /* TKLabelSwitchCell.m in Sources */,
 				5200F3CE198F83AB00EAFEDE /* UIFont+TKCategory.m in Sources */,
+				5221875B19B45AA90064DC86 /* PFLanguageViewController.m in Sources */,
 				52FE2BFC198BE92A00CF29F0 /* PFMapView.m in Sources */,
 				52BC894F1988FB52006622C9 /* PFRatreeSamosornApi.m in Sources */,
 				5200F3B4198F83AB00EAFEDE /* TKLabelTextViewCell.m in Sources */,
@@ -2333,6 +2380,7 @@
 				52FE2BC4198BE92A00CF29F0 /* AFURLResponseSerialization.m in Sources */,
 				52FE2BCD198BE92A00CF29F0 /* AMBlurView.m in Sources */,
 				52FE2BE4198BE92A00CF29F0 /* PSTCollectionViewFlowLayout.m in Sources */,
+				5221876E19B473FF0064DC86 /* PFDrinkCell.m in Sources */,
 				5200F3A9198F83AB00EAFEDE /* TKEmptyView.m in Sources */,
 				5200F39C198F83AB00EAFEDE /* NSString+TKCategory.m in Sources */,
 				528B88B419AB27B300C14B8C /* PagedImageScrollView.m in Sources */,

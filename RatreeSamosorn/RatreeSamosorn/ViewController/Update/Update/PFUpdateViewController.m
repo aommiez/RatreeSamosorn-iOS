@@ -234,6 +234,10 @@ BOOL refreshDataUpdate;
 
 - (void)PFAccountViewControllerBack {
     [self.delegate ShowTabbar];
+    
+    if ([[self.RatreeSamosornApi getReset] isEqualToString:@"YES"]) {
+        [self.delegate resetApp];
+    }
 }
 
 @end

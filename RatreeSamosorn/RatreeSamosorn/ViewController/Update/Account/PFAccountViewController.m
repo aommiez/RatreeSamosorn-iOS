@@ -158,7 +158,16 @@ NSString *removeBreckets;
 }
 
 - (IBAction)applanguage:(id)sender {
-    NSLog(@"applanguage");
+    PFLanguageViewController *language = [[PFLanguageViewController alloc] init];
+    
+    if(IS_WIDESCREEN) {
+        language = [[PFLanguageViewController alloc] initWithNibName:@"PFLanguageViewController_Wide" bundle:nil];
+    } else {
+        language = [[PFLanguageViewController alloc] initWithNibName:@"PFLanguageViewController" bundle:nil];
+    }
+    
+    language.delegate = self;
+    [self.navigationController pushViewController:language animated:YES];
 }
 
 - (IBAction)logoutTapped:(id)sender {
@@ -168,7 +177,11 @@ NSString *removeBreckets;
     
 }
 
-- (void) PFProfileViewControllerBack {
+- (void)PFProfileViewControllerBack {
+    [self viewDidLoad];
+}
+
+- (void)BackSetting {
     [self viewDidLoad];
 }
 
