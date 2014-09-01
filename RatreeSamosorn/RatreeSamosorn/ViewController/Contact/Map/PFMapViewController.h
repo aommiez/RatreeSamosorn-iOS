@@ -1,6 +1,6 @@
 //
 //  PFMapViewController.h
-//  ราตรีสโมสร
+//  RatreeSamosorn
 //
 //  Created by Pariwat on 7/31/14.
 //  Copyright (c) 2014 platwofusion. All rights reserved.

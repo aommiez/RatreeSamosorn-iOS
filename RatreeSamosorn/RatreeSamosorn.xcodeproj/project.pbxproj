@@ -470,20 +470,20 @@
 		5200F3DC198F83D900EAFEDE /* PFActivityCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFActivityCalendarViewController.m; sourceTree = "<group>"; };
 		5200F3E0198F84EE00EAFEDE /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
 		5200F3E1198F84EE00EAFEDE /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
-		52273D891988E83F0023F87A /* ราตรีสโมสร.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ราตรีสโมสร.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		52273D891988E83F0023F87A /* RatreeSamosorn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RatreeSamosorn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52273D8C1988E83F0023F87A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		52273D8E1988E83F0023F87A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		52273D901988E83F0023F87A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		52273D941988E83F0023F87A /* ราตรีสโมสร-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ราตรีสโมสร-Info.plist"; sourceTree = "<group>"; };
+		52273D941988E83F0023F87A /* RatreeSamosorn-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RatreeSamosorn-Info.plist"; sourceTree = "<group>"; };
 		52273D961988E83F0023F87A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		52273D981988E83F0023F87A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		52273D9A1988E83F0023F87A /* ราตรีสโมสร-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ราตรีสโมสร-Prefix.pch"; sourceTree = "<group>"; };
+		52273D9A1988E83F0023F87A /* RatreeSamosorn-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RatreeSamosorn-Prefix.pch"; sourceTree = "<group>"; };
 		52273D9B1988E83F0023F87A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		52273D9C1988E83F0023F87A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		52273DA41988E83F0023F87A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		52273DAA1988E83F0023F87A /* ราตรีสโมสรTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ราตรีสโมสรTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		52273DAA1988E83F0023F87A /* RatreeSamosornTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RatreeSamosornTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		52273DAB1988E83F0023F87A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		52273DB31988E83F0023F87A /* ราตรีสโมสรTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ราตรีสโมสรTests-Info.plist"; sourceTree = "<group>"; };
+		52273DB31988E83F0023F87A /* RatreeSamosornTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RatreeSamosornTests-Info.plist"; sourceTree = "<group>"; };
 		52273DB51988E83F0023F87A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		52273DB71988E83F0023F87A /* RatreeSamosornTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RatreeSamosornTests.m; sourceTree = "<group>"; };
 		52273DF21988E91A0023F87A /* notificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = notificationView.xib; sourceTree = "<group>"; };
@@ -1004,8 +1004,8 @@
 		52273D8A1988E83F0023F87A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				52273D891988E83F0023F87A /* ราตรีสโมสร.app */,
-				52273DAA1988E83F0023F87A /* ราตรีสโมสรTests.xctest */,
+				52273D891988E83F0023F87A /* RatreeSamosorn.app */,
+				52273DAA1988E83F0023F87A /* RatreeSamosornTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1044,10 +1044,10 @@
 		52273D931988E83F0023F87A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				52273D941988E83F0023F87A /* ราตรีสโมสร-Info.plist */,
+				52273D941988E83F0023F87A /* RatreeSamosorn-Info.plist */,
 				52273D951988E83F0023F87A /* InfoPlist.strings */,
 				52273D981988E83F0023F87A /* main.m */,
-				52273D9A1988E83F0023F87A /* ราตรีสโมสร-Prefix.pch */,
+				52273D9A1988E83F0023F87A /* RatreeSamosorn-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1064,7 +1064,7 @@
 		52273DB21988E83F0023F87A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				52273DB31988E83F0023F87A /* ราตรีสโมสรTests-Info.plist */,
+				52273DB31988E83F0023F87A /* RatreeSamosornTests-Info.plist */,
 				52273DB41988E83F0023F87A /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -1946,9 +1946,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		52273D881988E83F0023F87A /* ราตรีสโมสร */ = {
+		52273D881988E83F0023F87A /* RatreeSamosorn */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 52273DBB1988E83F0023F87A /* Build configuration list for PBXNativeTarget "ราตรีสโมสร" */;
+			buildConfigurationList = 52273DBB1988E83F0023F87A /* Build configuration list for PBXNativeTarget "RatreeSamosorn" */;
 			buildPhases = (
 				52273D851988E83F0023F87A /* Sources */,
 				52273D861988E83F0023F87A /* Frameworks */,
@@ -1958,14 +1958,14 @@
 			);
 			dependencies = (
 			);
-			name = "ราตรีสโมสร";
+			name = RatreeSamosorn;
 			productName = RatreeSamosorn;
-			productReference = 52273D891988E83F0023F87A /* ราตรีสโมสร.app */;
+			productReference = 52273D891988E83F0023F87A /* RatreeSamosorn.app */;
 			productType = "com.apple.product-type.application";
 		};
-		52273DA91988E83F0023F87A /* ราตรีสโมสรTests */ = {
+		52273DA91988E83F0023F87A /* RatreeSamosornTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 52273DBE1988E83F0023F87A /* Build configuration list for PBXNativeTarget "ราตรีสโมสรTests" */;
+			buildConfigurationList = 52273DBE1988E83F0023F87A /* Build configuration list for PBXNativeTarget "RatreeSamosornTests" */;
 			buildPhases = (
 				52273DA61988E83F0023F87A /* Sources */,
 				52273DA71988E83F0023F87A /* Frameworks */,
@@ -1976,9 +1976,9 @@
 			dependencies = (
 				52273DB01988E83F0023F87A /* PBXTargetDependency */,
 			);
-			name = "ราตรีสโมสรTests";
+			name = RatreeSamosornTests;
 			productName = RatreeSamosornTests;
-			productReference = 52273DAA1988E83F0023F87A /* ราตรีสโมสรTests.xctest */;
+			productReference = 52273DAA1988E83F0023F87A /* RatreeSamosornTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1999,7 +1999,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 52273D841988E83F0023F87A /* Build configuration list for PBXProject "ราตรีสโมสร" */;
+			buildConfigurationList = 52273D841988E83F0023F87A /* Build configuration list for PBXProject "RatreeSamosorn" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -2012,8 +2012,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				52273D881988E83F0023F87A /* ราตรีสโมสร */,
-				52273DA91988E83F0023F87A /* ราตรีสโมสรTests */,
+				52273D881988E83F0023F87A /* RatreeSamosorn */,
+				52273DA91988E83F0023F87A /* RatreeSamosornTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2358,7 +2358,7 @@
 /* Begin PBXTargetDependency section */
 		52273DB01988E83F0023F87A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 52273D881988E83F0023F87A /* ราตรีสโมสร */;
+			target = 52273D881988E83F0023F87A /* RatreeSamosorn */;
 			targetProxy = 52273DAF1988E83F0023F87A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -2465,9 +2465,9 @@
 					"$(PROJECT_DIR)/RatreeSamosorn/Facebook",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RatreeSamosorn/ราตรีสโมสร-Prefix.pch";
-				INFOPLIST_FILE = "RatreeSamosorn/ราตรีสโมสร-Info.plist";
-				PRODUCT_NAME = "ราตรีสโมสร";
+				GCC_PREFIX_HEADER = "RatreeSamosorn/RatreeSamosorn-Prefix.pch";
+				INFOPLIST_FILE = "RatreeSamosorn/RatreeSamosorn-Info.plist";
+				PRODUCT_NAME = RatreeSamosorn;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2484,9 +2484,9 @@
 					"$(PROJECT_DIR)/RatreeSamosorn/Facebook",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RatreeSamosorn/ราตรีสโมสร-Prefix.pch";
-				INFOPLIST_FILE = "RatreeSamosorn/ราตรีสโมสร-Info.plist";
-				PRODUCT_NAME = "ราตรีสโมสร";
+				GCC_PREFIX_HEADER = "RatreeSamosorn/RatreeSamosorn-Prefix.pch";
+				INFOPLIST_FILE = "RatreeSamosorn/RatreeSamosorn-Info.plist";
+				PRODUCT_NAME = RatreeSamosorn;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2506,8 +2506,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "RatreeSamosornTests/ราตรีสโมสรTests-Info.plist";
-				PRODUCT_NAME = "ราตรีสโมสรTests";
+				INFOPLIST_FILE = "RatreeSamosornTests/RatreeSamosornTests-Info.plist";
+				PRODUCT_NAME = RatreeSamosornTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -2524,8 +2524,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RatreeSamosorn/RatreeSamosorn-Prefix.pch";
-				INFOPLIST_FILE = "RatreeSamosornTests/ราตรีสโมสรTests-Info.plist";
-				PRODUCT_NAME = "ราตรีสโมสรTests";
+				INFOPLIST_FILE = "RatreeSamosornTests/RatreeSamosornTests-Info.plist";
+				PRODUCT_NAME = RatreeSamosornTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -2534,7 +2534,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		52273D841988E83F0023F87A /* Build configuration list for PBXProject "ราตรีสโมสร" */ = {
+		52273D841988E83F0023F87A /* Build configuration list for PBXProject "RatreeSamosorn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				52273DB91988E83F0023F87A /* Debug */,
@@ -2543,7 +2543,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		52273DBB1988E83F0023F87A /* Build configuration list for PBXNativeTarget "ราตรีสโมสร" */ = {
+		52273DBB1988E83F0023F87A /* Build configuration list for PBXNativeTarget "RatreeSamosorn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				52273DBC1988E83F0023F87A /* Debug */,
@@ -2552,7 +2552,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		52273DBE1988E83F0023F87A /* Build configuration list for PBXNativeTarget "ราตรีสโมสรTests" */ = {
+		52273DBE1988E83F0023F87A /* Build configuration list for PBXNativeTarget "RatreeSamosornTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				52273DBF1988E83F0023F87A /* Debug */,
