@@ -22,6 +22,8 @@ UIImage *theimage;
 {
     [super viewDidLoad];
     
+    self.navigationItem.title = self.titleText;
+    
     UINib *headerNib = [UINib nibWithNibName:@"HeaderView" bundle:nil];
     [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
     
@@ -72,8 +74,8 @@ UIImage *theimage;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSString *num = [NSString stringWithFormat:@"%lu",indexPath.row];
-    //[self.delegate PFFullimageViewController:self.sumimg current:num];
+    NSString *num = [NSString stringWithFormat:@"%d",indexPath.row];
+    [self.delegate PFGalleryViewController:self sum:self.sumimg current:num];
     
 }
 

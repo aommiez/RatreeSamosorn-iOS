@@ -1,18 +1,18 @@
 //
-//  PFRewardViewController.m
+//  PFOrderViewController.m
 //  RatreeSamosorn
 //
-//  Created by Pariwat on 8/1/14.
+//  Created by Pariwat on 9/2/14.
 //  Copyright (c) 2014 platwofusion. All rights reserved.
 //
 
-#import "PFRewardViewController.h"
+#import "PFOrderViewController.h"
 
-@interface PFRewardViewController ()
+@interface PFOrderViewController ()
 
 @end
 
-@implementation PFRewardViewController
+@implementation PFOrderViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,11 +38,10 @@
     self.RatreeSamosornApi.delegate = self;
     
     if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
-        self.navigationItem.title = @"Reward";
+        self.navigationItem.title = @"Order";
     } else {
-        self.navigationItem.title = @"รางวัล";
+        self.navigationItem.title = @"สั่งซื้อ";
     }
-
     
     self.token = [self.RatreeSamosornApi getAccessToken];
     self.user_id = [self.RatreeSamosornApi getUserId];
@@ -91,8 +90,8 @@
     if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
         // 'Back' button was pressed.  We know this is true because self is no longer
         // in the navigation stack.
-        if([self.delegate respondsToSelector:@selector(PFRewardViewControllerBack)]){
-            [self.delegate PFRewardViewControllerBack];
+        if([self.delegate respondsToSelector:@selector(PFOrderViewControllerBack)]){
+            [self.delegate PFOrderViewControllerBack];
         }
     }
 }

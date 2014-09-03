@@ -214,6 +214,15 @@
     }];
 }
 
+- (void)getFoodsAndDrinkByURL:(NSString *)url {
+    NSString *urlStr = [[NSString alloc] initWithFormat:@"%@",url];
+    [self.manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self getFoodsAndDrinkByURLResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self getFoodsAndDrinkByURLErrorResponse:[error localizedDescription]];
+    }];
+}
+
 - (void)getDrinks {
     self.urlStr = [[NSString alloc] initWithFormat:@"%@node/drink",API_URL];
     [self.manager GET:self.urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -223,12 +232,31 @@
     }];
 }
 
+- (void)getFolderTypeByURL:(NSString *)url {
+    NSString *urlStr = [[NSString alloc] initWithFormat:@"%@",url];
+    [self.manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self getFolderTypeByURLResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self getFolderTypeByURLErrorResponse:[error localizedDescription]];
+    }];
+}
+
 - (void)getGallery {
     self.urlStr = [[NSString alloc] initWithFormat:@"%@node/gallery",API_URL];
     [self.manager GET:self.urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.delegate PFRatreeSamosornApi:self getGalleryResponse:responseObject];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.delegate PFRatreeSamosornApi:self getGalleryErrorResponse:[error localizedDescription]];
+    }];
+}
+
+- (void)galleryPictureByURL:(NSString *)url {
+    NSString *urlStr = [[NSString alloc] initWithFormat:@"%@%@",url,@"?limit=100"];
+    self.manager = [AFHTTPRequestOperationManager manager];
+    [self.manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self galleryPictureByURLResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self galleryPictureByURLErrorResponse:[error localizedDescription]];
     }];
 }
 

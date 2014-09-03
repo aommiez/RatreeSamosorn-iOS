@@ -6,13 +6,19 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PFAccountViewController">
             <connections>
+                <outlet property="applanguageLabel" destination="dY3-ka-p4V" id="Xds-Ne-C65"/>
+                <outlet property="appstatuslanguageLabel" destination="mTg-34-6KZ" id="cXg-na-2Fe"/>
                 <outlet property="bgEditView" destination="JRM-jZ-QaH" id="uRC-9a-cmm"/>
                 <outlet property="bgmessageView" destination="Ci1-vt-SQQ" id="koM-ZU-7HZ"/>
                 <outlet property="bgnewsView" destination="lSe-61-VQ8" id="Bug-Uu-zZS"/>
                 <outlet property="display_name" destination="51D-8v-EKE" id="UGK-AE-q7n"/>
                 <outlet property="footerView" destination="kyA-Dl-qRp" id="B41-c2-n7q"/>
                 <outlet property="headerView" destination="kmW-zk-hMF" id="YFq-DV-P1q"/>
+                <outlet property="languageLabel" destination="Ilc-VX-pBf" id="8Ce-Ws-CJM"/>
                 <outlet property="logoutButton" destination="e5g-6S-Zf3" id="YGd-O1-HjK"/>
+                <outlet property="messageLabel" destination="KOl-SN-KFM" id="2F3-Sj-Krk"/>
+                <outlet property="newupdateLabel" destination="q4l-sz-0hg" id="hry-Up-Pec"/>
+                <outlet property="notificationLabel" destination="IvD-84-iyw" id="QJj-7u-7PK"/>
                 <outlet property="popupwaitView" destination="DDe-ub-NLu" id="gqs-xo-kOa"/>
                 <outlet property="switchMessage" destination="9Wt-Eh-Ehw" id="3Rx-Uy-pQQ"/>
                 <outlet property="switchNews" destination="7g0-iu-9hc" id="e0s-GO-MPJ"/>
@@ -71,7 +77,7 @@
                     <rect key="frame" x="0.0" y="10" width="320" height="110"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="yYp-rY-6dL" customClass="AsyncImageView">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="yYp-rY-6dL">
                             <rect key="frame" x="10" y="10" width="90" height="90"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
@@ -110,14 +116,14 @@
                     <rect key="frame" x="10" y="246" width="300" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Logout">
+                    <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="logoutTapped:" destination="-1" eventType="touchUpInside" id="PPw-lQ-Yls"/>
                     </connections>
                 </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notification setting" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IvD-84-iyw">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IvD-84-iyw">
                     <rect key="frame" x="10" y="10" width="300" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -128,7 +134,7 @@
                     <rect key="frame" x="0.0" y="41" width="320" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="News Update" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q4l-sz-0hg">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q4l-sz-0hg">
                             <rect key="frame" x="20" y="12" width="119" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -148,7 +154,7 @@
                     <rect key="frame" x="0.0" y="87" width="320" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message from shop" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KOl-SN-KFM">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KOl-SN-KFM">
                             <rect key="frame" x="20" y="12" width="173" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -164,7 +170,7 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language setting" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ilc-VX-pBf">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ilc-VX-pBf">
                     <rect key="frame" x="10" y="150" width="300" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -187,7 +193,14 @@
                                 <action selector="applanguage:" destination="-1" eventType="touchUpInside" id="vCX-Bg-bd4"/>
                             </connections>
                         </button>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App Language" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dY3-ka-p4V">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mTg-34-6KZ">
+                            <rect key="frame" x="262" y="12" width="30" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dY3-ka-p4V">
                             <rect key="frame" x="20" y="12" width="173" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>

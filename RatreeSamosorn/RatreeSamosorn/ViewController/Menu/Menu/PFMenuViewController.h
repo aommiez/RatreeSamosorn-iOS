@@ -12,15 +12,19 @@
 
 #import "PFRatreeSamosornApi.h"
 
-#import "PFFoodsCell.h"
-#import "PFDrinkCell.h"
+#import "PFFoldertypeCell.h"
+#import "PFFoldertype1Cell.h"
 #import "PFGalleryCell.h"
 #import "PFActivityCalendarViewController.h"
 
+#import "PFDetailFoldertypeViewController.h"
+#import "PFFoodAndDrinkDetailViewController.h"
+#import "PFGalleryViewController.h"
+
 @protocol PFMenuViewControllerDelegate <NSObject>
 
-//- (void)PFGalleryViewController:(id)sender sum:(NSMutableArray *)sum current:(NSString *)current;
-//- (void)PFImageViewController:(id)sender viewPicture:(NSString *)link;
+- (void)PFGalleryViewController:(id)sender sum:(NSMutableArray *)sum current:(NSString *)current;
+- (void)PFImageViewController:(id)sender viewPicture:(NSString *)link;
 - (void)HideTabbar;
 - (void)ShowTabbar;
 
@@ -46,19 +50,20 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *CalendarView;
 
+@property NSUserDefaults *foodOffline;
+@property NSUserDefaults *drinkOffline;
+@property NSUserDefaults *galleryOffline;
+
 @property (strong, nonatomic) IBOutlet UIButton *foodsBt;
 @property (strong, nonatomic) IBOutlet UIButton *drinksBt;
 @property (strong, nonatomic) IBOutlet UIButton *activityBt;
 @property (strong, nonatomic) IBOutlet UIButton *galleryBt;
 
-@property (strong, nonatomic) NSDictionary *objFood;
 @property (strong, nonatomic) NSMutableArray *arrObjFood;
-
-@property (strong, nonatomic) NSDictionary *objDrink;
 @property (strong, nonatomic) NSMutableArray *arrObjDrink;
-
-@property (strong, nonatomic) NSDictionary *objGallery;
 @property (strong, nonatomic) NSMutableArray *arrObjGallery;
+@property (retain, nonatomic) NSMutableArray *arrObjGalleryAlbum;
+@property (retain, nonatomic) NSMutableArray *sum;
 
 @property (strong, nonatomic) NSString *menu;
 

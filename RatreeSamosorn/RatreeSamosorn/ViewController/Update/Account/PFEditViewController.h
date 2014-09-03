@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AsyncImageView.h"
+#import "DLImageLoader.h"
 #import "CRGradientNavigationBar.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "SDImageCache.h"
@@ -26,6 +26,8 @@
 
 @property (assign, nonatomic) id delegate;
 @property (strong, nonatomic) PFRatreeSamosornApi *RatreeSamosornApi;
+
+@property NSUserDefaults *meOffline;
 
 @property (strong, nonatomic) NSDictionary *objEdit;
 
@@ -49,9 +51,12 @@
 @property (strong, nonatomic) IBOutlet UIView *bggenderView;
 @property (strong, nonatomic) IBOutlet UIView *bgbirthdayView;
 
+@property (strong, nonatomic) IBOutlet UILabel *displaynameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *changepasswordLabel;
+
 @property (strong, nonatomic) IBOutlet UITextField *display_name;
 
-@property (strong, nonatomic) IBOutlet AsyncImageView *thumUser;
+@property (strong, nonatomic) IBOutlet UIImageView *thumUser;
 
 @property (strong, nonatomic) IBOutlet UITextField *email;
 @property (strong, nonatomic) IBOutlet UITextField *website;

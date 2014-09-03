@@ -20,6 +20,8 @@
     if (self) {
         // Custom initialization
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        self.meOffline = [NSUserDefaults standardUserDefaults];
+        self.settingOffline = [NSUserDefaults standardUserDefaults];
     }
     return self;
 }
@@ -34,7 +36,16 @@
     [popup setMasksToBounds:YES];
     [popup setCornerRadius:7.0f];
     
-    self.navigationItem.title = @"Profile";
+    self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
+    self.RatreeSamosornApi.delegate = self;
+    
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        self.navigationItem.title = @"Profile";
+        [self.edit_bt setTitle:@"Edit" forState:UIControlStateNormal];
+    } else {
+        self.navigationItem.title = @"โปรไฟล์";
+        [self.edit_bt setTitle:@"แก้ไข" forState:UIControlStateNormal];
+    }
     
     self.tableView.tableHeaderView = self.headerView;
     
@@ -70,9 +81,6 @@
     [birthday_bt setMasksToBounds:YES];
     [birthday_bt setCornerRadius:5.0f];
     
-    self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
-    self.RatreeSamosornApi.delegate = self;
-    
     self.objAccount = [[NSDictionary alloc] init];
 
     [self.RatreeSamosornApi me];
@@ -90,7 +98,7 @@
 
 - (IBAction)fullimgTapped:(id)sender {
     
-    NSString *picStr = [[NSString alloc] initWithString:[[self.objAccount objectForKey:@"picture"] objectForKey:@"url"]];
+    NSString *picStr = [[NSString alloc] initWithString:[[[self.meOffline objectForKey:@"meOffline"] objectForKey:@"picture"] objectForKey:@"url"]];
     [self.delegate PFAccountViewController:self viewPicture:picStr];
     
 }
@@ -101,12 +109,19 @@
     
     [self.waitView removeFromSuperview];
     
+    [self.meOffline setObject:response forKey:@"meOffline"];
+    [self.meOffline synchronize];
+    
     self.display_name.text = [response objectForKey:@"display_name"];
     
     NSString *picStr = [[response objectForKey:@"picture"] objectForKey:@"url"];
     self.thumUser.layer.masksToBounds = YES;
     self.thumUser.contentMode = UIViewContentModeScaleAspectFill;
-    self.thumUser.imageURL = [[NSURL alloc] initWithString:picStr];
+
+    [DLImageLoader loadImageFromURL:picStr
+                          completed:^(NSError *error, NSData *imgData) {
+                              self.thumUser.image = [UIImage imageWithData:imgData];
+                          }];
     
     self.facebook.text = [response objectForKey:@"fb_name"];
     self.email.text = [response objectForKey:@"email"];
@@ -125,63 +140,142 @@
 
 - (void)PFRatreeSamosornApi:(id)sender meErrorResponse:(NSString *)errorResponse {
     NSLog(@"%@",errorResponse);
+    
+    [self.waitView removeFromSuperview];
+    
+    self.objAccount = [self.meOffline objectForKey:@"meOffline"];
+    
+    self.display_name.text = [[self.meOffline objectForKey:@"meOffline"] objectForKey:@"display_name"];
+    
+    NSString *picStr = [[[self.meOffline objectForKey:@"meOffline"] objectForKey:@"picture"] objectForKey:@"url"];
+    self.thumUser.layer.masksToBounds = YES;
+    self.thumUser.contentMode = UIViewContentModeScaleAspectFill;
+    
+    [DLImageLoader loadImageFromURL:picStr
+                          completed:^(NSError *error, NSData *imgData) {
+                              self.thumUser.image = [UIImage imageWithData:imgData];
+                          }];
+    
+    self.facebook.text = [[self.meOffline objectForKey:@"meOffline"] objectForKey:@"fb_name"];
+    self.email.text = [[self.meOffline objectForKey:@"meOffline"] objectForKey:@"email"];
+    self.website.text = [[self.meOffline objectForKey:@"meOffline"] objectForKey:@"website"];
+    self.tel.text = [[self.meOffline objectForKey:@"meOffline"] objectForKey:@"mobile"];
+    self.gender.text = [[self.meOffline objectForKey:@"meOffline"] objectForKey:@"gender"];
+    
+    NSString *myString = [[NSString alloc] initWithFormat:@"%@",[[self.meOffline objectForKey:@"meOffline"] objectForKey:@"birth_date"]];
+    NSString *mySmallerString = [myString substringToIndex:10];
+    
+    self.birthday.text = mySmallerString;
+    
+    [self.RatreeSamosornApi getUserSetting];
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getUserSettingResponse:(NSDictionary *)response {
     NSLog(@"getUserSetting %@",response);
     
+    [self.settingOffline setObject:response forKey:@"settingOffline"];
+    [self.settingOffline synchronize];
+    
     //switch
     if ([[response objectForKey:@"show_facebook"] intValue] == 1) {
-        [self.facebook_bt setTitle:@"Show" forState:UIControlStateNormal];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            [self.facebook_bt setTitle:@"Show" forState:UIControlStateNormal];
+        } else {
+            [self.facebook_bt setTitle:@"แสดง" forState:UIControlStateNormal];
+        }
         [self.facebook_bt setTintColor:RGB(0, 174, 239)];
         self.facebookSetting = @"1";
     } else {
-        [self.facebook_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            [self.facebook_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        } else {
+            [self.facebook_bt setTitle:@"ซ่อน" forState:UIControlStateNormal];
+        }
         [self.facebook_bt setTintColor:RGB(167, 169, 172)];
         self.facebookSetting = @"0";
     }
     if ([[response objectForKey:@"show_email"] intValue] == 1) {
-        [self.email_bt setTitle:@"Show" forState:UIControlStateNormal];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            [self.email_bt setTitle:@"Show" forState:UIControlStateNormal];
+        } else {
+            [self.email_bt setTitle:@"แสดง" forState:UIControlStateNormal];
+        }
         [self.email_bt setTintColor:RGB(0, 174, 239)];
         self.emailSetting = @"1";
     } else {
-        [self.email_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            [self.email_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        } else {
+            [self.email_bt setTitle:@"ซ่อน" forState:UIControlStateNormal];
+        }
         [self.email_bt setTintColor:RGB(167, 169, 172)];
         self.emailSetting = @"0";
     }
     if ([[response objectForKey:@"show_website"] intValue] == 1) {
-        [self.website_bt setTitle:@"Show" forState:UIControlStateNormal];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            [self.website_bt setTitle:@"Show" forState:UIControlStateNormal];
+        } else {
+            [self.website_bt setTitle:@"แสดง" forState:UIControlStateNormal];
+        }
         [self.website_bt setTintColor:RGB(0, 174, 239)];
         self.websiteSetting = @"1";
     } else {
-        [self.website_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            [self.website_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        } else {
+            [self.website_bt setTitle:@"ซ่อน" forState:UIControlStateNormal];
+        }
         [self.website_bt setTintColor:RGB(167, 169, 172)];
         self.websiteSetting = @"0";
     }
     if ([[response objectForKey:@"show_mobile"] intValue] == 1) {
-        [self.tel_bt setTitle:@"Show" forState:UIControlStateNormal];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            [self.tel_bt setTitle:@"Show" forState:UIControlStateNormal];
+        } else {
+            [self.tel_bt setTitle:@"แสดง" forState:UIControlStateNormal];
+        }
         [self.tel_bt setTintColor:RGB(0, 174, 239)];
         self.telSetting = @"1";
     } else {
-        [self.tel_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            [self.tel_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        } else {
+            [self.tel_bt setTitle:@"ซ่อน" forState:UIControlStateNormal];
+        }
         [self.tel_bt setTintColor:RGB(167, 169, 172)];
         self.telSetting = @"0";
     }
     if ([[response objectForKey:@"show_gender"] intValue] == 1) {
-        [self.gender_bt setTitle:@"Show" forState:UIControlStateNormal];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            [self.gender_bt setTitle:@"Show" forState:UIControlStateNormal];
+        } else {
+            [self.gender_bt setTitle:@"แสดง" forState:UIControlStateNormal];
+        }
         [self.gender_bt setTintColor:RGB(0, 174, 239)];
         self.genderSetting = @"1";
     } else {
-        [self.gender_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            [self.gender_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        } else {
+            [self.gender_bt setTitle:@"ซ่อน" forState:UIControlStateNormal];
+        }
         [self.gender_bt setTintColor:RGB(167, 169, 172)];
         self.genderSetting = @"0";
     }
     if ([[response objectForKey:@"show_birth_date"] intValue] == 1) {
-        [self.birthday_bt setTitle:@"Show" forState:UIControlStateNormal];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            [self.birthday_bt setTitle:@"Show" forState:UIControlStateNormal];
+        } else {
+            [self.birthday_bt setTitle:@"แสดง" forState:UIControlStateNormal];
+        }
         [self.birthday_bt setTintColor:RGB(0, 174, 239)];
         self.birthdaySetting = @"1";
     } else {
-        [self.birthday_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            [self.birthday_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        } else {
+            [self.birthday_bt setTitle:@"ซ่อน" forState:UIControlStateNormal];
+        }
         [self.birthday_bt setTintColor:RGB(167, 169, 172)];
         self.birthdaySetting = @"0";
     }
@@ -190,6 +284,62 @@
 
 - (void)PFRatreeSamosornApi:(id)sender getUserSettingErrorResponse:(NSString *)errorResponse {
     NSLog(@"%@",errorResponse);
+    
+    //switch
+    if ([[[self.settingOffline objectForKey:@"settingOffline"] objectForKey:@"show_facebook"] intValue] == 1) {
+        [self.facebook_bt setTitle:@"Show" forState:UIControlStateNormal];
+        [self.facebook_bt setTintColor:RGB(0, 174, 239)];
+        self.facebookSetting = @"1";
+    } else {
+        [self.facebook_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        [self.facebook_bt setTintColor:RGB(167, 169, 172)];
+        self.facebookSetting = @"0";
+    }
+    if ([[[self.settingOffline objectForKey:@"settingOffline"] objectForKey:@"show_email"] intValue] == 1) {
+        [self.email_bt setTitle:@"Show" forState:UIControlStateNormal];
+        [self.email_bt setTintColor:RGB(0, 174, 239)];
+        self.emailSetting = @"1";
+    } else {
+        [self.email_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        [self.email_bt setTintColor:RGB(167, 169, 172)];
+        self.emailSetting = @"0";
+    }
+    if ([[[self.settingOffline objectForKey:@"settingOffline"] objectForKey:@"show_website"] intValue] == 1) {
+        [self.website_bt setTitle:@"Show" forState:UIControlStateNormal];
+        [self.website_bt setTintColor:RGB(0, 174, 239)];
+        self.websiteSetting = @"1";
+    } else {
+        [self.website_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        [self.website_bt setTintColor:RGB(167, 169, 172)];
+        self.websiteSetting = @"0";
+    }
+    if ([[[self.settingOffline objectForKey:@"settingOffline"] objectForKey:@"show_mobile"] intValue] == 1) {
+        [self.tel_bt setTitle:@"Show" forState:UIControlStateNormal];
+        [self.tel_bt setTintColor:RGB(0, 174, 239)];
+        self.telSetting = @"1";
+    } else {
+        [self.tel_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        [self.tel_bt setTintColor:RGB(167, 169, 172)];
+        self.telSetting = @"0";
+    }
+    if ([[[self.settingOffline objectForKey:@"settingOffline"] objectForKey:@"show_gender"] intValue] == 1) {
+        [self.gender_bt setTitle:@"Show" forState:UIControlStateNormal];
+        [self.gender_bt setTintColor:RGB(0, 174, 239)];
+        self.genderSetting = @"1";
+    } else {
+        [self.gender_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        [self.gender_bt setTintColor:RGB(167, 169, 172)];
+        self.genderSetting = @"0";
+    }
+    if ([[[self.settingOffline objectForKey:@"settingOffline"] objectForKey:@"show_birth_date"] intValue] == 1) {
+        [self.birthday_bt setTitle:@"Show" forState:UIControlStateNormal];
+        [self.birthday_bt setTintColor:RGB(0, 174, 239)];
+        self.birthdaySetting = @"1";
+    } else {
+        [self.birthday_bt setTitle:@"Hide" forState:UIControlStateNormal];
+        [self.birthday_bt setTintColor:RGB(167, 169, 172)];
+        self.birthdaySetting = @"0";
+    }
 }
 
 -(IBAction)editTapped:(id)sender{

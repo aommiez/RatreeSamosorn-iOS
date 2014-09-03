@@ -1,14 +1,14 @@
 //
-//  PFDrinkCell.m
-//  RatreeSamosorn
+//  PFFoldertype1Cell.m
+//  DeLanna
 //
-//  Created by Pariwat on 9/1/14.
-//  Copyright (c) 2014 platwofusion. All rights reserved.
+//  Created by Pariwat on 8/8/14.
+//  Copyright (c) 2014 Platwo fusion. All rights reserved.
 //
 
-#import "PFDrinkCell.h"
+#import "PFFoldertype1Cell.h"
 
-@implementation PFDrinkCell
+@implementation PFFoldertype1Cell
 
 - (void)awakeFromNib
 {

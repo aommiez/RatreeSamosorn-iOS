@@ -91,16 +91,11 @@
         cell = [nib objectAtIndex:0];
     }
     
-	NSArray *ar = self.dataDictionary[[self.monthView dateSelected]];
-    
-    if ([[ar[indexPath.row] objectForKey:@"obj_type"] isEqualToString:@"activity"] ) {
-        cell.nameLabel.text = [ar[indexPath.row] objectForKey:@"name"];
-        cell.timeLabel.text =  [ar[indexPath.row] objectForKey:@"start_time_2"];
-    } else {
-        cell.nameLabel.text = [[ar[indexPath.row] objectForKey:@"group"] objectForKey:@"name"];
-        cell.timeLabel.text =  [ar[indexPath.row] objectForKey:@"start_time_2"];
-    }
-	
+//	NSArray *ar = self.dataDictionary[[self.monthView dateSelected]];
+//    
+//    cell.nameLabel.text = [ar[indexPath.row] objectForKey:@"name"];
+//    cell.timeLabel.text =  [ar[indexPath.row] objectForKey:@"detail"];
+
     return cell;
 	
 }
@@ -126,10 +121,11 @@
     
     NSString *dateStart = [[NSString alloc] initWithFormat:@"%@",startString];
     NSString *dateEnd = [[NSString alloc] initWithFormat:@"%@",endString];
+    
     dateStart = [dateStart substringToIndex:10];
     dateEnd = [dateEnd substringToIndex:10];
 
-    NSString *urlStr = [[NSString alloc] initWithFormat:@"%@calendar?start_date=%@&end_date=%@",@"http://satitcmu-api.pla2app.com/",dateStart,dateEnd];
+    NSString *urlStr = [[NSString alloc] initWithFormat:@"%@calendar?year=%@&month=%@",API_URL,@"2014",@"9"];
     // create the URL we'd like to query
     NSURL *myURL = [[NSURL alloc]initWithString:urlStr];
     
@@ -139,18 +135,23 @@
     // now we'll parse our data using NSJSONSerialization
     id myJSON = [NSJSONSerialization JSONObjectWithData:myData options:NSJSONReadingMutableContainers error:nil];
     NSDictionary *dict = [[NSDictionary alloc] initWithDictionary:myJSON];
+    
     NSDate *d = start;
     int i = 0;
     while (YES) {
         
         NSDateComponents *info = [d dateComponentsWithTimeZone:self.monthView.timeZone];
         
-        if ( [[[[[dict objectForKey:@"data"]objectAtIndex:i] objectForKey:@"activities"] objectForKey:@"has_data"] isEqualToString:@"no"]  ) {
+        NSString *length = [[NSString alloc] initWithFormat:@"%@",[[[dict objectForKey:@"data"]objectAtIndex:i] objectForKey:@"length"]];
+        if ( [length isEqualToString:@"0"]) {
             [self.dataArray addObject:@NO];
-        } else if ( [[[[[dict objectForKey:@"data"]objectAtIndex:i] objectForKey:@"activities"] objectForKey:@"has_data"] isEqualToString:@"yes"] ){
-            (self.dataDictionary)[d] = [[[[dict objectForKey:@"data"]objectAtIndex:i] objectForKey:@"activities"] objectForKey:@"data"];
+        } else {
+            (self.dataDictionary)[d] = [[[dict objectForKey:@"data"] objectAtIndex:i]objectForKey:@"data"];
             [self.dataArray addObject:@YES];
+            NSLog(@"%@",[[[dict objectForKey:@"data"] objectAtIndex:i] objectForKey:@"data"]);
+
         }
+        
         i++;
         info.day++;
         d = [NSDate dateWithDateComponents:info];

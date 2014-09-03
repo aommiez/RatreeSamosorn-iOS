@@ -44,11 +44,20 @@
 - (void)PFRatreeSamosornApi:(id)sender getFoodsResponse:(NSDictionary *)response;
 - (void)PFRatreeSamosornApi:(id)sender getFoodsErrorResponse:(NSString *)errorResponse;
 
+- (void)PFRatreeSamosornApi:(id)sender getFoodsAndDrinkByURLResponse:(NSDictionary *)response;
+- (void)PFRatreeSamosornApi:(id)sender getFoodsAndDrinkByURLErrorResponse:(NSString *)errorResponse;
+
 - (void)PFRatreeSamosornApi:(id)sender getDrinksResponse:(NSDictionary *)response;
 - (void)PFRatreeSamosornApi:(id)sender getDrinksErrorResponse:(NSString *)errorResponse;
 
+- (void)PFRatreeSamosornApi:(id)sender getFolderTypeByURLResponse:(NSDictionary *)response;
+- (void)PFRatreeSamosornApi:(id)sender getFolderTypeByURLErrorResponse:(NSString *)errorResponse;
+
 - (void)PFRatreeSamosornApi:(id)sender getGalleryResponse:(NSDictionary *)response;
 - (void)PFRatreeSamosornApi:(id)sender getGalleryErrorResponse:(NSString *)errorResponse;
+
+- (void)PFRatreeSamosornApi:(id)sender galleryPictureByURLResponse:(NSDictionary *)response;
+- (void)PFRatreeSamosornApi:(id)sender galleryPictureByURLErrorResponse:(NSString *)errorResponse;
 
 #pragma mark - Member Protocal Delegate
 - (void)PFRatreeSamosornApi:(id)sender getStampStyleResponse:(NSDictionary *)response;
@@ -125,8 +134,11 @@
 
 #pragma mark - Menu
 - (void)getFoods;
+- (void)getFoodsAndDrinkByURL:(NSString *)url;
 - (void)getDrinks;
+- (void)getFolderTypeByURL:(NSString *)url;
 - (void)getGallery;
+- (void)galleryPictureByURL:(NSString *)url;
 
 #pragma mark - Member
 - (void)getStampStyle;

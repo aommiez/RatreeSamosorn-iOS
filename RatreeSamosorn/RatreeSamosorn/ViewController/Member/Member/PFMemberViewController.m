@@ -68,8 +68,24 @@ NSTimer *timmer;
     
     if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
         self.navItem.title = @"Member";
+        self.pointTxt.text = @"Point";
+        self.addTxt.text = @"Add";
+        self.amountFailLabel.text = @"Invalid Password";
+        [self.cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+        [self.confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
+        [self.amountFinishButton setTitle:@"OK" forState:UIControlStateNormal];
+        [self.amountFailButton setTitle:@"OK" forState:UIControlStateNormal];
+        [self.signinButton setTitle:@"Sign in" forState:UIControlStateNormal];
     } else {
         self.navItem.title = @"สมาชิก";
+        self.pointTxt.text = @"คะแนน";
+        self.addTxt.text = @"เพิ่ม";
+        self.amountFailLabel.text = @"รหัสผ่านไม่ถูกต้อง";
+        [self.cancelButton setTitle:@"ยกเลิก" forState:UIControlStateNormal];
+        [self.confirmButton setTitle:@"ยืนยัน" forState:UIControlStateNormal];
+        [self.amountFinishButton setTitle:@"ตกลง" forState:UIControlStateNormal];
+        [self.amountFailButton setTitle:@"ตกลง" forState:UIControlStateNormal];
+        [self.signinButton setTitle:@"ลงชื่อเข้าใช้" forState:UIControlStateNormal];
     }
     
     if ([self.RatreeSamosornApi checkLogin] != 0){
@@ -111,6 +127,8 @@ NSTimer *timmer;
 
 - (IBAction)posterTapped:(id)sender {
     
+    self.navItem.title = @" ";
+    
     [self.delegate HideTabbar];
     
     PFHistoryViewController *history = [[PFHistoryViewController alloc] init];
@@ -126,6 +144,8 @@ NSTimer *timmer;
 }
 
 - (IBAction)posternoTapped:(id)sender {
+    
+    self.navItem.title = @" ";
     
     [self.delegate HideTabbar];
     
@@ -1417,8 +1437,13 @@ NSTimer *timmer;
         
     } else {
         
-        NSString *show = [[NSString alloc] initWithFormat:@"Add %@ Stamp FINISH",self.amountLabel.text];
-        [self.finishamount setText:show];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            NSString *show = [[NSString alloc] initWithFormat:@"%@ points added",self.amountLabel.text];
+            [self.finishamount setText:show];
+        } else {
+            NSString *show = [[NSString alloc] initWithFormat:@"เพิ่ม %@ คะแนน แล้ว",self.amountLabel.text];
+            [self.finishamount setText:show];
+        }
         
         [self.addPointView removeFromSuperview];
         [self.amountFinishView.layer setCornerRadius:4.0f];
@@ -1526,13 +1551,13 @@ NSTimer *timmer;
                               cell.image.image = [UIImage imageWithData:imgData];
                           }];
     
-    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
-        cell.free.text = @"Free";
-        cell.points.text = @"Points";
-    } else {
-        cell.free.text = @"ฟรี";
-        cell.points.text = @"คะแนน";
-    }
+//    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+//        cell.free.text = @"Free";
+//        cell.points.text = @"Points";
+//    } else {
+//        cell.free.text = @"ฟรี";
+//        cell.points.text = @"คะแนน";
+//    }
     
     cell.name.text = [[NSString alloc] initWithString:[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"name"]];
     NSString *point = [[NSString alloc] initWithFormat:@"%@",[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"point"]];
@@ -1551,6 +1576,8 @@ NSTimer *timmer;
         
         if ([self.showpoint.text intValue] >= [[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"point"] intValue]) {
             
+            self.navItem.title = @" ";
+            
             [self.delegate HideTabbar];
             
             PFRewardViewController *reward = [[PFRewardViewController alloc] init];
@@ -1564,13 +1591,6 @@ NSTimer *timmer;
             reward.reward_id = [[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"id"];
             [self.navController pushViewController:reward animated:YES];
         }
-//        else {
-//            [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
-//                                        message:@"แลกสินค้านี้ไม่ได้ เนื่องจากสแตมป์ของคุณมีน้อยกว่าเงื่อนไข"
-//                                       delegate:nil
-//                              cancelButtonTitle:@"ตกลง"
-//                              otherButtonTitles:nil] show];
-//        }
     } else {
         self.loginView = [PFLoginViewController alloc];
         self.loginView.menu = @"member";

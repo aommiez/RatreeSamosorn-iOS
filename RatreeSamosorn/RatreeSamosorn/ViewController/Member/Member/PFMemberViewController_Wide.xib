@@ -10,6 +10,9 @@
                 <outlet property="addAmountButton" destination="GOX-Lb-nCX" id="RII-wv-CY0"/>
                 <outlet property="addButton" destination="XZ3-KJ-fmd" id="gXF-HT-VOs"/>
                 <outlet property="addPointView" destination="uDv-TU-jFO" id="vgf-dN-Wwd"/>
+                <outlet property="addTxt" destination="nco-gP-sCG" id="jy1-hf-yJx"/>
+                <outlet property="amountFailButton" destination="k7Y-hI-Xln" id="MOu-EW-zCo"/>
+                <outlet property="amountFailLabel" destination="53B-9h-gj3" id="hmH-SZ-4Ts"/>
                 <outlet property="amountFailView" destination="jVi-PS-ebk" id="V1y-zu-Hat"/>
                 <outlet property="amountFinishButton" destination="Ynj-Xf-ipb" id="Q5m-r8-Hqc"/>
                 <outlet property="amountFinishView" destination="Sdf-07-eA6" id="w7s-8e-I7X"/>
@@ -48,6 +51,7 @@
                 <outlet property="num8" destination="hVU-4H-4zy" id="MIT-ZV-hwG"/>
                 <outlet property="num9" destination="I6w-jU-EF4" id="QpH-Qp-HdM"/>
                 <outlet property="password" destination="7CB-nD-424" id="6rI-ij-Ebg"/>
+                <outlet property="pointTxt" destination="MZV-io-hhw" id="0nO-JL-all"/>
                 <outlet property="popupwaitView" destination="eOv-Eb-dM0" id="2gu-2E-d9p"/>
                 <outlet property="postermember" destination="Egt-pG-YEs" id="4wc-82-Bpe"/>
                 <outlet property="posternomember" destination="pcC-2D-ufT" id="xcD-vU-XAT"/>
@@ -192,14 +196,14 @@
                     <rect key="frame" x="0.0" y="259" width="320" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Point" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MZV-io-hhw">
-                            <rect key="frame" x="20" y="17" width="45" height="21"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MZV-io-hhw">
+                            <rect key="frame" x="20" y="17" width="60" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AaM-OD-alb">
-                            <rect key="frame" x="90" y="17" width="150" height="21"/>
+                            <rect key="frame" x="90" y="17" width="140" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="highlightedColor"/>
@@ -222,6 +226,13 @@
                                 <action selector="addPointTapped:" destination="-1" eventType="touchUpInside" id="csV-Ij-2fx"/>
                             </connections>
                         </button>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nco-gP-sCG">
+                            <rect key="frame" x="254" y="17" width="42" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
@@ -428,7 +439,7 @@
                     <rect key="frame" x="65" y="0.0" width="190" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.29803921570000003" green="0.85098039219999999" blue="0.3921568627" alpha="1" colorSpace="deviceRGB"/>
-                    <state key="normal" title="Sign in">
+                    <state key="normal">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -486,7 +497,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aF4-OC-LYf">
                     <rect key="frame" x="0.0" y="129" width="124" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Cancel">
+                    <state key="normal">
                         <color key="titleColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -497,7 +508,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jde-PX-Htb">
                     <rect key="frame" x="126" y="129" width="124" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Confirm">
+                    <state key="normal">
                         <color key="titleColor" red="0.29803921570000003" green="0.85098039219999999" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -533,7 +544,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ynj-Xf-ipb">
                     <rect key="frame" x="0.0" y="80" width="280" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="OK">
+                    <state key="normal">
                         <color key="titleColor" red="0.29803921570000003" green="0.85098039219999999" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -552,7 +563,7 @@
             <rect key="frame" x="0.0" y="0.0" width="280" height="120"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="53B-9h-gj3">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="53B-9h-gj3">
                     <rect key="frame" x="68" y="29" width="192" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -565,7 +576,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="k7Y-hI-Xln">
                     <rect key="frame" x="0.0" y="80" width="280" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="OK">
+                    <state key="normal">
                         <color key="titleColor" red="0.29803921570000003" green="0.85098039219999999" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>

@@ -261,6 +261,8 @@ NSTimer *timmer;
 
 - (IBAction)mapTapped:(id)sender{
     
+    self.navItem.title = @" ";
+    
     [self.delegate HideTabbar];
     
     PFMapViewController *mapView = [[PFMapViewController alloc] init];
@@ -364,6 +366,11 @@ NSTimer *timmer;
 
 - (void)PFMapViewControllerBack {
     [self.delegate ShowTabbar];
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        self.navItem.title = @"Contact Us";
+    } else {
+        self.navItem.title = @"ติดต่อ";
+    }
 }
 
 @end

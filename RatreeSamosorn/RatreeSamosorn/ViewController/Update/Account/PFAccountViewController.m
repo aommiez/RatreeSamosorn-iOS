@@ -22,6 +22,8 @@ NSString *removeBreckets;
     if (self) {
         // Custom initialization
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        self.meOffline = [NSUserDefaults standardUserDefaults];
+        self.settingOffline = [NSUserDefaults standardUserDefaults];
     }
     return self;
 }
@@ -36,7 +38,29 @@ NSString *removeBreckets;
     [popup setMasksToBounds:YES];
     [popup setCornerRadius:7.0f];
     
-    self.navigationItem.title = @"Setting";
+    
+    self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
+    self.RatreeSamosornApi.delegate = self;
+    
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        self.navigationItem.title = @"Setting";
+        self.notificationLabel.text = @"Notification setting";
+        self.newupdateLabel.text = @"News Update";
+        self.messageLabel.text = @"Message from shop";
+        self.languageLabel.text = @"Language setting";
+        self.applanguageLabel.text = @"App Language";
+        self.appstatuslanguageLabel.text = @"EN";
+        [self.logoutButton setTitle:@"Logout" forState:UIControlStateNormal];
+    } else {
+        self.navigationItem.title = @"ตั้งค่า";
+        self.notificationLabel.text = @"ตั้งค่าการแจ้งเตือน";
+        self.newupdateLabel.text = @"ข่าวใหม่";
+        self.messageLabel.text = @"ข้อความจากระบบ";
+        self.languageLabel.text = @"ตั้งค่าภาษา";
+        self.applanguageLabel.text = @"ภาษาแอพพลิเคชั่น";
+        self.appstatuslanguageLabel.text = @"TH";
+        [self.logoutButton setTitle:@"ออกจากระบบ" forState:UIControlStateNormal];
+    }
     
     self.tableView.tableHeaderView = self.headerView;
     self.tableView.tableFooterView = self.footerView;
@@ -48,9 +72,6 @@ NSString *removeBreckets;
     CALayer *logoutButton = [self.logoutButton layer];
     [logoutButton setMasksToBounds:YES];
     [logoutButton setCornerRadius:5.0f];
-    
-    self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
-    self.RatreeSamosornApi.delegate = self;
     
     self.obj = [[NSDictionary alloc] init];
     self.rowCount = [[NSString alloc] init];
@@ -73,12 +94,19 @@ NSString *removeBreckets;
     
     [self.waitView removeFromSuperview];
     
+    [self.meOffline setObject:response forKey:@"meOffline"];
+    [self.meOffline synchronize];
+    
     self.display_name.text = [response objectForKey:@"display_name"];
     
     NSString *picStr = [[response objectForKey:@"picture"] objectForKey:@"url"];
     self.thumUser.layer.masksToBounds = YES;
     self.thumUser.contentMode = UIViewContentModeScaleAspectFill;
-    self.thumUser.imageURL = [[NSURL alloc] initWithString:picStr];
+    
+    [DLImageLoader loadImageFromURL:picStr
+                          completed:^(NSError *error, NSData *imgData) {
+                              self.thumUser.image = [UIImage imageWithData:imgData];
+                          }];
     
     [self.RatreeSamosornApi getUserSetting];
     
@@ -86,10 +114,28 @@ NSString *removeBreckets;
 
 - (void)PFRatreeSamosornApi:(id)sender meErrorResponse:(NSString *)errorResponse {
     NSLog(@"%@",errorResponse);
+    
+    [self.waitView removeFromSuperview];
+    
+    self.display_name.text = [[self.meOffline objectForKey:@"meOffline"] objectForKey:@"display_name"];
+    
+    NSString *picStr = [[[self.meOffline objectForKey:@"meOffline"] objectForKey:@"picture"] objectForKey:@"url"];
+    self.thumUser.layer.masksToBounds = YES;
+    self.thumUser.contentMode = UIViewContentModeScaleAspectFill;
+    
+    [DLImageLoader loadImageFromURL:picStr
+                          completed:^(NSError *error, NSData *imgData) {
+                              self.thumUser.image = [UIImage imageWithData:imgData];
+                          }];
+    
+    [self.RatreeSamosornApi getUserSetting];
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getUserSettingResponse:(NSDictionary *)response {
     NSLog(@"getUserSetting %@",response);
+    
+    [self.settingOffline setObject:response forKey:@"settingOffline"];
+    [self.settingOffline synchronize];
     
     //switch
     
@@ -109,6 +155,18 @@ NSString *removeBreckets;
 
 - (void)PFRatreeSamosornApi:(id)sender getUserSettingErrorResponse:(NSString *)errorResponse {
     NSLog(@"%@",errorResponse);
+    
+    if ([[[self.settingOffline objectForKey:@"settingOffline"] objectForKey:@"notify_update"] intValue] == 1) {
+        self.switchNews.on = YES;
+    } else {
+        self.switchNews.on = NO;
+    }
+    
+    if ([[[self.settingOffline objectForKey:@"settingOffline"] objectForKey:@"notify_message"] intValue] == 1) {
+        self.switchMessage.on = YES;
+    } else {
+        self.switchMessage.on = NO;
+    }
 }
 
 - (IBAction)switchNewsonoff:(id)sender{
@@ -147,7 +205,7 @@ NSString *removeBreckets;
     } else {
         profileView = [[PFProfileViewController alloc] initWithNibName:@"PFProfileViewController" bundle:nil];
     }
-    
+    self.navigationItem.title = @" ";
     profileView.delegate = self;
     profileView.objAccount = self.obj;
     [self.navigationController pushViewController:profileView animated:YES];
@@ -165,7 +223,7 @@ NSString *removeBreckets;
     } else {
         language = [[PFLanguageViewController alloc] initWithNibName:@"PFLanguageViewController" bundle:nil];
     }
-    
+    self.navigationItem.title = @" ";
     language.delegate = self;
     [self.navigationController pushViewController:language animated:YES];
 }

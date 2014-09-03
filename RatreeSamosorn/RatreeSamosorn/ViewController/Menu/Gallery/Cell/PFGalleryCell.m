@@ -20,6 +20,9 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    CALayer *bgView = [self.bgView layer];
+    [bgView setMasksToBounds:YES];
+    [bgView setCornerRadius:5.0f];
 }
 
 @end

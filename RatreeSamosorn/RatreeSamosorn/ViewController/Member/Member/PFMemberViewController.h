@@ -62,7 +62,9 @@
 //login
 @property (strong, nonatomic) IBOutlet UIView *memberView;
 @property (strong, nonatomic) IBOutlet UIImageView *postermember;
+@property (strong, nonatomic) IBOutlet UILabel *pointTxt;
 @property (strong, nonatomic) IBOutlet UILabel *showpoint;
+@property (strong, nonatomic) IBOutlet UILabel *addTxt;
 @property (strong, nonatomic) IBOutlet UIButton *addButton;
 
 - (IBAction)posterTapped:(id)sender;
@@ -138,7 +140,9 @@
 - (IBAction)amountFinishOkTapped:(id)sender;
 
 //amountFail
+@property (strong, nonatomic) IBOutlet UILabel *amountFailLabel;
 @property (strong, nonatomic) IBOutlet UIView *amountFailView;
+@property (strong, nonatomic) IBOutlet UIButton *amountFailButton;
 
 - (IBAction)FailTapped:(id)sender;
 

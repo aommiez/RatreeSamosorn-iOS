@@ -32,7 +32,15 @@
     self.RatreeSamosornApi.delegate = self;
     
     if ([self.checkstatus isEqualToString:@"displayname"]) {
-        self.navigationItem.title = @"Display Name";
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            self.navigationItem.title = @"Display Name";
+            [self.displayname setPlaceholder:@"Display Name"];
+            [self.displayname_bt setTitle:@"Save" forState:UIControlStateNormal];
+        } else {
+            self.navigationItem.title = @"ชื่อที่ใช้แสดง";
+            [self.displayname setPlaceholder:@"ชื่อที่ใช้แสดง"];
+            [self.displayname_bt setTitle:@"บันทึก" forState:UIControlStateNormal];
+        }
         self.tableView.tableHeaderView = self.displaynameView;
         
         self.displayname.text = [self.obj objectForKey:@"display_name"];
@@ -43,7 +51,19 @@
     }
     
     if ([self.checkstatus isEqualToString:@"password"]) {
-        self.navigationItem.title = @"Password";
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            self.navigationItem.title = @"Password";
+            [self.password setPlaceholder:@"Current Password"];
+            [self.newpassword setPlaceholder:@"New Password"];
+            [self.confirmpassword setPlaceholder:@"New Password again"];
+            [self.password_bt setTitle:@"Save" forState:UIControlStateNormal];
+        } else {
+            self.navigationItem.title = @"รหัสผ่าน";
+            [self.password setPlaceholder:@"รหัสผ่านปัจจุบัน"];
+            [self.newpassword setPlaceholder:@"รหัสผ่านใหม่"];
+            [self.confirmpassword setPlaceholder:@"ยืนยันรหัสอีกครั้ง"];
+            [self.password_bt setTitle:@"บันทึก" forState:UIControlStateNormal];
+        }
         self.tableView.tableHeaderView = self.passwordView;
         
         CALayer *password_bt = [self.password_bt layer];
@@ -52,7 +72,15 @@
     }
     
     if ([self.checkstatus isEqualToString:@"email"]) {
-        self.navigationItem.title = @"E-mail Address";
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            self.navigationItem.title = @"E-mail Address";
+            [self.email setPlaceholder:@"E-mail"];
+            [self.email_bt setTitle:@"Save" forState:UIControlStateNormal];
+        } else {
+            self.navigationItem.title = @"E-mail Address";
+            [self.email setPlaceholder:@"E-mail"];
+            [self.email_bt setTitle:@"บันทึก" forState:UIControlStateNormal];
+        }
         self.tableView.tableHeaderView = self.emailView;
         
         self.email.text = [self.obj objectForKey:@"email"];
@@ -63,7 +91,15 @@
     }
     
     if ([self.checkstatus isEqualToString:@"website"]) {
-        self.navigationItem.title = @"Website";
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            self.navigationItem.title = @"Website";
+            [self.website setPlaceholder:@"Website"];
+            [self.website_bt setTitle:@"Save" forState:UIControlStateNormal];
+        } else {
+            self.navigationItem.title = @"Website";
+            [self.website setPlaceholder:@"Website"];
+            [self.website_bt setTitle:@"บันทึก" forState:UIControlStateNormal];
+        }
         self.tableView.tableHeaderView = self.websiteView;
         
         self.website.text = [self.obj objectForKey:@"website"];
@@ -74,7 +110,15 @@
     }
     
     if ([self.checkstatus isEqualToString:@"phone"]) {
-        self.navigationItem.title = @"Phone Number";
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            self.navigationItem.title = @"Phone Number";
+            [self.phone setPlaceholder:@"Phone Number"];
+            [self.phone_bt setTitle:@"Save" forState:UIControlStateNormal];
+        } else {
+            self.navigationItem.title = @"หมายเลขโทรศัพท์";
+            [self.phone setPlaceholder:@"หมายเลขโทรศัพท์"];
+            [self.phone_bt setTitle:@"บันทึก" forState:UIControlStateNormal];
+        }
         self.tableView.tableHeaderView = self.phoneView;
         
         self.phone.text = [self.obj objectForKey:@"mobile"];
@@ -85,7 +129,17 @@
     }
     
     if ([self.checkstatus isEqualToString:@"gender"]) {
-        self.navigationItem.title = @"Gender";
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            self.navigationItem.title = @"Gender";
+            [self.male_bt setTitle:@"Male" forState:UIControlStateNormal];
+            [self.female_bt setTitle:@"Female" forState:UIControlStateNormal];
+            [self.gender_bt setTitle:@"Save" forState:UIControlStateNormal];
+        } else {
+            self.navigationItem.title = @"เพศ";
+            [self.male_bt setTitle:@"ชาย" forState:UIControlStateNormal];
+            [self.female_bt setTitle:@"หญิง" forState:UIControlStateNormal];
+            [self.gender_bt setTitle:@"บันทึก" forState:UIControlStateNormal];
+        }
         self.tableView.tableHeaderView = self.genderView;
         
         if ([[self.obj objectForKey:@"gender"] isEqualToString:@"Male"] || [[self.obj objectForKey:@"gender"] isEqualToString:@"male"]) {
@@ -104,7 +158,13 @@
     }
     
     if ([self.checkstatus isEqualToString:@"birthday"]) {
-        self.navigationItem.title = @"Birthday";
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            self.navigationItem.title = @"Birthday";
+            [self.birthday_bt setTitle:@"Save" forState:UIControlStateNormal];
+        } else {
+            self.navigationItem.title = @"วันเกิด";
+            [self.birthday_bt setTitle:@"บันทึก" forState:UIControlStateNormal];
+        }
         self.tableView.tableHeaderView = self.birthdayView;
         
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -144,17 +204,33 @@
 - (void)PFRatreeSamosornApi:(id)sender changPasswordResponse:(NSDictionary *)response {
     NSLog(@"changPassword %@",response);
     if ([[[response objectForKey:@"error"] objectForKey:@"type"] isEqualToString:@"Main\\CTL\\Exception\\NeedParameterException"] || [[[response objectForKey:@"error"] objectForKey:@"type"] isEqualToString:@"Main\\CTL\\Exception\\UnAuthorizedException"]) {
-        [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
-                                    message:[[response objectForKey:@"error"] objectForKey:@"message"]
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                        message:[[response objectForKey:@"error"] objectForKey:@"message"]
+                                       delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil] show];
+        } else {
+            [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                        message:[[response objectForKey:@"error"] objectForKey:@"message"]
+                                       delegate:nil
+                              cancelButtonTitle:@"ตกลง"
+                              otherButtonTitles:nil] show];
+        }
     } else {
-        [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
-                                    message:@"Save complete."
-                                   delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                        message:@"Save complete."
+                                       delegate:self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil] show];
+        } else {
+            [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                        message:@"บันทึกเรียบร้อย"
+                                       delegate:self
+                              cancelButtonTitle:@"ตกลง"
+                              otherButtonTitles:nil] show];
+        }
     }
 }
 

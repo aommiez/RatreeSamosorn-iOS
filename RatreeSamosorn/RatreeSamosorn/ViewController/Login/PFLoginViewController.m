@@ -64,6 +64,35 @@ NSString *password;
     self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
     self.RatreeSamosornApi.delegate = self;
     
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        [self.emailSignIn setPlaceholder:@"Username"];
+        [self.passwordSignIn setPlaceholder:@"Password"];
+        [self.signin_bt setTitle:@"Login" forState:UIControlStateNormal];
+        [self.signup_bt setTitle:@"Sign up" forState:UIControlStateNormal];
+        
+        [self.username setPlaceholder:@"Username"];
+        [self.emailSignUp setPlaceholder:@"E-mail"];
+        [self.passwordSignUp setPlaceholder:@"Password"];
+        [self.confirmSignUp setPlaceholder:@"Confirm Password"];
+        [self.dateOfBirthSignUp setPlaceholder:@"Date of Birth"];
+        [self.gender setPlaceholder:@"Gender"];
+        [self.create_bt setTitle:@"Create New Account" forState:UIControlStateNormal];
+
+    } else {
+        [self.emailSignIn setPlaceholder:@"ชื่อผู้ใช้"];
+        [self.passwordSignIn setPlaceholder:@"รหัสผ่าน"];
+        [self.signin_bt setTitle:@"ตกลง" forState:UIControlStateNormal];
+        [self.signup_bt setTitle:@"ลงทะเบียน" forState:UIControlStateNormal];
+        
+        [self.username setPlaceholder:@"ชื่อผู้ใช้"];
+        [self.emailSignUp setPlaceholder:@"E-mail"];
+        [self.passwordSignUp setPlaceholder:@"รหัสผ่าน"];
+        [self.confirmSignUp setPlaceholder:@"ยืนยัน รหัสผ่าน"];
+        [self.dateOfBirthSignUp setPlaceholder:@"วันเกิด"];
+        [self.gender setPlaceholder:@"เพศ"];
+        [self.create_bt setTitle:@"ลงทะเบียนผู้ใช้" forState:UIControlStateNormal];
+    }
+    
     FBLoginView *fbView = [[FBLoginView alloc] init];
     fbView.delegate = self;
     fbView.frame = CGRectMake(20, 123, 240, 60);
@@ -246,13 +275,25 @@ NSString *password;
 }
 - (IBAction)genderTapped:(id)sender {
     [self hideKeyboard];
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                                          message:@"Select gender."
+                                                         delegate:self
+                                                cancelButtonTitle:@"Cancel"
+                                                otherButtonTitles:@"Male", @"Female", nil];
+        [message show];
+        
+    } else {
     
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
-                                                      message:@"Select gender."
-                                                     delegate:self
-                                            cancelButtonTitle:@"Cancel"
-                                            otherButtonTitles:@"Male", @"Female", nil];
-    [message show];
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                                          message:@"เลือก เพศ"
+                                                         delegate:self
+                                                cancelButtonTitle:@"ยกเลิก"
+                                                otherButtonTitles:@"ชาย", @"หญิง", nil];
+        [message show];
+        
+    }
 }
 - (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
@@ -272,44 +313,89 @@ NSString *password;
     password = self.passwordSignUp.text;
     
     if ( [self.username.text isEqualToString:@""]) {
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร!"
-                                                          message:@"Username Incorrect"
-                                                         delegate:nil
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles:nil];
-        [message show];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร!"
+                                                              message:@"Username Incorrect"
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles:nil];
+            [message show];
+        } else {
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร!"
+                                                              message:@"ชื่อผู้ใช้ไม่ถูกต้อง"
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"ตกลง"
+                                                    otherButtonTitles:nil];
+            [message show];
+        }
         return;
     } else if ( [self.emailSignUp.text isEqualToString:@""]) {
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร!"
-                                                          message:@"Email Incorrect"
-                                                         delegate:nil
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles:nil];
-        [message show];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร!"
+                                                              message:@"Email Incorrect"
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles:nil];
+            [message show];
+        } else {
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร!"
+                                                              message:@"Email ไม่ถูกต้อง"
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"ตกลง"
+                                                    otherButtonTitles:nil];
+            [message show];
+        }
         return;
     } else if ( ![self validateEmail:[self.emailSignUp text]] ) {
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร!"
-                                                          message:@"Enter a valid email address"
-                                                         delegate:nil
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles:nil];
-        [message show];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร!"
+                                                              message:@"Enter a valid email address"
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles:nil];
+            [message show];
+        } else {
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร!"
+                                                              message:@"ป้อนที่อยู่ email ที่ถูกต้อง"
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"ตกลง"
+                                                    otherButtonTitles:nil];
+            [message show];
+        }
         return;
     } else if ( [self.passwordSignUp.text isEqualToString:@""]) {
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร!"
-                                                          message:@"Password Incorrect"
-                                                         delegate:nil
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles:nil];
-        [message show];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร!"
+                                                              message:@"Password Incorrect"
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles:nil];
+            [message show];
+        } else {
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร!"
+                                                              message:@"รหัสผ่านไม่ถูกต้อง"
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"ตกลง"
+                                                    otherButtonTitles:nil];
+            [message show];
+        }
         return;
     } else if (![self.passwordSignUp.text isEqualToString:self.confirmSignUp.text]) {
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร!"
-                                                          message:@"And password do not match."
-                                                         delegate:nil
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles:nil];
-        [message show];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร!"
+                                                              message:@"And password do not match."
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles:nil];
+            [message show];
+        } else {
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร!"
+                                                              message:@"รหัสผ่านไม่ตรงกัน"
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"ตกลง"
+                                                    otherButtonTitles:nil];
+            [message show];
+        }
         return;
     } else {
         [self.RatreeSamosornApi registerWithUsername:self.username.text password:self.passwordSignUp.text email:self.emailSignUp.text birth_date:self.dateOfBirthSignUp.text gender:self.gender.text];

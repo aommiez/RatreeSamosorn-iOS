@@ -13,7 +13,9 @@
                 <outlet property="bgprofileView" destination="1Gw-us-prU" id="6PN-by-Xn9"/>
                 <outlet property="bgwebsiteView" destination="N1D-av-OPk" id="KcR-m0-YE8"/>
                 <outlet property="birthday" destination="fem-oz-e6c" id="Ulf-Ov-wPR"/>
+                <outlet property="changepasswordLabel" destination="APW-k1-QqH" id="fF0-rl-coJ"/>
                 <outlet property="display_name" destination="uQ7-PO-0ho" id="ppA-JK-hvy"/>
+                <outlet property="displaynameLabel" destination="mzh-ka-cAb" id="hm8-a0-ccB"/>
                 <outlet property="displaynameView" destination="Sno-i7-UXF" id="SBm-e0-syI"/>
                 <outlet property="email" destination="xXY-bi-fLI" id="FWv-f6-CGv"/>
                 <outlet property="gender" destination="yv9-90-IPc" id="o8X-UU-noU"/>
@@ -99,7 +101,7 @@
                     <rect key="frame" x="0.0" y="20" width="320" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZJM-rA-m9R" customClass="AsyncImageView">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZJM-rA-m9R">
                             <rect key="frame" x="10" y="5" width="90" height="90"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
@@ -131,7 +133,7 @@
                                 <action selector="displaynameTapped:" destination="-1" eventType="touchUpInside" id="2B0-MY-tIF"/>
                             </connections>
                         </button>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Display Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzh-ka-cAb">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzh-ka-cAb">
                             <rect key="frame" x="12" y="12" width="110" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -170,12 +172,13 @@
                             <rect key="frame" x="12" y="10" width="25" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Change Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DUH-XT-6ga">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APW-k1-QqH">
                             <rect key="frame" x="50" y="8" width="220" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="next.png" translatesAutoresizingMaskIntoConstraints="NO" id="qcc-ur-9LW">
                             <rect key="frame" x="300" y="17" width="7" height="12"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

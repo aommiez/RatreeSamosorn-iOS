@@ -89,8 +89,8 @@ BOOL refreshDataUpdate;
         [self.view addSubview:self.loginView.view];
         
     }else{
-        NSLog(@"Login");
         
+        self.navItem.title = @" ";
         [self.delegate HideTabbar];
         
         PFAccountViewController *account = [[PFAccountViewController alloc] init];
@@ -112,6 +112,7 @@ BOOL refreshDataUpdate;
 
 - (void)PFAccountViewController:(id)sender{
     
+    self.navItem.title = @" ";
     [self.delegate HideTabbar];
     
     PFAccountViewController *account = [[PFAccountViewController alloc] init];
@@ -159,6 +160,7 @@ BOOL refreshDataUpdate;
     } else {
         detail = [[PFDetailViewController alloc] initWithNibName:@"PFDetailViewController" bundle:nil];
     }
+    self.navItem.title = @" ";
     //detail.obj = [self.arrObj objectAtIndex:indexPath.row];
     detail.delegate = self;
     [self.navController pushViewController:detail animated:YES];
@@ -230,10 +232,20 @@ BOOL refreshDataUpdate;
 
 - (void)PFDetailViewControllerBack {
     [self.delegate ShowTabbar];
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        self.navItem.title = @"Update";
+    } else {
+        self.navItem.title = @"ข่าวสาร";
+    }
 }
 
 - (void)PFAccountViewControllerBack {
     [self.delegate ShowTabbar];
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        self.navItem.title = @"Update";
+    } else {
+        self.navItem.title = @"ข่าวสาร";
+    }
     
     if ([[self.RatreeSamosornApi getReset] isEqualToString:@"YES"]) {
         [self.delegate resetApp];

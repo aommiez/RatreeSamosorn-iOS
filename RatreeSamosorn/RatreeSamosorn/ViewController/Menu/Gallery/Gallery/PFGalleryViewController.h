@@ -12,7 +12,7 @@
 
 @protocol PFGalleryViewControllerDelegate <NSObject>
 
-//- (void)PFFullimageViewController:(NSMutableArray *)sum current:(NSString *)current;
+- (void)PFGalleryViewController:(id)sender sum:(NSMutableArray *)sum current:(NSString *)current;
 - (void)PFGalleryViewControllerBack;
 
 @end
@@ -23,12 +23,12 @@
 
 @property (assign, nonatomic) id < PFGalleryViewControllerDelegate > delegate;
 
-@property (retain, nonatomic) NSMutableArray *arrObj;
-@property (retain, nonatomic) NSMutableArray *sumimg;
+@property (strong, nonatomic) NSMutableArray *arrObj;
+@property (strong, nonatomic) NSMutableArray *sumimg;
 
-@property (nonatomic, weak ) NSString *galleryId;
-@property (nonatomic, weak ) NSString *titleText;
-@property (nonatomic, weak ) NSString *detailText;
-@property (nonatomic, weak ) NSString *totalImg;
+@property (nonatomic, strong) NSString *galleryId;
+@property (nonatomic, strong) NSString *titleText;
+@property (nonatomic, strong) NSString *detailText;
+@property (nonatomic, strong) NSString *totalImg;
 
 @end

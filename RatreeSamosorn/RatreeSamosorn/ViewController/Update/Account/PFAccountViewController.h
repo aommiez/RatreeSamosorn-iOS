@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DLImageLoader.h"
 #import <FacebookSDK/FacebookSDK.h>
-#import "AsyncImageView.h"
 
 #import "PFRatreeSamosornApi.h"
 
@@ -28,6 +28,9 @@
 @property (assign, nonatomic) id delegate;
 @property (strong, nonatomic) PFRatreeSamosornApi *RatreeSamosornApi;
 
+@property NSUserDefaults *meOffline;
+@property NSUserDefaults *settingOffline;
+
 @property (strong, nonatomic) IBOutlet UIView *waitView;
 @property (strong, nonatomic) IBOutlet UIView *popupwaitView;
 
@@ -44,8 +47,15 @@
 @property (strong, nonatomic) IBOutlet UIView *bgnewsView;
 @property (strong, nonatomic) IBOutlet UIView *bgmessageView;
 
-@property (strong, nonatomic) IBOutlet AsyncImageView *thumUser;
+@property (strong, nonatomic) IBOutlet UIImageView *thumUser;
 @property (strong, nonatomic) IBOutlet UITextField *display_name;
+
+@property (strong, nonatomic) IBOutlet UILabel *notificationLabel;
+@property (strong, nonatomic) IBOutlet UILabel *newupdateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *messageLabel;
+@property (strong, nonatomic) IBOutlet UILabel *languageLabel;
+@property (strong, nonatomic) IBOutlet UILabel *applanguageLabel;
+@property (strong, nonatomic) IBOutlet UILabel *appstatuslanguageLabel;
 
 @property (strong, nonatomic) IBOutlet UIButton *logoutButton;
 

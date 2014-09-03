@@ -15,6 +15,7 @@
 @implementation PFEditViewController
 
 BOOL newMedia;
+NSString *close_bt;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -22,6 +23,7 @@ BOOL newMedia;
     if (self) {
         // Custom initialization
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        self.meOffline = [NSUserDefaults standardUserDefaults];
     }
     return self;
 }
@@ -51,7 +53,20 @@ BOOL newMedia;
     [[self.navController navigationBar] setTranslucent:YES];
     [self.view addSubview:self.navController.view];
     
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(close)];
+    self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
+    self.RatreeSamosornApi.delegate = self;
+    
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        self.displaynameLabel.text = @"Display Name";
+        self.changepasswordLabel.text = @"Change Password";
+        close_bt = @"Close";
+    } else {
+        self.displaynameLabel.text = @"ชื่อที่ใช้แสดง";
+        self.changepasswordLabel.text = @"แก้ไขรหัสผ่าน";
+        close_bt = @"ปิด";
+    }
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:close_bt style:UIBarButtonItemStyleDone target:self action:@selector(close)];
     [rightButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                          [UIFont fontWithName:@"Helvetica" size:17.0],NSFontAttributeName,nil] forState:UIControlStateNormal];
     
@@ -70,9 +85,6 @@ BOOL newMedia;
     self.passwordView.layer.shadowOffset = CGSizeMake(0.5, -0.5);
     self.passwordView.layer.shadowRadius = 2;
     self.passwordView.layer.shadowOpacity = 0.1;
-    
-    self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
-    self.RatreeSamosornApi.delegate = self;
     
     self.objEdit = [[NSDictionary alloc] init];
     
@@ -98,12 +110,19 @@ BOOL newMedia;
     
     [self.waitView removeFromSuperview];
     
+    [self.meOffline setObject:response forKey:@"meOffline"];
+    [self.meOffline synchronize];
+    
     self.display_name.text = [response objectForKey:@"display_name"];
     
     NSString *picStr = [[response objectForKey:@"picture"] objectForKey:@"url"];
     self.thumUser.layer.masksToBounds = YES;
     self.thumUser.contentMode = UIViewContentModeScaleAspectFill;
-    self.thumUser.imageURL = [[NSURL alloc] initWithString:picStr];
+    
+    [DLImageLoader loadImageFromURL:picStr
+                          completed:^(NSError *error, NSData *imgData) {
+                              self.thumUser.image = [UIImage imageWithData:imgData];
+                          }];
 
     self.email.text = [response objectForKey:@"email"];
     self.website.text = [response objectForKey:@"website"];
@@ -122,6 +141,35 @@ BOOL newMedia;
 
 - (void)PFRatreeSamosornApi:(id)sender meErrorResponse:(NSString *)errorResponse {
     NSLog(@"%@",errorResponse);
+    
+    [self.waitView removeFromSuperview];
+    
+    self.objEdit = [self.meOffline objectForKey:@"meOffline"];
+    
+    self.display_name.text = [[self.meOffline objectForKey:@"meOffline"] objectForKey:@"display_name"];
+    
+    NSString *picStr = [[[self.meOffline objectForKey:@"meOffline"] objectForKey:@"picture"] objectForKey:@"url"];
+    self.thumUser.layer.masksToBounds = YES;
+    self.thumUser.contentMode = UIViewContentModeScaleAspectFill;
+    
+    [DLImageLoader loadImageFromURL:picStr
+                          completed:^(NSError *error, NSData *imgData) {
+                              self.thumUser.image = [UIImage imageWithData:imgData];
+                          }];
+    
+    self.email.text = [[self.meOffline objectForKey:@"meOffline"] objectForKey:@"email"];
+    self.website.text = [[self.meOffline objectForKey:@"meOffline"] objectForKey:@"website"];
+    self.tel.text = [[self.meOffline objectForKey:@"meOffline"] objectForKey:@"mobile"];
+    self.gender.text = [[self.meOffline objectForKey:@"meOffline"] objectForKey:@"gender"];
+    
+    NSString *myString = [[NSString alloc] initWithFormat:@"%@",[[self.meOffline objectForKey:@"meOffline"] objectForKey:@"birth_date"]];
+    NSString *mySmallerString = [myString substringToIndex:10];
+    
+    self.birthday.text = mySmallerString;
+    
+    if (![[[self.meOffline objectForKey:@"meOffline"] objectForKey:@"fb_id"] isEqualToString:@""]) {
+        self.password.hidden = YES;
+    }
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getUserSettingResponse:(NSDictionary *)response {
@@ -281,7 +329,7 @@ BOOL newMedia;
 {
     [self.view addSubview:self.waitView];
     
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:255.0f/255.0f green:0.0f/255.0f blue:107.0f/255.0f alpha:1.0f]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f]];
     
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0], NSForegroundColorAttributeName, nil]];

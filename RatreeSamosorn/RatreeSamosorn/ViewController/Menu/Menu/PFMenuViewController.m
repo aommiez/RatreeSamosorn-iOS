@@ -18,12 +18,19 @@ BOOL loadMenu;
 BOOL noDataMenu;
 BOOL refreshDataMenu;
 
+NSString *totalImg;
+NSString *titleText;
+NSString *detailText;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        self.foodOffline = [NSUserDefaults standardUserDefaults];
+        self.drinkOffline = [NSUserDefaults standardUserDefaults];
+        self.galleryOffline = [NSUserDefaults standardUserDefaults];
     }
     return self;
 }
@@ -50,8 +57,16 @@ BOOL refreshDataMenu;
     
     if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
         self.navItem.title = @"Menu";
+        [self.foodsBt setTitle:@"Foods" forState:UIControlStateNormal];
+        [self.drinksBt setTitle:@"Drinks" forState:UIControlStateNormal];
+        [self.activityBt setTitle:@"Activity" forState:UIControlStateNormal];
+        [self.galleryBt setTitle:@"Gallery" forState:UIControlStateNormal];
     } else {
         self.navItem.title = @"รายการ";
+        [self.foodsBt setTitle:@"อาหาร" forState:UIControlStateNormal];
+        [self.drinksBt setTitle:@"เครื่องดื่ม" forState:UIControlStateNormal];
+        [self.activityBt setTitle:@"กิจกรรม" forState:UIControlStateNormal];
+        [self.galleryBt setTitle:@"อัลบั้ม" forState:UIControlStateNormal];
     }
     
     UIView *hv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 35)];
@@ -63,14 +78,11 @@ BOOL refreshDataMenu;
     
     refreshDataMenu = YES;
     
-    self.objFood = [[NSDictionary alloc] init];
     self.arrObjFood = [[NSMutableArray alloc] init];
-    
-    self.objDrink = [[NSDictionary alloc] init];
     self.arrObjDrink = [[NSMutableArray alloc] init];
-    
-    self.objGallery = [[NSDictionary alloc] init];
     self.arrObjGallery = [[NSMutableArray alloc] init];
+    self.arrObjGalleryAlbum = [[NSMutableArray alloc] init];
+    self.sum = [[NSMutableArray alloc] init];
     
     self.foodsBt.backgroundColor = [UIColor clearColor];
     [self.foodsBt.titleLabel setTextColor:[UIColor whiteColor]];
@@ -83,8 +95,8 @@ BOOL refreshDataMenu;
     self.menu = @"Foods";
     [self.RatreeSamosornApi getFoods];
     
-    self.viewController = [PFActivityCalendarViewController new];
-    [self.CalendarView addSubview:self.viewController.view];
+    //self.viewController = [PFActivityCalendarViewController new];
+    //[self.CalendarView addSubview:self.viewController.view];
     
 }
 
@@ -98,8 +110,7 @@ BOOL refreshDataMenu;
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getFoodsResponse:(NSDictionary *)response {
-    NSLog(@"%@",response);
-    self.objFood = response;
+    //NSLog(@"%@",response);
     
     self.menu = @"Foods";
     
@@ -114,16 +125,35 @@ BOOL refreshDataMenu;
         }
     }
     
+    [self.foodOffline setObject:response forKey:@"foodArray"];
+    [self.foodOffline synchronize];
+    
     [self.tableView reloadData];
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getFoodsErrorResponse:(NSString *)errorResponse {
-    NSLog(@"%@",errorResponse);
+    //NSLog(@"%@",errorResponse);
+    
+    self.menu = @"Foods";
+    
+    if (!refreshDataMenu) {
+        for (int i=0; i<[[[self.foodOffline objectForKey:@"foodArray"] objectForKey:@"data"] count]; ++i) {
+            [self.arrObjFood addObject:[[[self.foodOffline objectForKey:@"foodArray"] objectForKey:@"data"] objectAtIndex:i]];
+        }
+    } else {
+        [self.arrObjFood removeAllObjects];
+        for (int i=0; i<[[[self.foodOffline objectForKey:@"foodArray"] objectForKey:@"data"] count]; ++i) {
+            [self.arrObjFood addObject:[[[self.foodOffline objectForKey:@"foodArray"] objectForKey:@"data"] objectAtIndex:i]];
+        }
+    }
+    
+    [self.tableView reloadData];
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getDrinksResponse:(NSDictionary *)response {
-    NSLog(@"%@",response);
-    self.objDrink = response;
+    //NSLog(@"%@",response);
+    
+    self.menu = @"Drinks";
     
     if (!refreshDataMenu) {
         for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
@@ -136,33 +166,70 @@ BOOL refreshDataMenu;
         }
     }
     
+    [self.drinkOffline setObject:response forKey:@"drinkArray"];
+    [self.drinkOffline synchronize];
+    
     [self.tableView reloadData];
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getDrinksErrorResponse:(NSString *)errorResponse {
-    NSLog(@"%@",errorResponse);
-}
-
-- (void)PFRatreeSamosornApi:(id)sender getGalleryResponse:(NSDictionary *)response {
-    NSLog(@"%@",response);
-    self.objGallery = response;
+    //NSLog(@"%@",errorResponse);
+    
+    self.menu = @"Drinks";
     
     if (!refreshDataMenu) {
-        for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
-            [self.arrObjGallery addObject:[[response objectForKey:@"data"] objectAtIndex:i]];
+        for (int i=0; i<[[[self.drinkOffline objectForKey:@"drinkArray"] objectForKey:@"data"] count]; ++i) {
+            [self.arrObjDrink addObject:[[[self.drinkOffline objectForKey:@"drinkArray"] objectForKey:@"data"] objectAtIndex:i]];
         }
     } else {
-        [self.arrObjGallery removeAllObjects];
-        for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
-            [self.arrObjGallery addObject:[[response objectForKey:@"data"] objectAtIndex:i]];
+        [self.arrObjDrink removeAllObjects];
+        for (int i=0; i<[[[self.drinkOffline objectForKey:@"drinkArray"] objectForKey:@"data"] count]; ++i) {
+            [self.arrObjDrink addObject:[[[self.drinkOffline objectForKey:@"drinkArray"] objectForKey:@"data"] objectAtIndex:i]];
         }
     }
     
     [self.tableView reloadData];
 }
 
+- (void)PFRatreeSamosornApi:(id)sender getGalleryResponse:(NSDictionary *)response {
+    //NSLog(@"%@",response);
+    
+    self.menu = @"Gallery";
+    
+    if (!refreshDataMenu) {
+        for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
+            [self.arrObjGalleryAlbum addObject:[[response objectForKey:@"data"] objectAtIndex:i]];
+        }
+    } else {
+        [self.arrObjGalleryAlbum removeAllObjects];
+        for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
+            [self.arrObjGalleryAlbum addObject:[[response objectForKey:@"data"] objectAtIndex:i]];
+        }
+    }
+    
+    [self.galleryOffline setObject:response forKey:@"galleryArray"];
+    [self.galleryOffline synchronize];
+    
+    [self.tableView reloadData];
+}
+
 - (void)PFRatreeSamosornApi:(id)sender getGalleryErrorResponse:(NSString *)errorResponse {
-    NSLog(@"%@",errorResponse);
+    //NSLog(@"%@",errorResponse);
+    
+    self.menu = @"Gallery";
+    
+    if (!refreshDataMenu) {
+        for (int i=0; i<[[[self.galleryOffline objectForKey:@"galleryArray"] objectForKey:@"data"] count]; ++i) {
+            [self.arrObjGalleryAlbum addObject:[[[self.galleryOffline objectForKey:@"galleryArray"] objectForKey:@"data"] objectAtIndex:i]];
+        }
+    } else {
+        [self.arrObjGalleryAlbum removeAllObjects];
+        for (int i=0; i<[[[self.galleryOffline objectForKey:@"galleryArray"] objectForKey:@"data"] count]; ++i) {
+            [self.arrObjGalleryAlbum addObject:[[[self.galleryOffline objectForKey:@"galleryArray"] objectForKey:@"data"] objectAtIndex:i]];
+        }
+    }
+    
+    [self.tableView reloadData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -177,7 +244,7 @@ BOOL refreshDataMenu;
         return 0;
     }
     if ([self.menu isEqualToString:@"Gallery"]) {
-        return [self.arrObjGallery count];
+        return [self.arrObjGalleryAlbum count];
     }
     return 0;
 }
@@ -204,52 +271,120 @@ BOOL refreshDataMenu;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
     if ([self.menu isEqualToString:@"Foods"]) {
-        PFFoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PFFoodsCell"];
-        if(cell == nil) {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PFFoodsCell" owner:self options:nil];
-            cell = [nib objectAtIndex:0];
+        
+        if ([[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"type"] isEqualToString:@"product"]) {
+        
+            PFFoldertypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PFFoldertypeCell"];
+            if(cell == nil) {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PFFoldertypeCell" owner:self options:nil];
+                cell = [nib objectAtIndex:0];
+            }
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            cell.image.layer.masksToBounds = YES;
+            cell.image.contentMode = UIViewContentModeScaleAspectFill;
+            
+            NSString *img = [[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
+            NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/100/100/"];
+            
+            [DLImageLoader loadImageFromURL:urlimg
+                                  completed:^(NSError *error, NSData *imgData) {
+                                      cell.image.image = [UIImage imageWithData:imgData];
+                                  }];
+            
+            cell.name.text = [[NSString alloc] initWithString:[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"name"]];
+            cell.price.text = [[NSString alloc] initWithFormat:@"%@",[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"price"]];
+            
+            cell.detail.text = [[NSString alloc] initWithString:[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"detail"]];
+            
+            return cell;
+            
+        } else {
+        
+            PFFoldertype1Cell *cell = [tableView dequeueReusableCellWithIdentifier:@"PFFoldertype1Cell"];
+            if(cell == nil) {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PFFoldertype1Cell" owner:self options:nil];
+                cell = [nib objectAtIndex:0];
+            }
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            cell.thumbnails.layer.masksToBounds = YES;
+            cell.thumbnails.contentMode = UIViewContentModeScaleAspectFill;
+            
+            NSString *img = [[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
+            NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/100/100/"];
+            
+            [DLImageLoader loadImageFromURL:urlimg
+                                  completed:^(NSError *error, NSData *imgData) {
+                                      cell.thumbnails.image = [UIImage imageWithData:imgData];
+                                  }];
+            
+            cell.name.text = [[NSString alloc] initWithString:[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"name"]];
+            
+            return cell;
+            
         }
         
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        NSString *img = [[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
-        NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/100/100/"];
-        
-        [DLImageLoader loadImageFromURL:urlimg
-                              completed:^(NSError *error, NSData *imgData) {
-                                  cell.image.image = [UIImage imageWithData:imgData];
-                              }];
-        
-        cell.name.text = [[NSString alloc] initWithString:[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"name"]];
-        cell.price.text = [[NSString alloc] initWithFormat:@"%@",[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"price"]];
-        
-        cell.detail.text = [[NSString alloc] initWithString:[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"detail"]];
-        
-        return cell;
     }
     if ([self.menu isEqualToString:@"Drinks"]) {
-        PFDrinkCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PFDrinkCell"];
-        if(cell == nil) {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PFDrinkCell" owner:self options:nil];
-            cell = [nib objectAtIndex:0];
+        
+        if ([[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"type"] isEqualToString:@"product"]) {
+            
+            PFFoldertypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PFFoldertypeCell"];
+            if(cell == nil) {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PFFoldertypeCell" owner:self options:nil];
+                cell = [nib objectAtIndex:0];
+            }
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            cell.image.layer.masksToBounds = YES;
+            cell.image.contentMode = UIViewContentModeScaleAspectFill;
+            
+            NSString *img = [[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
+            NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/100/100/"];
+            
+            [DLImageLoader loadImageFromURL:urlimg
+                                  completed:^(NSError *error, NSData *imgData) {
+                                      cell.image.image = [UIImage imageWithData:imgData];
+                                  }];
+            
+            cell.name.text = [[NSString alloc] initWithString:[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"name"]];
+            cell.price.text = [[NSString alloc] initWithFormat:@"%@",[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"price"]];
+            
+            cell.detail.text = [[NSString alloc] initWithString:[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"detail"]];
+            
+            return cell;
+            
+        } else {
+            
+            PFFoldertype1Cell *cell = [tableView dequeueReusableCellWithIdentifier:@"PFFoldertype1Cell"];
+            if(cell == nil) {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PFFoldertype1Cell" owner:self options:nil];
+                cell = [nib objectAtIndex:0];
+            }
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            cell.thumbnails.layer.masksToBounds = YES;
+            cell.thumbnails.contentMode = UIViewContentModeScaleAspectFill;
+            
+            NSString *img = [[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
+            NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/100/100/"];
+            
+            [DLImageLoader loadImageFromURL:urlimg
+                                  completed:^(NSError *error, NSData *imgData) {
+                                      cell.thumbnails.image = [UIImage imageWithData:imgData];
+                                  }];
+            
+            cell.name.text = [[NSString alloc] initWithString:[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"name"]];
+            
+            return cell;
+            
         }
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        NSString *img = [[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
-        NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/100/100/"];
-        
-        [DLImageLoader loadImageFromURL:urlimg
-                              completed:^(NSError *error, NSData *imgData) {
-                                  cell.image.image = [UIImage imageWithData:imgData];
-                              }];
-        
-        cell.name.text = [[NSString alloc] initWithString:[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"name"]];
-        cell.price.text = [[NSString alloc] initWithFormat:@"%@",[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"price"]];
-        
-        cell.detail.text = [[NSString alloc] initWithString:[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"detail"]];
-        
-        return cell;
+
     }
     if ([self.menu isEqualToString:@"Gallery"]) {
         PFGalleryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PFGalleryCell"];
@@ -260,7 +395,10 @@ BOOL refreshDataMenu;
     
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        NSString *img = [[[self.arrObjGallery objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
+        cell.image.layer.masksToBounds = YES;
+        cell.image.contentMode = UIViewContentModeScaleAspectFill;
+        
+        NSString *img = [[[self.arrObjGalleryAlbum objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
         NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/79/79/"];
         
         [DLImageLoader loadImageFromURL:urlimg
@@ -268,13 +406,137 @@ BOOL refreshDataMenu;
                                   cell.image.image = [UIImage imageWithData:imgData];
                               }];
         
-        cell.name.text = [[NSString alloc] initWithString:[[self.arrObjGallery objectAtIndex:indexPath.row] objectForKey:@"name"]];
-        cell.detail.text = [[NSString alloc] initWithString:[[self.arrObjGallery objectAtIndex:indexPath.row] objectForKey:@"detail"]];
+        cell.name.text = [[NSString alloc] initWithString:[[self.arrObjGalleryAlbum objectAtIndex:indexPath.row] objectForKey:@"name"]];
+        cell.detail.text = [[NSString alloc] initWithString:[[self.arrObjGalleryAlbum objectAtIndex:indexPath.row] objectForKey:@"detail"]];
         
         return cell;
     }
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([self.menu isEqualToString:@"Foods"]) {
+        
+        self.navItem.title = @" ";
+        [self.delegate HideTabbar];
+        
+        if ([[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"type"] isEqualToString:@"product"]) {
+            
+            PFFoodAndDrinkDetailViewController *detailView = [[PFFoodAndDrinkDetailViewController alloc] init];
+            if(IS_WIDESCREEN) {
+                detailView = [[PFFoodAndDrinkDetailViewController alloc] initWithNibName:@"PFFoodAndDrinkDetailViewController_Wide" bundle:nil];
+            } else {
+                detailView = [[PFFoodAndDrinkDetailViewController alloc] initWithNibName:@"PFFoodAndDrinkDetailViewController" bundle:nil];
+            }
+            detailView.obj = [self.arrObjFood objectAtIndex:indexPath.row];
+            detailView.delegate = self;
+            [self.navController pushViewController:detailView animated:YES];
+            
+        } else {
+            
+            PFDetailFoldertypeViewController *foldertypeView = [[PFDetailFoldertypeViewController alloc] init];
+            if(IS_WIDESCREEN) {
+                foldertypeView = [[PFDetailFoldertypeViewController alloc] initWithNibName:@"PFDetailFoldertypeViewController_Wide" bundle:nil];
+            } else {
+                foldertypeView = [[PFDetailFoldertypeViewController alloc] initWithNibName:@"PFDetailFoldertypeViewController" bundle:nil];
+            }
+            foldertypeView.obj = [self.arrObjFood objectAtIndex:indexPath.row];
+            foldertypeView.folder_id = [[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"id"];
+            foldertypeView.delegate = self;
+            [self.navController pushViewController:foldertypeView animated:YES];
+        
+        }
+    }
+    if ([self.menu isEqualToString:@"Drinks"]) {
+        
+        self.navItem.title = @" ";
+        [self.delegate HideTabbar];
+        
+        if ([[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"type"] isEqualToString:@"product"]) {
+            
+            PFFoodAndDrinkDetailViewController *detailView = [[PFFoodAndDrinkDetailViewController alloc] init];
+            if(IS_WIDESCREEN) {
+                detailView = [[PFFoodAndDrinkDetailViewController alloc] initWithNibName:@"PFFoodAndDrinkDetailViewController_Wide" bundle:nil];
+            } else {
+                detailView = [[PFFoodAndDrinkDetailViewController alloc] initWithNibName:@"PFFoodAndDrinkDetailViewController" bundle:nil];
+            }
+            detailView.obj = [self.arrObjDrink objectAtIndex:indexPath.row];
+            detailView.delegate = self;
+            [self.navController pushViewController:detailView animated:YES];
+            
+        } else {
+            
+            PFDetailFoldertypeViewController *foldertypeView = [[PFDetailFoldertypeViewController alloc] init];
+            if(IS_WIDESCREEN) {
+                foldertypeView = [[PFDetailFoldertypeViewController alloc] initWithNibName:@"PFDetailFoldertypeViewController_Wide" bundle:nil];
+            } else {
+                foldertypeView = [[PFDetailFoldertypeViewController alloc] initWithNibName:@"PFDetailFoldertypeViewController" bundle:nil];
+            }
+            foldertypeView.obj = [self.arrObjFood objectAtIndex:indexPath.row];
+            foldertypeView.folder_id = [[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"id"];
+            foldertypeView.delegate = self;
+            [self.navController pushViewController:foldertypeView animated:YES];
+            
+        }
+        
+    }
+    if ([self.menu isEqualToString:@"Gallery"]) {
+        
+        totalImg = [[self.arrObjGalleryAlbum objectAtIndex:indexPath.row] objectForKey:@"picture_length"];
+        titleText = [[self.arrObjGalleryAlbum objectAtIndex:indexPath.row] objectForKey:@"name"];
+        detailText = [[self.arrObjGalleryAlbum objectAtIndex:indexPath.row] objectForKey:@"detail"];
+        
+        [self.arrObjGallery removeAllObjects];
+        [self.sum removeAllObjects];
+        
+        [self.RatreeSamosornApi galleryPictureByURL:[[[self.arrObjGalleryAlbum objectAtIndex:indexPath.row] objectForKey:@"node"] objectForKey:@"pictures"]];
+        
+    }
+    
+}
+
+- (void)PFRatreeSamosornApi:(id)sender galleryPictureByURLResponse:(NSDictionary *)response {
+    
+    for (int i = 0; i < [[response objectForKey:@"data"] count]; i++) {
+        
+        [self.arrObjGallery addObject:[[response objectForKey:@"data"] objectAtIndex:i]];
+        
+    }
+    
+    for (int i = 0; i < [[response objectForKey:@"data"] count]; i++) {
+        
+        [self.sum addObject:[[self.arrObjGallery objectAtIndex:i] objectForKey:@"url"]];
+        
+    }
+    
+    self.navItem.title = @" ";
+    
+    [self.delegate HideTabbar];
+    
+    PFGalleryViewController *showcaseGallery = [[PFGalleryViewController alloc] init];
+    
+    if (IS_WIDESCREEN) {
+        showcaseGallery = [[PFGalleryViewController alloc] initWithNibName:@"PFGalleryViewController_Wide" bundle:nil];
+    } else {
+        showcaseGallery = [[PFGalleryViewController alloc] initWithNibName:@"PFGalleryViewController" bundle:nil];
+    }
+    
+    showcaseGallery.delegate = self;
+    
+    showcaseGallery.arrObj = self.arrObjGallery;
+    showcaseGallery.sumimg = self.sum;
+    showcaseGallery.totalImg = totalImg;
+    showcaseGallery.titleText = titleText;
+    showcaseGallery.detailText = detailText;
+    
+    [self.navController pushViewController:showcaseGallery animated:YES];
+    
+}
+
+- (void)PFRatreeSamosornApi:(id)sender galleryPictureByURLErrorResponse:(NSString *)errorResponse {
+    NSLog(@"%@",errorResponse);
 }
 
 //food
@@ -362,6 +624,20 @@ BOOL refreshDataMenu;
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
     if (scrollView.contentOffset.y < -60.0f ) {
         refreshDataMenu = YES;
+        
+        self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
+        self.RatreeSamosornApi.delegate = self;
+        
+        if ([self.menu isEqualToString:@"Foods"]) {
+            NSLog(@"Foods");
+            [self.RatreeSamosornApi getFoods];
+        } else if ([self.menu isEqualToString:@"Drinks"]) {
+            NSLog(@"Drinks");
+            [self.RatreeSamosornApi getDrinks];
+        } else if ([self.menu isEqualToString:@"Gallery"]) {
+            NSLog(@"Gallery");
+            [self.RatreeSamosornApi getGallery];
+        }
     }
 }
 
@@ -383,12 +659,19 @@ BOOL refreshDataMenu;
         if (!noDataMenu) {
             refreshDataMenu = NO;
             
-            /*
-             self.mingmitrSDK = [[PFMingMitrSDK alloc] init];
-             self.mingmitrSDK.delegate = self;
-             
-             [self.mingmitrSDK getNews:@"NO" next:self.paging];
-             */
+             self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
+             self.RatreeSamosornApi.delegate = self;
+            
+            if ([self.menu isEqualToString:@"Foods"]) {
+                NSLog(@"Foods");
+                [self.RatreeSamosornApi getFoods];
+            } else if ([self.menu isEqualToString:@"Drinks"]) {
+                NSLog(@"Drinks");
+                [self.RatreeSamosornApi getDrinks];
+            } else if ([self.menu isEqualToString:@"Gallery"]) {
+                NSLog(@"Gallery");
+                [self.RatreeSamosornApi getGallery];
+            }
         }
     }
 }
@@ -398,6 +681,41 @@ BOOL refreshDataMenu;
     [UIView setAnimationDuration:0.2];
     self.tableView.frame = CGRectMake(0, 0, 320, self.tableView.frame.size.height);
     [UIView commitAnimations];
+}
+
+- (void)PFImageViewController:(id)sender viewPicture:(NSString *)link{
+    [self.delegate PFImageViewController:self viewPicture:link];
+}
+
+- (void)PFGalleryViewController:(id)sender sum:(NSMutableArray *)sum current:(NSString *)current{
+    [self.delegate PFGalleryViewController:self sum:sum current:current];
+}
+
+- (void)PFDetailFoldertypeViewControllerBack {
+    [self.delegate ShowTabbar];
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        self.navItem.title = @"Menu";
+    } else {
+        self.navItem.title = @"รายการ";
+    }
+}
+
+- (void)PFFoodAndDrinkDetailViewControllerBack {
+    [self.delegate ShowTabbar];
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        self.navItem.title = @"Menu";
+    } else {
+        self.navItem.title = @"รายการ";
+    }
+}
+
+- (void)PFGalleryViewControllerBack {
+    [self.delegate ShowTabbar];
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        self.navItem.title = @"Menu";
+    } else {
+        self.navItem.title = @"รายการ";
+    }
 }
 
 @end
