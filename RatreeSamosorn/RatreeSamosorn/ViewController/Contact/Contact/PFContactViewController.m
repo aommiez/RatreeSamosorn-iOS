@@ -278,8 +278,10 @@ NSTimer *timmer;
 }
 
 - (IBAction)phoneTapped:(id)sender{
-    NSString *phone = [[NSString alloc] initWithFormat:@"telprompt://%@",self.phoneTxt.text];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phone]];
+    if (![self.phoneTxt.text isEqualToString:@""]) {
+        NSString *phone = [[NSString alloc] initWithFormat:@"telprompt://%@",self.phoneTxt.text];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phone]];
+    }
 }
 
 - (IBAction)websiteTapped:(id)sender{

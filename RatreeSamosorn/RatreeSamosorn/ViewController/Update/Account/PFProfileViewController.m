@@ -105,7 +105,7 @@
 
 - (void)PFRatreeSamosornApi:(id)sender meResponse:(NSDictionary *)response {
     self.objAccount = response;
-    NSLog(@"Me %@",response);
+    //NSLog(@"Me %@",response);
     
     [self.waitView removeFromSuperview];
     
@@ -171,7 +171,7 @@
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getUserSettingResponse:(NSDictionary *)response {
-    NSLog(@"getUserSetting %@",response);
+    //NSLog(@"getUserSetting %@",response);
     
     [self.settingOffline setObject:response forKey:@"settingOffline"];
     [self.settingOffline synchronize];

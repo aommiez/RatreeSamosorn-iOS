@@ -724,11 +724,10 @@ static UIImage *tileImage;
         
 		label.text = s;
 		label.textAlignment = NSTextAlignmentCenter;
-		label.shadowColor = [UIColor whiteColor];
+        label.textColor = [UIColor whiteColor];
 		label.shadowOffset = CGSizeMake(0, 1);
 		label.font = [UIFont boldSystemFontOfSize:10];
 		label.backgroundColor = [UIColor clearColor];
-		label.textColor = TEXT_COLOR;
 		i++;
 	}
 	
@@ -953,11 +952,10 @@ static UIImage *tileImage;
 	_monthYear = [[UILabel alloc] initWithFrame:CGRectInset(CGRectMake(0, 0, VIEW_WIDTH, 36), 40, 6)];
 	_monthYear.textAlignment = NSTextAlignmentCenter;
 	_monthYear.backgroundColor = [UIColor clearColor];
-//	_monthYear.font = [UIFont boldSystemFontOfSize:22];
     _monthYear.font = [UIFont systemFontOfSize:22];
 	_monthYear.shadowColor = [UIColor whiteColor];
 	_monthYear.shadowOffset = CGSizeMake(0,1);
-	_monthYear.textColor = gradientColor;
+    _monthYear.textColor = [UIColor whiteColor];
 	return _monthYear;
 }
 - (UIButton *) leftArrow{

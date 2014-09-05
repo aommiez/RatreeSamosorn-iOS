@@ -106,7 +106,7 @@ NSString *close_bt;
 
 - (void)PFRatreeSamosornApi:(id)sender meResponse:(NSDictionary *)response {
     self.objEdit = response;
-    NSLog(@"Me %@",response);
+    //NSLog(@"Me %@",response);
     
     [self.waitView removeFromSuperview];
     
@@ -173,7 +173,7 @@ NSString *close_bt;
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getUserSettingResponse:(NSDictionary *)response {
-    NSLog(@"settingUser %@",response);
+    //NSLog(@"settingUser %@",response);
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getUserSettingErrorResponse:(NSString *)errorResponse {

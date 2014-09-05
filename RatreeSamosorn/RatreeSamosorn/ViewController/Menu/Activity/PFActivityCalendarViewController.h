@@ -12,9 +12,11 @@
 #import "AFNetworking.h"
 #import "monthCell.h"
 
+#import "PFActivityDetailViewController.h"
+
 @protocol PFActivityCalendarViewControllerDelegate <NSObject>
 
-//- (void)PFActivityCalendarViewController:(id)sender viewPicture:(NSString *)link;
+- (void)PFImageViewController:(id)sender viewPicture:(NSString *)link;
 
 @end
 
@@ -31,6 +33,8 @@
 @property (nonatomic, strong) NSDate *dateStart;
 @property (nonatomic, strong) NSDate *dateEnd;
 @property (nonatomic, strong) NSMutableArray *allDataArray;
+
+@property NSUserDefaults *calendarOffline;
 
 - (void) generateRandomDataForStartDate:(NSDate*)start endDate:(NSDate*)end;
 

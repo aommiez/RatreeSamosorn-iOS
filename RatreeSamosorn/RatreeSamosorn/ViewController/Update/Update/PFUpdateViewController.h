@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DLImageLoader.h"
 #import "CRGradientNavigationBar.h"
 
 #import "PFRatreeSamosornApi.h"
 
 #import "PFUpdateCell.h"
 #import "PFDetailViewController.h"
+#import "PFActivityDetailViewController.h"
 
 #import "PFLoginViewController.h"
 #import "PFAccountViewController.h"
@@ -20,7 +22,7 @@
 @protocol PFUpdateViewControllerDelegate <NSObject>
 
 - (void)resetApp;
-//- (void)PFGalleryViewController:(id)sender sum:(NSMutableArray *)sum current:(NSString *)current;
+- (void)PFGalleryViewController:(id)sender sum:(NSMutableArray *)sum current:(NSString *)current;
 - (void)PFImageViewController:(id)sender viewPicture:(NSString *)link;
 - (void)HideTabbar;
 - (void)ShowTabbar;
@@ -31,6 +33,8 @@
 
 @property (assign, nonatomic) id delegate;
 @property (strong, nonatomic) PFRatreeSamosornApi *RatreeSamosornApi;
+
+@property NSUserDefaults *feedOffline;
 
 @property (strong, nonatomic) PFLoginViewController *loginView;
 
@@ -44,5 +48,7 @@
 @property (strong, nonatomic) IBOutlet UINavigationItem *navItem;
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSMutableArray *arrObj;
 
 @end

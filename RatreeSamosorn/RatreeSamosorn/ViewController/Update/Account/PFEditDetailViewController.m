@@ -194,7 +194,7 @@
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getUserSettingResponse:(NSDictionary *)response {
-    NSLog(@"settingUser %@",response);
+    //NSLog(@"settingUser %@",response);
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getUserSettingErrorResponse:(NSString *)errorResponse {
@@ -249,20 +249,36 @@
                          gender:[self.obj objectForKey:@"gender"]
                        birthday:[self.obj objectForKey:@"birth_date"]];
     
-    [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
-                                message:@"Save complete."
-                               delegate:self
-                      cancelButtonTitle:@"OK"
-                      otherButtonTitles:nil] show];
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                    message:@"Save complete."
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                    message:@"บันทึกเรียบร้อย"
+                                   delegate:self
+                          cancelButtonTitle:@"ตกลง"
+                          otherButtonTitles:nil] show];
+    }
 }
 
 - (IBAction)passwordTapped:(id)sender{
     if (![self.newpassword.text isEqualToString:self.confirmpassword.text]) {
-        [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
-                                    message:@"You must enter the same password twice in order to confirm it."
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
+        if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+            [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                        message:@"You must enter the same password twice in order to confirm it."
+                                       delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil] show];
+        } else {
+            [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                        message:@"ป้อนรหัสผ่านเดียวกันสองครั้งเพื่อยืนยัน"
+                                       delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil] show];
+        }
     } else {
         [self.RatreeSamosornApi changePassword:self.password.text new_password:self.newpassword.text];
     }
@@ -279,11 +295,19 @@
                          gender:[self.obj objectForKey:@"gender"]
                        birthday:[self.obj objectForKey:@"birth_date"]];
     
-    [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
-                                message:@"Save complete."
-                               delegate:self
-                      cancelButtonTitle:@"OK"
-                      otherButtonTitles:nil] show];
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                    message:@"Save complete."
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                    message:@"บันทึกเรียบร้อย"
+                                   delegate:self
+                          cancelButtonTitle:@"ตกลง"
+                          otherButtonTitles:nil] show];
+    }
 }
 
 - (IBAction)websiteTapped:(id)sender{
@@ -297,11 +321,19 @@
                          gender:[self.obj objectForKey:@"gender"]
                        birthday:[self.obj objectForKey:@"birth_date"]];
     
-    [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
-                                message:@"Save complete."
-                               delegate:self
-                      cancelButtonTitle:@"OK"
-                      otherButtonTitles:nil] show];
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                    message:@"Save complete."
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                    message:@"บันทึกเรียบร้อย"
+                                   delegate:self
+                          cancelButtonTitle:@"ตกลง"
+                          otherButtonTitles:nil] show];
+    }
 }
 
 - (IBAction)phoneTapped:(id)sender{
@@ -315,11 +347,19 @@
                          gender:[self.obj objectForKey:@"gender"]
                        birthday:[self.obj objectForKey:@"birth_date"]];
     
-    [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
-                                message:@"Save complete."
-                               delegate:self
-                      cancelButtonTitle:@"OK"
-                      otherButtonTitles:nil] show];
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                    message:@"Save complete."
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                    message:@"บันทึกเรียบร้อย"
+                                   delegate:self
+                          cancelButtonTitle:@"ตกลง"
+                          otherButtonTitles:nil] show];
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -348,11 +388,19 @@
                                 gender:self.checkgender
                             birthday:[self.obj objectForKey:@"birth_date"]];
     
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
         [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
                                     message:@"Save complete."
-                                    delegate:self
-                            cancelButtonTitle:@"OK"
-                            otherButtonTitles:nil] show];
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                    message:@"บันทึกเรียบร้อย"
+                                   delegate:self
+                          cancelButtonTitle:@"ตกลง"
+                          otherButtonTitles:nil] show];
+    }
 }
 
 - (IBAction)birthdayTapped:(id)sender {
@@ -370,11 +418,19 @@
                          gender:[self.obj objectForKey:@"gender"]
                        birthday:dateString];
     
-    [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
-                                message:@"Save complete."
-                               delegate:self
-                      cancelButtonTitle:@"OK"
-                      otherButtonTitles:nil] show];
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                    message:@"Save complete."
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                    message:@"บันทึกเรียบร้อย"
+                                   delegate:self
+                          cancelButtonTitle:@"ตกลง"
+                          otherButtonTitles:nil] show];
+    }
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField  {

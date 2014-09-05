@@ -149,6 +149,7 @@
         
         cell.name.text = [[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"name"];
         cell.price.text = [[NSString alloc] initWithFormat:@"%@",[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"price"]];
+        cell.detail.text = [[NSString alloc] initWithString:[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"detail"]];
         
         return cell;
     }

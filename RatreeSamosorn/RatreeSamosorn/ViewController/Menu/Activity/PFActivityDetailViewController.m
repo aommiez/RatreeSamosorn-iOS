@@ -1,12 +1,12 @@
 //
-//  PFDetailViewController.m
+//  PFActivityDetailViewController.m
 //  RatreeSamosorn
 //
-//  Created by Pariwat on 8/1/14.
+//  Created by Pariwat on 9/5/14.
 //  Copyright (c) 2014 platwofusion. All rights reserved.
 //
 
-#import "PFDetailViewController.h"
+#import "PFActivityDetailViewController.h"
 #import "UIView+MTAnimation.h"
 
 #define FONT_SIZE 15.0f
@@ -14,11 +14,11 @@
 #define CELL_CONTENT_MARGIN 4.0f
 #define FONT_SIZE_COMMENT 14.0f
 
-@interface PFDetailViewController ()
+@interface PFActivityDetailViewController ()
 
 @end
 
-@implementation PFDetailViewController
+@implementation PFActivityDetailViewController
 
 int maxH;
 BOOL noDataDetail;
@@ -31,7 +31,7 @@ BOOL newMediaDetail;
     if (self) {
         // Custom initialization
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-        self.feedDetailOffline = [NSUserDefaults standardUserDefaults];
+        self.activityDetailOffline = [NSUserDefaults standardUserDefaults];
     }
     return self;
 }
@@ -48,9 +48,12 @@ BOOL newMediaDetail;
     noDataDetail = NO;
     refreshDataDetail = NO;
     
-    [self.detailView.layer setCornerRadius:5.0f];
-    
     self.titlenews.text = [self.obj objectForKey:@"name"];
+    
+    //NSString *myString = [self.obj objectForKey:@"datetime"];
+    //NSString *mySmallerString = [myString substringToIndex:10];
+    
+    self.timenews.text = [self.obj objectForKey:@"datetime"];
     
     self.detailnews.text = [self.obj objectForKey:@"detail"];
     CGRect frame = self.detailnews.frame;
@@ -65,8 +68,9 @@ BOOL newMediaDetail;
     descText.text = self.detailnews.text;
     descText.numberOfLines = lines;
     [descText setFont:[UIFont systemFontOfSize:15]];
+    [descText setTextColor:[UIColor whiteColor]];
     self.detailnews.alpha = 0;
-    [self.detailView addSubview:descText];
+    [self.headerView addSubview:descText];
     
     NSString *img = [[self.obj objectForKey:@"thumb"] objectForKey:@"url"];
     NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/100/100/"];
@@ -76,12 +80,8 @@ BOOL newMediaDetail;
                               self.detailthumb.image = [UIImage imageWithData:imgData];
                           }];
     
-    //
-    self.detailthumb.frame = CGRectMake(self.detailthumb.frame.origin.x, self.detailnews.frame.origin.y+self.detailnews.frame.size.height+20, self.detailthumb.frame.size.width, self.detailthumb.frame.size.height);
-    
     self.detailthumb.layer.masksToBounds = YES;
     self.detailthumb.contentMode = UIViewContentModeScaleAspectFill;
-    
     
     [self.detailthumb setUserInteractionEnabled:YES];
     UITapGestureRecognizer *singleTap =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapping:)];
@@ -116,7 +116,8 @@ BOOL newMediaDetail;
     }
     
     self.arrObj = [[NSMutableArray alloc] init];
-    [self.RatreeSamosornApi getNewsCommentObjId:[self.obj objectForKey:@"id"] padding:@"NO"];
+    [self.RatreeSamosornApi getActivityCommentObjId:[self.obj objectForKey:@"id"] padding:@"NO"];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -129,16 +130,13 @@ BOOL newMediaDetail;
     return UIInterfaceOrientationMaskPortrait;
 }
 
-- (void)PFRatreeSamosornApi:(id)sender getNewsCommentObjIdResponse:(NSDictionary *)response {
+- (void)PFRatreeSamosornApi:(id)sender getActivityCommentObjIdResponse:(NSDictionary *)response {
     //NSLog(@"%@",response);
     
     self.internetstatus = @"connect";
     
-    [self.feedDetailOffline removeObjectForKey:@"feedDetailArray"];
-    [self.feedDetailOffline removeObjectForKey:@"activityDetailArray"];
-    
-    //[self.feedDetailOffline setObject:response forKey:@"feedDetailArray"];
-    //[self.feedDetailOffline synchronize];
+    //[self.activityDetailOffline setObject:response forKey:@"activityDetailArray"];
+    //[self.activityDetailOffline synchronize];
     
     if (!refreshDataDetail) {
         for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
@@ -167,33 +165,33 @@ BOOL newMediaDetail;
     [self reloadData:YES];
 }
 
-- (void)PFRatreeSamosornApi:(id)sender getNewsCommentObjIdErrorResponse:(NSString *)errorResponse {
+- (void)PFRatreeSamosornApi:(id)sender getActivityCommentObjIdErrorResponse:(NSString *)errorResponse {
     NSLog(@"%@",errorResponse);
     
     self.internetstatus = @"error";
     
     if (!refreshDataDetail) {
-        for (int i=0; i<[[[self.feedDetailOffline objectForKey:@"feedDetailArray"] objectForKey:@"data"] count]; ++i) {
-            [self.arrObj addObject:[[[self.feedDetailOffline objectForKey:@"feedDetailArray"] objectForKey:@"data"] objectAtIndex:i]];
+        for (int i=0; i<[[[self.activityDetailOffline objectForKey:@"activityDetailArray"] objectForKey:@"data"] count]; ++i) {
+            [self.arrObj addObject:[[[self.activityDetailOffline objectForKey:@"activityDetailArray"] objectForKey:@"data"] objectAtIndex:i]];
         }
     } else {
         [self.arrObj removeAllObjects];
-        for (int i=0; i<[[[self.feedDetailOffline objectForKey:@"feedDetailArray"] objectForKey:@"data"] count]; ++i) {
-            [self.arrObj addObject:[[[self.feedDetailOffline objectForKey:@"feedDetailArray"] objectForKey:@"data"] objectAtIndex:i]];
+        for (int i=0; i<[[[self.activityDetailOffline objectForKey:@"activityDetailArray"] objectForKey:@"data"] count]; ++i) {
+            [self.arrObj addObject:[[[self.activityDetailOffline objectForKey:@"activityDetailArray"] objectForKey:@"data"] objectAtIndex:i]];
         }
     }
-    if ( [[[self.feedDetailOffline objectForKey:@"feedDetailArray"] objectForKey:@"paging"] objectForKey:@"next"] == nil ) {
+    if ( [[[self.activityDetailOffline objectForKey:@"activityDetailArray"] objectForKey:@"paging"] objectForKey:@"next"] == nil ) {
         noDataDetail = YES;
     } else {
         noDataDetail = NO;
-        self.paging = [[[self.feedDetailOffline objectForKey:@"feedDetailArray"] objectForKey:@"paging"] objectForKey:@"next"];
+        self.paging = [[[self.activityDetailOffline objectForKey:@"activityDetailArray"] objectForKey:@"paging"] objectForKey:@"next"];
     }
-    NSString *current = [[[self.feedDetailOffline objectForKey:@"feedDetailArray"] objectForKey:@"paging"] objectForKey:@"current"];
+    NSString *current = [[[self.activityDetailOffline objectForKey:@"activityDetailArray"] objectForKey:@"paging"] objectForKey:@"current"];
     
     if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
-        self.prevString = [[NSString alloc]initWithFormat:@"View previous comments %@ total %@",current,[[[self.feedDetailOffline objectForKey:@"feedDetailArray"] objectForKey:@"paging"] objectForKey:@"length"]];
+        self.prevString = [[NSString alloc]initWithFormat:@"View previous comments %@ total %@",current,[[[self.activityDetailOffline objectForKey:@"activityDetailArray"] objectForKey:@"paging"] objectForKey:@"length"]];
     } else {
-        self.prevString = [[NSString alloc]initWithFormat:@"ดูความคิดเห็นก่อนหน้า %@ รวม %@",current,[[[self.feedDetailOffline objectForKey:@"feedDetailArray"] objectForKey:@"paging"] objectForKey:@"length"]];
+        self.prevString = [[NSString alloc]initWithFormat:@"ดูความคิดเห็นก่อนหน้า %@ รวม %@",current,[[[self.activityDetailOffline objectForKey:@"activityDetailArray"] objectForKey:@"paging"] objectForKey:@"length"]];
     }
     
     [self reloadData:YES];
@@ -364,7 +362,7 @@ BOOL newMediaDetail;
     }else{
         if (![self.textComment.text isEqualToString:@""]) {
             
-            [self.RatreeSamosornApi commentObjId:[self.obj objectForKey:@"id"] content:self.textComment.text];
+            [self.RatreeSamosornApi commentActivityObjId:[self.obj objectForKey:@"id"] content:self.textComment.text];
             
         }
     }
@@ -416,7 +414,7 @@ BOOL newMediaDetail;
 -(void)singleTapping:(UIGestureRecognizer *)recognizer
 {
     NSString *picStr = [[self.obj objectForKey:@"thumb"] objectForKey:@"url"];
-    [self.delegate PFUpdateDetailViewController:self viewPicture:picStr];
+    [self.delegate PFActivityDetailViewController:self viewPicture:picStr];
     
     [self.textComment resignFirstResponder];
     
@@ -490,7 +488,7 @@ BOOL newMediaDetail;
     if (!noDataDetail){
         refreshDataDetail = NO;
         if ([self.internetstatus isEqualToString:@"connect"]) {
-            [self.RatreeSamosornApi getNewsCommentObjId:[self.obj objectForKey:@"id"] padding:self.paging];
+            [self.RatreeSamosornApi getActivityCommentObjId:[self.obj objectForKey:@"id"] padding:self.paging];
         }
     }
 }
@@ -538,12 +536,12 @@ BOOL newMediaDetail;
     int lineValue = [h intValue]/16;
     cell.commentLabel.numberOfLines = 0;
     int heightLable = 20*lineValue;
-
+    
     cell.commentLabel.frame = CGRectMake(cell.commentLabel.frame.origin.x, cell.commentLabel.frame.origin.y, cell.commentLabel.frame.size.width, heightLable);
     
     cell.timeComment.frame = CGRectMake(cell.timeComment.frame.origin.x,heightLable +14, cell.timeComment.frame.size.width, cell.timeComment.frame.size.height);
     cell.timeComment.text = [[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"created_at"];
-
+    
     cell.commentLabel.text = [[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"message"];
     cell.nameLabel.text = [[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"user"] objectForKey:@"display_name"];
     
@@ -597,7 +595,7 @@ BOOL newMediaDetail;
             cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxIp5"];
         }
     }
-
+    
     
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -653,7 +651,6 @@ BOOL newMediaDetail;
     seeAct.delegate = self;
     seeAct.user_id = [[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"user"] objectForKey:@"id"];
     [self.navigationController pushViewController:seeAct animated:YES];
-    
 }
 
 - (UIImage *)imageRotatedByDegrees:(UIImage*)oldImage deg:(CGFloat)degrees{
@@ -682,7 +679,7 @@ BOOL newMediaDetail;
 }
 
 - (void)PFSeeprofileViewController:(id)sender viewPicture:(NSString *)link {
-    [self.delegate PFUpdateDetailViewController:self viewPicture:link];
+    [self.delegate PFActivityDetailViewController:self viewPicture:link];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -690,8 +687,8 @@ BOOL newMediaDetail;
     if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
         // 'Back' button was pressed.  We know this is true because self is no longer
         // in the navigation stack.
-        if([self.delegate respondsToSelector:@selector(PFDetailViewControllerBack)]){
-            [self.delegate PFDetailViewControllerBack];
+        if([self.delegate respondsToSelector:@selector(PFActivityDetailViewControllerBack)]){
+            [self.delegate PFActivityDetailViewControllerBack];
         }
     }
 }

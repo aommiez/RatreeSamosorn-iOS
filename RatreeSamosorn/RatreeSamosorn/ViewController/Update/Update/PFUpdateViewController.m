@@ -24,6 +24,7 @@ BOOL refreshDataUpdate;
     if (self) {
         // Custom initialization
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        self.feedOffline = [NSUserDefaults standardUserDefaults];
     }
     return self;
 }
@@ -68,6 +69,10 @@ BOOL refreshDataUpdate;
     loadUpdate = NO;
     noDataUpdate = NO;
     refreshDataUpdate = NO;
+    
+    self.arrObj = [[NSMutableArray alloc] init];
+    
+    [self.RatreeSamosornApi getFeeds];
 
 }
 
@@ -128,9 +133,46 @@ BOOL refreshDataUpdate;
     
 }
 
+- (void)PFRatreeSamosornApi:(id)sender getFeedsResponse:(NSDictionary *)response {
+    //NSLog(@"%@",response);
+    
+    if (!refreshDataUpdate) {
+        for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
+            [self.arrObj addObject:[[response objectForKey:@"data"] objectAtIndex:i]];
+        }
+    } else {
+        [self.arrObj removeAllObjects];
+        for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
+            [self.arrObj addObject:[[response objectForKey:@"data"] objectAtIndex:i]];
+        }
+    }
+    
+    [self.feedOffline setObject:response forKey:@"feedArray"];
+    [self.feedOffline synchronize];
+    
+    [self.tableView reloadData];
+}
+
+- (void)PFRatreeSamosornApi:(id)sender getFeedsErrorResponse:(NSString *)errorResponse {
+    NSLog(@"%@",errorResponse);
+    
+    if (!refreshDataUpdate) {
+        for (int i=0; i<[[[self.feedOffline objectForKey:@"feedArray"] objectForKey:@"data"] count]; ++i) {
+            [self.arrObj addObject:[[[self.feedOffline objectForKey:@"feedArray"] objectForKey:@"data"] objectAtIndex:i]];
+        }
+    } else {
+        [self.arrObj removeAllObjects];
+        for (int i=0; i<[[[self.feedOffline objectForKey:@"feedArray"] objectForKey:@"data"] count]; ++i) {
+            [self.arrObj addObject:[[[self.feedOffline objectForKey:@"feedArray"] objectForKey:@"data"] objectAtIndex:i]];
+        }
+    }
+    
+    [self.tableView reloadData];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return [self.arrObj count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -146,24 +188,59 @@ BOOL refreshDataUpdate;
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    cell.thumbnails.layer.masksToBounds = YES;
+    cell.thumbnails.contentMode = UIViewContentModeScaleAspectFill;
+    
+    NSString *img = [[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
+    NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/100/100/"];
+    
+    [DLImageLoader loadImageFromURL:urlimg
+                          completed:^(NSError *error, NSData *imgData) {
+                              cell.thumbnails.image = [UIImage imageWithData:imgData];
+                          }];
+    
+    cell.titleNews.text = [[NSString alloc] initWithString:[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"name"]];
+    cell.detailNews.text = [[NSString alloc] initWithString:[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"detail"]];
+    
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self.delegate HideTabbar];
+    if ([[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"type"] isEqualToString:@"news"]) {
+        
+        [self.delegate HideTabbar];
+        
+        PFDetailViewController *detail = [[PFDetailViewController alloc] init];
+        
+        if(IS_WIDESCREEN){
+            detail = [[PFDetailViewController alloc] initWithNibName:@"PFDetailViewController_Wide" bundle:nil];
+        } else {
+            detail = [[PFDetailViewController alloc] initWithNibName:@"PFDetailViewController" bundle:nil];
+        }
+        self.navItem.title = @" ";
+        detail.obj = [self.arrObj objectAtIndex:indexPath.row];
+        detail.delegate = self;
+        [self.navController pushViewController:detail animated:YES];
     
-    PFDetailViewController *detail = [[PFDetailViewController alloc] init];
-    
-    if(IS_WIDESCREEN){
-        detail = [[PFDetailViewController alloc] initWithNibName:@"PFDetailViewController_Wide" bundle:nil];
-    } else {
-        detail = [[PFDetailViewController alloc] initWithNibName:@"PFDetailViewController" bundle:nil];
+    } else if ([[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"type"] isEqualToString:@"activity"]) {
+        
+        [self.delegate HideTabbar];
+        
+        PFActivityDetailViewController *activity = [[PFActivityDetailViewController alloc] init];
+        
+        if(IS_WIDESCREEN){
+            activity = [[PFActivityDetailViewController alloc] initWithNibName:@"PFActivityDetailViewController_Wide" bundle:nil];
+        } else {
+            activity = [[PFActivityDetailViewController alloc] initWithNibName:@"PFActivityDetailViewController" bundle:nil];
+        }
+        self.navItem.title = @" ";
+        activity.obj = [self.arrObj objectAtIndex:indexPath.row];
+        activity.delegate = self;
+        [self.navController pushViewController:activity animated:YES];
+        
     }
-    self.navItem.title = @" ";
-    //detail.obj = [self.arrObj objectAtIndex:indexPath.row];
-    detail.delegate = self;
-    [self.navController pushViewController:detail animated:YES];
 }
 
 #pragma mark -
@@ -230,7 +307,24 @@ BOOL refreshDataUpdate;
     [self.delegate PFImageViewController:self viewPicture:link];
 }
 
+- (void)PFUpdateDetailViewController:(id)sender viewPicture:(NSString *)link {
+    [self.delegate PFImageViewController:self viewPicture:link];
+}
+
+- (void)PFActivityDetailViewController:(id)sender viewPicture:(NSString *)link {
+    [self.delegate PFImageViewController:self viewPicture:link];
+}
+
 - (void)PFDetailViewControllerBack {
+    [self.delegate ShowTabbar];
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        self.navItem.title = @"Update";
+    } else {
+        self.navItem.title = @"ข่าวสาร";
+    }
+}
+
+- (void)PFActivityDetailViewControllerBack {
     [self.delegate ShowTabbar];
     if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
         self.navItem.title = @"Update";

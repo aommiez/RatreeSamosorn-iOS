@@ -40,6 +40,19 @@
 - (void)PFRatreeSamosornApi:(id)sender changPasswordResponse:(NSDictionary *)response;
 - (void)PFRatreeSamosornApi:(id)sender changPasswordErrorResponse:(NSString *)errorResponse;
 
+#pragma mark - Update Protocal Delegate
+- (void)PFRatreeSamosornApi:(id)sender getFeedsResponse:(NSDictionary *)response;
+- (void)PFRatreeSamosornApi:(id)sender getFeedsErrorResponse:(NSString *)errorResponse;
+
+- (void)PFRatreeSamosornApi:(id)sender getNewsCommentObjIdResponse:(NSDictionary *)response;
+- (void)PFRatreeSamosornApi:(id)sender getNewsCommentObjIdErrorResponse:(NSString *)errorResponse;
+
+- (void)PFRatreeSamosornApi:(id)sender commentObjIdResponse:(NSDictionary *)response;
+- (void)PFRatreeSamosornApi:(id)sender commentObjIdErrorResponse:(NSString *)errorResponse;
+
+- (void)PFRatreeSamosornApi:(id)sender getUserByIdResponse:(NSDictionary *)response;
+- (void)PFRatreeSamosornApi:(id)sender getUserByIdErrorResponse:(NSString *)errorResponse;
+
 #pragma mark - Menu Protocal Delegate
 - (void)PFRatreeSamosornApi:(id)sender getFoodsResponse:(NSDictionary *)response;
 - (void)PFRatreeSamosornApi:(id)sender getFoodsErrorResponse:(NSString *)errorResponse;
@@ -52,6 +65,12 @@
 
 - (void)PFRatreeSamosornApi:(id)sender getFolderTypeByURLResponse:(NSDictionary *)response;
 - (void)PFRatreeSamosornApi:(id)sender getFolderTypeByURLErrorResponse:(NSString *)errorResponse;
+
+- (void)PFRatreeSamosornApi:(id)sender getActivityByIDResponse:(NSDictionary *)response;
+- (void)PFRatreeSamosornApi:(id)sender getActivityByIDErrorResponse:(NSString *)errorResponse;
+
+- (void)PFRatreeSamosornApi:(id)sender getActivityCommentObjIdResponse:(NSDictionary *)response;
+- (void)PFRatreeSamosornApi:(id)sender getActivityCommentObjIdErrorResponse:(NSString *)errorResponse;
 
 - (void)PFRatreeSamosornApi:(id)sender getGalleryResponse:(NSDictionary *)response;
 - (void)PFRatreeSamosornApi:(id)sender getGalleryErrorResponse:(NSString *)errorResponse;
@@ -132,11 +151,21 @@
 - (void)updateSetting:(NSString *)profilename email:(NSString *)email website:(NSString *)website tel:(NSString *)tel gender:(NSString *)gender birthday:(NSString *)birthday;
 - (void)changePassword:(NSString *)old_password new_password:(NSString *)new_password;
 
+#pragma mark - Update
+- (void)getFeeds;
+- (void)getNewsCommentObjId:(NSString *)feed_id padding:(NSString *)padding;
+- (void)commentObjId:(NSString *)obj_id content:(NSString *)content;
+- (void)profile:(NSString *)userId;
+- (void)getUserSettingById:(NSString *)user_id;
+
 #pragma mark - Menu
 - (void)getFoods;
 - (void)getFoodsAndDrinkByURL:(NSString *)url;
 - (void)getDrinks;
 - (void)getFolderTypeByURL:(NSString *)url;
+- (void)getActivityByID:(NSString *)activity_id;
+- (void)getActivityCommentObjId:(NSString *)activity_id padding:(NSString *)padding;
+- (void)commentActivityObjId:(NSString *)obj_id content:(NSString *)content;
 - (void)getGallery;
 - (void)galleryPictureByURL:(NSString *)url;
 

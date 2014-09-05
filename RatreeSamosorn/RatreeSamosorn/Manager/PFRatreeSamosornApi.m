@@ -204,6 +204,64 @@
     }];
 }
 
+#pragma mark - Update
+- (void)getFeeds {
+    self.urlStr = [[NSString alloc] initWithFormat:@"%@feed",API_URL];
+    [self.manager GET:self.urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self getFeedsResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self getFeedsErrorResponse:[error localizedDescription]];
+    }];
+}
+
+- (void)getNewsCommentObjId:(NSString *)feed_id padding:(NSString *)padding {
+    
+    if ([padding isEqualToString:@"NO"]) {
+        self.urlStr = [[NSString alloc] initWithFormat:@"%@news/%@/comment?limit=5",API_URL,feed_id];
+    } else {
+        self.urlStr = [[NSString alloc] initWithFormat:@"%@",padding];
+    }
+    
+    [self.manager GET:self.urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self getNewsCommentObjIdResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self getNewsCommentObjIdErrorResponse:[error localizedDescription]];
+    }];
+}
+
+- (void)commentObjId:(NSString *)obj_id content:(NSString *)content {
+    
+    NSDictionary *parameters = @{@"message":content , @"access_token":[self getAccessToken]};
+    self.urlStr = [[NSString alloc] initWithFormat:@"%@news/%@/comment",API_URL,obj_id];
+    [self.manager POST:self.urlStr parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self commentObjIdResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self commentObjIdErrorResponse:[error localizedDescription]];
+    }];
+}
+
+- (void)profile:(NSString *)userId {
+    
+    NSLog(@"user id %@",userId);
+    
+    self.urlStr = [[NSString alloc] initWithFormat:@"%@user/%@",API_URL,userId];
+    self.manager = [AFHTTPRequestOperationManager manager];
+    [self.manager GET:self.urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self getUserByIdResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self getUserByIdErrorResponse:[error localizedDescription]];
+    }];
+}
+
+- (void)getUserSettingById:(NSString *)user_id {
+    NSString *urlStr = [[NSString alloc] initWithFormat:@"%@user/setting/%@",API_URL,user_id];
+    [self.manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self getUserSettingResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self getUserSettingErrorResponse:[error localizedDescription]];
+    }];
+}
+
 #pragma mark - Menu
 - (void)getFoods {
     self.urlStr = [[NSString alloc] initWithFormat:@"%@node/food",API_URL];
@@ -238,6 +296,41 @@
         [self.delegate PFRatreeSamosornApi:self getFolderTypeByURLResponse:responseObject];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.delegate PFRatreeSamosornApi:self getFolderTypeByURLErrorResponse:[error localizedDescription]];
+    }];
+}
+
+- (void)getActivityByID:(NSString *)activity_id {
+    NSString *urlStr = [[NSString alloc] initWithFormat:@"%@%@",API_URL,activity_id];
+    [self.manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self getActivityByIDResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self getActivityByIDErrorResponse:[error localizedDescription]];
+    }];
+}
+
+- (void)getActivityCommentObjId:(NSString *)activity_id padding:(NSString *)padding {
+    
+    if ([padding isEqualToString:@"NO"]) {
+        self.urlStr = [[NSString alloc] initWithFormat:@"%@activity/%@/comment?limit=5",API_URL,activity_id];
+    } else {
+        self.urlStr = [[NSString alloc] initWithFormat:@"%@",padding];
+    }
+    
+    [self.manager GET:self.urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self getActivityCommentObjIdResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self getActivityCommentObjIdErrorResponse:[error localizedDescription]];
+    }];
+}
+
+- (void)commentActivityObjId:(NSString *)obj_id content:(NSString *)content {
+    
+    NSDictionary *parameters = @{@"message":content , @"access_token":[self getAccessToken]};
+    self.urlStr = [[NSString alloc] initWithFormat:@"%@activity/%@/comment",API_URL,obj_id];
+    [self.manager POST:self.urlStr parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self commentObjIdResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self commentObjIdErrorResponse:[error localizedDescription]];
     }];
 }
 

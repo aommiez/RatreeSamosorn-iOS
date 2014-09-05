@@ -76,6 +76,8 @@
 		5200F3DE198F83D900EAFEDE /* monthCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5200F3DA198F83D900EAFEDE /* monthCell.xib */; };
 		5200F3DF198F83D900EAFEDE /* PFActivityCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5200F3DC198F83D900EAFEDE /* PFActivityCalendarViewController.m */; };
 		5200F3E2198F84EE00EAFEDE /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5200F3E1198F84EE00EAFEDE /* NSDate+Helper.m */; };
+		520A17D519B9AA31003A2463 /* PFActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 520A17D319B9AA31003A2463 /* PFActivityDetailViewController.m */; };
+		520A17D619B9AA31003A2463 /* PFActivityDetailViewController_Wide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 520A17D419B9AA31003A2463 /* PFActivityDetailViewController_Wide.xib */; };
 		5221875B19B45AA90064DC86 /* PFLanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5221875819B45AA90064DC86 /* PFLanguageViewController.m */; };
 		5221875D19B45AA90064DC86 /* PFLanguageViewController_Wide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5221875A19B45AA90064DC86 /* PFLanguageViewController_Wide.xib */; };
 		5221875F19B45B060064DC86 /* ic_corect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5221875E19B45B060064DC86 /* ic_corect@2x.png */; };
@@ -265,6 +267,21 @@
 		52C4B7D9198C80D1006D26B3 /* PFMenuViewController_Wide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52C4B7D7198C80D1006D26B3 /* PFMenuViewController_Wide.xib */; };
 		52C4B7E8198C88D0006D26B3 /* PFGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C4B7E6198C88D0006D26B3 /* PFGalleryCell.m */; };
 		52C4B7E9198C88D0006D26B3 /* PFGalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52C4B7E7198C88D0006D26B3 /* PFGalleryCell.xib */; };
+		52CF715A19B85F7300393822 /* BodyCommentBoxIp5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CF714D19B85F7300393822 /* BodyCommentBoxIp5@2x.png */; };
+		52CF715B19B85F7300393822 /* FootCommentBoxEndIp5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CF714E19B85F7300393822 /* FootCommentBoxEndIp5@2x.png */; };
+		52CF715C19B85F7300393822 /* HeadCommentBoxIp5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CF714F19B85F7300393822 /* HeadCommentBoxIp5@2x.png */; };
+		52CF715D19B85F7300393822 /* icon_notification_number@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CF715019B85F7300393822 /* icon_notification_number@2x.png */; };
+		52CF715E19B85F7300393822 /* icon_share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CF715119B85F7300393822 /* icon_share@2x.png */; };
+		52CF715F19B85F7300393822 /* LineCommentBoxIp5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CF715219B85F7300393822 /* LineCommentBoxIp5@2x.png */; };
+		52CF716019B85F7300393822 /* linePrev.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CF715319B85F7300393822 /* linePrev.png */; };
+		52CF716119B85F7300393822 /* NotBoxNoReadIp4.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CF715419B85F7300393822 /* NotBoxNoReadIp4.png */; };
+		52CF716219B85F7300393822 /* NotBoxNoReadIp4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CF715519B85F7300393822 /* NotBoxNoReadIp4@2x.png */; };
+		52CF716319B85F7300393822 /* NotBoxNoReadIp5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CF715619B85F7300393822 /* NotBoxNoReadIp5@2x.png */; };
+		52CF716419B85F7300393822 /* NotBoxReadedIp4.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CF715719B85F7300393822 /* NotBoxReadedIp4.png */; };
+		52CF716519B85F7300393822 /* NotBoxReadedIp4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CF715819B85F7300393822 /* NotBoxReadedIp4@2x.png */; };
+		52CF716619B85F7300393822 /* NotBoxReadedIp5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CF715919B85F7300393822 /* NotBoxReadedIp5@2x.png */; };
+		52CF716B19B863EB00393822 /* PFSeeprofileViewController_Wide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52CF716819B863EA00393822 /* PFSeeprofileViewController_Wide.xib */; };
+		52CF716C19B863EB00393822 /* PFSeeprofileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CF716A19B863EB00393822 /* PFSeeprofileViewController.m */; };
 		52DD2E1D198BA00D001B8ABE /* PFRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DD2E1B198BA00D001B8ABE /* PFRewardViewController.m */; };
 		52DD2E1E198BA00D001B8ABE /* PFRewardViewController_Wide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52DD2E1C198BA00D001B8ABE /* PFRewardViewController_Wide.xib */; };
 		52DD2E22198BA024001B8ABE /* PFHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DD2E20198BA024001B8ABE /* PFHistoryViewController.m */; };
@@ -488,6 +505,9 @@
 		5200F3DC198F83D900EAFEDE /* PFActivityCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFActivityCalendarViewController.m; sourceTree = "<group>"; };
 		5200F3E0198F84EE00EAFEDE /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
 		5200F3E1198F84EE00EAFEDE /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
+		520A17D219B9AA31003A2463 /* PFActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFActivityDetailViewController.h; sourceTree = "<group>"; };
+		520A17D319B9AA31003A2463 /* PFActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFActivityDetailViewController.m; sourceTree = "<group>"; };
+		520A17D419B9AA31003A2463 /* PFActivityDetailViewController_Wide.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PFActivityDetailViewController_Wide.xib; sourceTree = "<group>"; };
 		5221875719B45AA90064DC86 /* PFLanguageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLanguageViewController.h; sourceTree = "<group>"; };
 		5221875819B45AA90064DC86 /* PFLanguageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLanguageViewController.m; sourceTree = "<group>"; };
 		5221875A19B45AA90064DC86 /* PFLanguageViewController_Wide.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PFLanguageViewController_Wide.xib; sourceTree = "<group>"; };
@@ -716,6 +736,22 @@
 		52C4B7E5198C88D0006D26B3 /* PFGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFGalleryCell.h; sourceTree = "<group>"; };
 		52C4B7E6198C88D0006D26B3 /* PFGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFGalleryCell.m; sourceTree = "<group>"; };
 		52C4B7E7198C88D0006D26B3 /* PFGalleryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PFGalleryCell.xib; sourceTree = "<group>"; };
+		52CF714D19B85F7300393822 /* BodyCommentBoxIp5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BodyCommentBoxIp5@2x.png"; sourceTree = "<group>"; };
+		52CF714E19B85F7300393822 /* FootCommentBoxEndIp5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FootCommentBoxEndIp5@2x.png"; sourceTree = "<group>"; };
+		52CF714F19B85F7300393822 /* HeadCommentBoxIp5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HeadCommentBoxIp5@2x.png"; sourceTree = "<group>"; };
+		52CF715019B85F7300393822 /* icon_notification_number@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_notification_number@2x.png"; sourceTree = "<group>"; };
+		52CF715119B85F7300393822 /* icon_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_share@2x.png"; sourceTree = "<group>"; };
+		52CF715219B85F7300393822 /* LineCommentBoxIp5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LineCommentBoxIp5@2x.png"; sourceTree = "<group>"; };
+		52CF715319B85F7300393822 /* linePrev.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = linePrev.png; sourceTree = "<group>"; };
+		52CF715419B85F7300393822 /* NotBoxNoReadIp4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotBoxNoReadIp4.png; sourceTree = "<group>"; };
+		52CF715519B85F7300393822 /* NotBoxNoReadIp4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotBoxNoReadIp4@2x.png"; sourceTree = "<group>"; };
+		52CF715619B85F7300393822 /* NotBoxNoReadIp5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotBoxNoReadIp5@2x.png"; sourceTree = "<group>"; };
+		52CF715719B85F7300393822 /* NotBoxReadedIp4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotBoxReadedIp4.png; sourceTree = "<group>"; };
+		52CF715819B85F7300393822 /* NotBoxReadedIp4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotBoxReadedIp4@2x.png"; sourceTree = "<group>"; };
+		52CF715919B85F7300393822 /* NotBoxReadedIp5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotBoxReadedIp5@2x.png"; sourceTree = "<group>"; };
+		52CF716819B863EA00393822 /* PFSeeprofileViewController_Wide.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PFSeeprofileViewController_Wide.xib; sourceTree = "<group>"; };
+		52CF716919B863EB00393822 /* PFSeeprofileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFSeeprofileViewController.h; sourceTree = "<group>"; };
+		52CF716A19B863EB00393822 /* PFSeeprofileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFSeeprofileViewController.m; sourceTree = "<group>"; };
 		52DD2E1A198BA00D001B8ABE /* PFRewardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFRewardViewController.h; sourceTree = "<group>"; };
 		52DD2E1B198BA00D001B8ABE /* PFRewardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFRewardViewController.m; sourceTree = "<group>"; };
 		52DD2E1C198BA00D001B8ABE /* PFRewardViewController_Wide.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PFRewardViewController_Wide.xib; sourceTree = "<group>"; };
@@ -1163,6 +1199,7 @@
 				527E83C4198A213200797DB3 /* Update */,
 				5245F8EF198B428900D40E4A /* Detail */,
 				52B49C6A19AD9F8D0086DFFF /* Account */,
+				52CF716719B863C100393822 /* SeeProfile */,
 			);
 			path = Update;
 			sourceTree = "<group>";
@@ -1394,6 +1431,19 @@
 		5245F906198B45ED00D40E4A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				52CF714D19B85F7300393822 /* BodyCommentBoxIp5@2x.png */,
+				52CF714E19B85F7300393822 /* FootCommentBoxEndIp5@2x.png */,
+				52CF714F19B85F7300393822 /* HeadCommentBoxIp5@2x.png */,
+				52CF715019B85F7300393822 /* icon_notification_number@2x.png */,
+				52CF715119B85F7300393822 /* icon_share@2x.png */,
+				52CF715219B85F7300393822 /* LineCommentBoxIp5@2x.png */,
+				52CF715319B85F7300393822 /* linePrev.png */,
+				52CF715419B85F7300393822 /* NotBoxNoReadIp4.png */,
+				52CF715519B85F7300393822 /* NotBoxNoReadIp4@2x.png */,
+				52CF715619B85F7300393822 /* NotBoxNoReadIp5@2x.png */,
+				52CF715719B85F7300393822 /* NotBoxReadedIp4.png */,
+				52CF715819B85F7300393822 /* NotBoxReadedIp4@2x.png */,
+				52CF715919B85F7300393822 /* NotBoxReadedIp5@2x.png */,
 				5245F907198B45ED00D40E4A /* PostBottonIp5@2x.png */,
 			);
 			path = Images;
@@ -1674,6 +1724,9 @@
 				5200F3DA198F83D900EAFEDE /* monthCell.xib */,
 				5200F3DB198F83D900EAFEDE /* PFActivityCalendarViewController.h */,
 				5200F3DC198F83D900EAFEDE /* PFActivityCalendarViewController.m */,
+				520A17D219B9AA31003A2463 /* PFActivityDetailViewController.h */,
+				520A17D319B9AA31003A2463 /* PFActivityDetailViewController.m */,
+				520A17D419B9AA31003A2463 /* PFActivityDetailViewController_Wide.xib */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -1695,6 +1748,16 @@
 				52C4B7E7198C88D0006D26B3 /* PFGalleryCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		52CF716719B863C100393822 /* SeeProfile */ = {
+			isa = PBXGroup;
+			children = (
+				52CF716919B863EB00393822 /* PFSeeprofileViewController.h */,
+				52CF716A19B863EB00393822 /* PFSeeprofileViewController.m */,
+				52CF716819B863EA00393822 /* PFSeeprofileViewController_Wide.xib */,
+			);
+			path = SeeProfile;
 			sourceTree = "<group>";
 		};
 		52DD2E18198B9FC0001B8ABE /* Reward */ = {
@@ -2097,6 +2160,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52CF716619B85F7300393822 /* NotBoxReadedIp5@2x.png in Resources */,
 				52273ED21988F04F0023F87A /* th_menu_on@2x.png in Resources */,
 				52273EB41988F0400023F87A /* en_update_on@2x.png in Resources */,
 				523061A3198B9707007D2F4F /* button_point@2x.png in Resources */,
@@ -2104,11 +2168,13 @@
 				52B49C9A19AD9F8D0086DFFF /* unchecked.png in Resources */,
 				52A67E2C198B4B590056EC10 /* NotBoxNoReadIp4.png in Resources */,
 				52306178198B942D007D2F4F /* Sign_Button.png in Resources */,
+				52CF716519B85F7300393822 /* NotBoxReadedIp4@2x.png in Resources */,
 				52DD2E29198BA0B2001B8ABE /* PFHistoryCell.xib in Resources */,
 				527E83B61989FE0A00797DB3 /* ic_website@2x.png in Resources */,
 				528C31A11991E1DD008670CD /* HeadDetailDZIp5@2x.png in Resources */,
 				52306177198B942D007D2F4F /* Login_Button.png in Resources */,
 				5200F39D198F83AB00EAFEDE /* TapkuLibrary.bundle in Resources */,
+				520A17D619B9AA31003A2463 /* PFActivityDetailViewController_Wide.xib in Resources */,
 				5221875D19B45AA90064DC86 /* PFLanguageViewController_Wide.xib in Resources */,
 				5230619E198B9621007D2F4F /* stamp.png in Resources */,
 				523061A2198B9707007D2F4F /* button_point.png in Resources */,
@@ -2130,6 +2196,7 @@
 				52AC986E19B58E53007007D8 /* bt_order.png in Resources */,
 				527E83B31989FE0A00797DB3 /* ic_phone.png in Resources */,
 				52B49C9019AD9F8D0086DFFF /* checked@2x.png in Resources */,
+				52CF716319B85F7300393822 /* NotBoxNoReadIp5@2x.png in Resources */,
 				52A67E30198B4B590056EC10 /* NotBoxReadedIp4@2x.png in Resources */,
 				527E83C1198A023000797DB3 /* chapter03.png in Resources */,
 				52AAEAA5198F4AEB00163E14 /* defaultGallery.jpg in Resources */,
@@ -2159,11 +2226,13 @@
 				5230619A198B9621007D2F4F /* ic_bt_add.png in Resources */,
 				527E83911989F74100797DB3 /* PFContactViewController_Wide.xib in Resources */,
 				527E83B41989FE0A00797DB3 /* ic_phone@2x.png in Resources */,
+				52CF715F19B85F7300393822 /* LineCommentBoxIp5@2x.png in Resources */,
 				52273EC31988F0490023F87A /* th_update_off.png in Resources */,
 				52AAEAA3198F4AB100163E14 /* PFGalleryViewController.xib in Resources */,
 				52B49C9319AD9F8D0086DFFF /* ic_gender@2x.png in Resources */,
 				52A09B1519AC936B00070C73 /* PFLoginViewController.xib in Resources */,
 				52273EC41988F0490023F87A /* th_update_on.png in Resources */,
+				52CF715C19B85F7300393822 /* HeadCommentBoxIp5@2x.png in Resources */,
 				52273EB31988F0400023F87A /* en_update_off@2x.png in Resources */,
 				523061AC198B981B007D2F4F /* correct_icon.png in Resources */,
 				527E83C9198A213200797DB3 /* PFUpdateViewController_Wide.xib in Resources */,
@@ -2174,13 +2243,16 @@
 				52273E1C1988E91A0023F87A /* notificationView.xib in Resources */,
 				52FE2BF9198BE92A00CF29F0 /* MWPhotoBrowser.bundle in Resources */,
 				527E83B51989FE0A00797DB3 /* ic_website.png in Resources */,
+				52CF715B19B85F7300393822 /* FootCommentBoxEndIp5@2x.png in Resources */,
 				52273EAE1988F0400023F87A /* en_contact_on@2x.png in Resources */,
 				527E83961989F75900797DB3 /* PFMapViewController_Wide.xib in Resources */,
 				52B49C8E19AD9F8D0086DFFF /* PFAccountCell.xib in Resources */,
 				52306196198B9621007D2F4F /* bt_delete.png in Resources */,
+				52CF715A19B85F7300393822 /* BodyCommentBoxIp5@2x.png in Resources */,
 				52273ED11988F04F0023F87A /* th_menu_off@2x.png in Resources */,
 				52B49C9B19AD9F8D0086DFFF /* unchecked@2x.png in Resources */,
 				52273EBD1988F0490023F87A /* th_contact_off.png in Resources */,
+				52CF716019B85F7300393822 /* linePrev.png in Resources */,
 				52273EC01988F0490023F87A /* th_member_on.png in Resources */,
 				5221875F19B45B060064DC86 /* ic_corect@2x.png in Resources */,
 				52273EBF1988F0490023F87A /* th_member_off.png in Resources */,
@@ -2199,6 +2271,8 @@
 				523061A8198B97C7007D2F4F /* cross_icon.png in Resources */,
 				52306175198B942D007D2F4F /* Create_Button.png in Resources */,
 				5245F8F4198B429B00D40E4A /* PFDetailViewController_Wide.xib in Resources */,
+				52CF716219B85F7300393822 /* NotBoxNoReadIp4@2x.png in Resources */,
+				52CF715D19B85F7300393822 /* icon_notification_number@2x.png in Resources */,
 				52A67E2E198B4B590056EC10 /* NotBoxNoReadIp5@2x.png in Resources */,
 				52AC988D19B5ABA5007007D8 /* PFFoldertypeCell.xib in Resources */,
 				52B49C9219AD9F8D0086DFFF /* ic_fb@2x.png in Resources */,
@@ -2214,6 +2288,8 @@
 				52273EB01988F0400023F87A /* en_member_on@2x.png in Resources */,
 				527E83C0198A023000797DB3 /* chapter02@2x.png in Resources */,
 				527E83A61989FAC300797DB3 /* pin_map@2x.png in Resources */,
+				52CF715E19B85F7300393822 /* icon_share@2x.png in Resources */,
+				52CF716B19B863EB00393822 /* PFSeeprofileViewController_Wide.xib in Resources */,
 				52273E9D1988F0380023F87A /* en_contact_off.png in Resources */,
 				52273ED01988F04F0023F87A /* th_member_on@2x.png in Resources */,
 				52A67E31198B4B590056EC10 /* NotBoxReadedIp5@2x.png in Resources */,
@@ -2221,6 +2297,7 @@
 				52306192198B9621007D2F4F /* bg_member.png in Resources */,
 				52273E9F1988F0380023F87A /* en_member_off.png in Resources */,
 				52AAEAB2198F4B3200163E14 /* HeaderView.xib in Resources */,
+				52CF716119B85F7300393822 /* NotBoxNoReadIp4.png in Resources */,
 				52A67E2D198B4B590056EC10 /* NotBoxNoReadIp4@2x.png in Resources */,
 				528C31A4199211B6008670CD /* dot_white.png in Resources */,
 				527E83C2198A023000797DB3 /* chapter03@2x.png in Resources */,
@@ -2231,6 +2308,7 @@
 				52273ECF1988F04F0023F87A /* th_member_off@2x.png in Resources */,
 				5245F908198B45ED00D40E4A /* PostBottonIp5@2x.png in Resources */,
 				52273EB21988F0400023F87A /* en_menu_on@2x.png in Resources */,
+				52CF716419B85F7300393822 /* NotBoxReadedIp4.png in Resources */,
 				52B49C9D19AD9F8D0086DFFF /* PFAccountViewController_Wide.xib in Resources */,
 				528055BB198A2A4A00396D9C /* Setting_icon@2x.png in Resources */,
 				52DD2E23198BA024001B8ABE /* PFHistoryViewController_Wide.xib in Resources */,
@@ -2274,6 +2352,7 @@
 				52FE2BC3198BE92A00CF29F0 /* AFURLRequestSerialization.m in Sources */,
 				5200F3CB198F83AB00EAFEDE /* UIButton+TKCategory.m in Sources */,
 				5200F3C8198F83AB00EAFEDE /* UIActionSheet+TKCategory.m in Sources */,
+				520A17D519B9AA31003A2463 /* PFActivityDetailViewController.m in Sources */,
 				5200F3AC198F83AB00EAFEDE /* TKGradientView.m in Sources */,
 				52FE2BD6198BE92A00CF29F0 /* MWGridCell.m in Sources */,
 				52FE2BC2198BE92A00CF29F0 /* AFURLConnectionOperation.m in Sources */,
@@ -2371,6 +2450,7 @@
 				5200F3A3198F83AB00EAFEDE /* TKCalendarDayView.m in Sources */,
 				5200F3CF198F83AB00EAFEDE /* UIGestureRecognizer+TKCategory.m in Sources */,
 				52B49CAF19ADC6A30086DFFF /* PFEditViewController.m in Sources */,
+				52CF716C19B863EB00393822 /* PFSeeprofileViewController.m in Sources */,
 				5200F3C1198F83AB00EAFEDE /* TKTableViewController.m in Sources */,
 				52FE2BBD198BE92A00CF29F0 /* AFHTTPRequestOperationManager.m in Sources */,
 				5200F3BC198F83AB00EAFEDE /* TKShapeView.m in Sources */,

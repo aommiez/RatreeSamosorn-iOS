@@ -1,8 +1,8 @@
 //
-//  PFDetailViewController.h
+//  PFActivityDetailViewController.h
 //  RatreeSamosorn
 //
-//  Created by Pariwat on 8/1/14.
+//  Created by Pariwat on 9/5/14.
 //  Copyright (c) 2014 platwofusion. All rights reserved.
 //
 
@@ -17,14 +17,14 @@
 #import "PFLoginViewController.h"
 #import "PFSeeprofileViewController.h"
 
-@protocol PFDetailViewControllerDelegate <NSObject>
+@protocol PFActivityDetailViewControllerDelegate <NSObject>
 
-- (void)PFUpdateDetailViewController:(id)sender viewPicture:(NSString *)link;
-- (void)PFDetailViewControllerBack;
+- (void)PFActivityDetailViewController:(id)sender viewPicture:(NSString *)link;
+- (void)PFActivityDetailViewControllerBack;
 
 @end
 
-@interface PFDetailViewController : UIViewController
+@interface PFActivityDetailViewController : UIViewController
 
 @property (assign, nonatomic) id delegate;
 @property (strong, nonatomic) PFRatreeSamosornApi *RatreeSamosornApi;
@@ -37,14 +37,14 @@
 
 @property (strong, nonatomic) PFLoginViewController *loginView;
 
-@property NSUserDefaults *feedDetailOffline;
+@property NSUserDefaults *activityDetailOffline;
 
 @property (strong, nonatomic) IBOutlet UIView *headerView;
-@property (strong, nonatomic) IBOutlet UIView *detailView;
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet UILabel *titlenews;
+@property (weak, nonatomic) IBOutlet UILabel *timenews;
 @property (weak, nonatomic) IBOutlet UILabel_UILabelDynamicHeight *detailnews;
 @property (weak, nonatomic) IBOutlet UIImageView *detailthumb;
 

@@ -95,8 +95,8 @@ NSString *detailText;
     self.menu = @"Foods";
     [self.RatreeSamosornApi getFoods];
     
-    //self.viewController = [PFActivityCalendarViewController new];
-    //[self.CalendarView addSubview:self.viewController.view];
+    self.viewController = [PFActivityCalendarViewController new];
+    [self.CalendarView addSubview:self.viewController.view];
     
 }
 
@@ -602,6 +602,7 @@ NSString *detailText;
     [self.RatreeSamosornApi getGallery];
 }
 
+/*
 #pragma mark -
 #pragma mark UIScrollViewDelegate Methods
 
@@ -682,6 +683,7 @@ NSString *detailText;
     self.tableView.frame = CGRectMake(0, 0, 320, self.tableView.frame.size.height);
     [UIView commitAnimations];
 }
+*/
 
 - (void)PFImageViewController:(id)sender viewPicture:(NSString *)link{
     [self.delegate PFImageViewController:self viewPicture:link];

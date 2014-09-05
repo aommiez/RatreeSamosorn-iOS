@@ -19,6 +19,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        self.calendarOffline = [NSUserDefaults standardUserDefaults];
     }
     return self;
 }
@@ -39,6 +41,7 @@
     self.title = NSLocalizedString(@"Calendar", @"");
 	[self.monthView selectDate:[NSDate date]];
     [self performSelector:@selector(CalenLoading) withObject:self afterDelay:0];
+    [self.tableView setBackgroundColor:[UIColor blackColor]];
     
 }
 
@@ -91,10 +94,13 @@
         cell = [nib objectAtIndex:0];
     }
     
-//	NSArray *ar = self.dataDictionary[[self.monthView dateSelected]];
-//    
-//    cell.nameLabel.text = [ar[indexPath.row] objectForKey:@"name"];
-//    cell.timeLabel.text =  [ar[indexPath.row] objectForKey:@"detail"];
+	NSArray *ar = self.dataDictionary[[self.monthView dateSelected]];
+    
+    cell.nameLabel.text = [ar[indexPath.row] objectForKey:@"name"];
+    
+    NSString *contentOffSet = [ar[indexPath.row] objectForKey:@"datetime"];
+    NSString *newStr = [contentOffSet substringWithRange:NSMakeRange(contentOffSet.length -8, 5)];
+    cell.timeLabel.text =  newStr;
 
     return cell;
 	
@@ -104,58 +110,86 @@
     
 //    NSArray *ar = self.dataDictionary[[self.monthView dateSelected]];
 //    
-//    PFActivityDetailViewController *activitiesDetailViewController = [[PFActivityDetailViewController alloc] initWithNibName:@"PFActivityDetailViewController_Wide" bundle:nil];
-//    activitiesDetailViewController.obj = ar[indexPath.row];
-//    activitiesDetailViewController.delegate = self;
-//    [self.navigationController pushViewController:activitiesDetailViewController animated:YES];
+//    PFActivityDetailViewController *activity = [[PFActivityDetailViewController alloc] init];
+//    
+//    if(IS_WIDESCREEN){
+//        activity = [[PFActivityDetailViewController alloc] initWithNibName:@"PFActivityDetailViewController_Wide" bundle:nil];
+//    } else {
+//        activity = [[PFActivityDetailViewController alloc] initWithNibName:@"PFActivityDetailViewController" bundle:nil];
+//    }
+//    
+//    activity.obj = ar[indexPath.row];
+//    activity.delegate = self;
+//    [self.navigationController pushViewController:activity animated:YES];
     
 }
 
 - (void)testItem:(NSDate*)start endDate:(NSDate*)end{
 
     self.dataArray = [[NSMutableArray alloc] init];
-    self.dateStart = start;
-    self.dateEnd = end;
-    NSString *startString = [NSDate stringFromDate:start];
-    NSString *endString = [NSDate stringFromDate:end];
     
-    NSString *dateStart = [[NSString alloc] initWithFormat:@"%@",startString];
-    NSString *dateEnd = [[NSString alloc] initWithFormat:@"%@",endString];
+    //
+    NSDateFormatter *date = [[NSDateFormatter alloc] init];
+    date.dateFormat = @"yyyy-MM-dd";
     
-    dateStart = [dateStart substringToIndex:10];
-    dateEnd = [dateEnd substringToIndex:10];
+    NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+    [date setLocale:enUSPOSIXLocale];
+    
+    NSArray *temp = [[NSString stringWithFormat:@"%@",[date stringFromDate:start]] componentsSeparatedByString:@""];
+    NSString *dateString = [[NSString alloc] init];
+    dateString = [[NSString alloc] initWithString:[temp objectAtIndex:0]];
+    
+    NSArray *temp1 = [[NSString stringWithFormat:@"%@",[date stringFromDate:end]] componentsSeparatedByString:@""];
+    NSString *dateString1 = [[NSString alloc] init];
+    dateString1 = [[NSString alloc] initWithString:[temp1 objectAtIndex:0]];
 
-    NSString *urlStr = [[NSString alloc] initWithFormat:@"%@calendar?year=%@&month=%@",API_URL,@"2014",@"9"];
+    NSDate *dateFromString = [[NSDate alloc] init];
+    dateFromString = [date dateFromString:dateString];
+    
+    NSDate *dateFromString1 = [[NSDate alloc] init];
+    dateFromString1 = [date dateFromString:dateString1];
+    
+    NSLog(@"%@",dateString);
+    NSLog(@"%@",dateString1);
+    //
+    
+    self.dateStart = dateFromString;
+    self.dateEnd = dateFromString1;
+
+    NSString *urlStr = [[NSString alloc] initWithFormat:@"%@calendar?start_date=%@&end_date=%@",API_URL,dateString,dateString1];
+    
     // create the URL we'd like to query
     NSURL *myURL = [[NSURL alloc]initWithString:urlStr];
     
     // we'll receive raw data so we'll create an NSData Object with it
     NSData *myData = [[NSData alloc]initWithContentsOfURL:myURL];
     
-    // now we'll parse our data using NSJSONSerialization
-    id myJSON = [NSJSONSerialization JSONObjectWithData:myData options:NSJSONReadingMutableContainers error:nil];
-    NSDictionary *dict = [[NSDictionary alloc] initWithDictionary:myJSON];
+    if (myData.length != 0) {
+        // now we'll parse our data using NSJSONSerialization
+        id myJSON = [NSJSONSerialization JSONObjectWithData:myData options:NSJSONReadingMutableContainers error:nil];
+        NSDictionary *dict = [[NSDictionary alloc] initWithDictionary:myJSON];
+        
+        [self.calendarOffline setObject:dict forKey:@"calendarOffline"];
+        [self.calendarOffline synchronize];
+    }
     
-    NSDate *d = start;
+    NSDate *d = dateFromString;
     int i = 0;
     while (YES) {
         
         NSDateComponents *info = [d dateComponentsWithTimeZone:self.monthView.timeZone];
         
-        NSString *length = [[NSString alloc] initWithFormat:@"%@",[[[dict objectForKey:@"data"]objectAtIndex:i] objectForKey:@"length"]];
-        if ( [length isEqualToString:@"0"]) {
+        if ( [[[[[self.calendarOffline objectForKey:@"calendarOffline"] objectForKey:@"data"] objectAtIndex:i] objectForKey:@"has_data"] isEqualToString:@"no"]) {
             [self.dataArray addObject:@NO];
         } else {
-            (self.dataDictionary)[d] = [[[dict objectForKey:@"data"] objectAtIndex:i]objectForKey:@"data"];
+            (self.dataDictionary)[d] = [[[[self.calendarOffline objectForKey:@"calendarOffline"] objectForKey:@"data"] objectAtIndex:i]objectForKey:@"data"];
             [self.dataArray addObject:@YES];
-            NSLog(@"%@",[[[dict objectForKey:@"data"] objectAtIndex:i] objectForKey:@"data"]);
-
         }
         
         i++;
         info.day++;
         d = [NSDate dateWithDateComponents:info];
-        if([d compare:end]==NSOrderedDescending) break;
+        if([d compare:dateFromString1]==NSOrderedDescending) break;
     }
 }
 
