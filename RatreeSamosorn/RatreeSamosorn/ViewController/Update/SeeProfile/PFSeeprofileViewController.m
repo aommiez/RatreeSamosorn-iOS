@@ -66,7 +66,7 @@
 
 - (void)PFRatreeSamosornApi:(id)sender getUserByIdResponse:(NSDictionary *)response {
     self.obj = response;
-    NSLog(@"Me %@",response);
+    //NSLog(@"Me %@",response);
     
     [self.waitView removeFromSuperview];
     
@@ -124,7 +124,7 @@
     if (indexPath.row == 0) {
         if ([[self.objUsersetting objectForKey:@"show_facebook"] intValue] == 1) {
             cell.imgrow.image = [UIImage imageNamed:@"ic_fb.png"];
-            cell.detailrow.text = [self.obj objectForKey:@"display_name"];
+            cell.detailrow.text = [self.obj objectForKey:@"fb_name"];
         } else {
             if ([[self.objUsersetting objectForKey:@"show_email"] intValue] == 1 && [[self.objUsersetting objectForKey:@"show_facebook"] intValue] == 0) {
                 cell.imgrow.image = [UIImage imageNamed:@"ic_mail.png"];

@@ -105,7 +105,7 @@
 
 - (void)PFRatreeSamosornApi:(id)sender meResponse:(NSDictionary *)response {
     self.objAccount = response;
-    //NSLog(@"Me %@",response);
+    NSLog(@"Me %@",response);
     
     [self.waitView removeFromSuperview];
     

@@ -108,8 +108,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    NSArray *ar = self.dataDictionary[[self.monthView dateSelected]];
-//    
+    NSArray *ar = self.dataDictionary[[self.monthView dateSelected]];
+    //NSLog(@"%@",ar[indexPath.row]);
+    
 //    PFActivityDetailViewController *activity = [[PFActivityDetailViewController alloc] init];
 //    
 //    if(IS_WIDESCREEN){
@@ -148,10 +149,6 @@
     
     NSDate *dateFromString1 = [[NSDate alloc] init];
     dateFromString1 = [date dateFromString:dateString1];
-    
-    NSLog(@"%@",dateString);
-    NSLog(@"%@",dateString1);
-    //
     
     self.dateStart = dateFromString;
     self.dateEnd = dateFromString1;
