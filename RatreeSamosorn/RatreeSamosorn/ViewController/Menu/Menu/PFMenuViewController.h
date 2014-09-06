@@ -35,7 +35,8 @@
 @property (assign, nonatomic) id delegate;
 @property (strong, nonatomic) PFRatreeSamosornApi *RatreeSamosornApi;
 
-@property (strong, nonatomic) TKCalendarMonthTableViewController *viewController;
+//@property (strong, nonatomic) TKCalendarMonthTableViewController *viewController;
+@property (strong, nonatomic) PFActivityCalendarViewController *viewController;
 
 @property (strong, nonatomic) IBOutlet UIView *waitView;
 @property (strong, nonatomic) IBOutlet UIView *popupwaitView;

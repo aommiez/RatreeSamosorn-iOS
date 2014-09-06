@@ -11,6 +11,7 @@
                 <outlet property="navBar" destination="4jE-9k-IkU" id="12J-Gw-3wc"/>
                 <outlet property="navController" destination="FZ0-nT-AZI" id="Huj-wh-ijU"/>
                 <outlet property="navItem" destination="1kP-Y8-SNg" id="OlT-Ml-2HA"/>
+                <outlet property="popupwaitView" destination="Wuw-8d-DrF" id="44g-7K-Qf0"/>
                 <outlet property="tableView" destination="Tw8-xW-2fB" id="skm-JD-PIm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="waitView" destination="uHq-mW-uBc" id="mo3-z0-Lkt"/>

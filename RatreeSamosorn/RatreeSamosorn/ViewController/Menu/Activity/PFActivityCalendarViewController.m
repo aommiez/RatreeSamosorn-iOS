@@ -109,19 +109,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSArray *ar = self.dataDictionary[[self.monthView dateSelected]];
-    //NSLog(@"%@",ar[indexPath.row]);
-    
-//    PFActivityDetailViewController *activity = [[PFActivityDetailViewController alloc] init];
-//    
-//    if(IS_WIDESCREEN){
-//        activity = [[PFActivityDetailViewController alloc] initWithNibName:@"PFActivityDetailViewController_Wide" bundle:nil];
-//    } else {
-//        activity = [[PFActivityDetailViewController alloc] initWithNibName:@"PFActivityDetailViewController" bundle:nil];
-//    }
-//    
-//    activity.obj = ar[indexPath.row];
-//    activity.delegate = self;
-//    [self.navigationController pushViewController:activity animated:YES];
+    [self.delegate PFActivityCalendarViewController:self didRowSelect:ar[indexPath.row]];
     
 }
 

@@ -547,6 +547,9 @@ BOOL newMediaDetail;
     cell.commentLabel.text = [[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"message"];
     cell.nameLabel.text = [[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"user"] objectForKey:@"display_name"];
     
+    cell.userImg.layer.masksToBounds = YES;
+    cell.userImg.contentMode = UIViewContentModeScaleAspectFill;
+    
     NSString *img = [[[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"user"] objectForKey:@"picture"] objectForKey:@"url"];
     NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/60/60/"];
     

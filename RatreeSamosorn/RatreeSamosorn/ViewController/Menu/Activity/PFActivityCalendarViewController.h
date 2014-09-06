@@ -17,6 +17,7 @@
 @protocol PFActivityCalendarViewControllerDelegate <NSObject>
 
 - (void)PFImageViewController:(id)sender viewPicture:(NSString *)link;
+- (void)PFActivityCalendarViewController:(id)sender didRowSelect:(NSDictionary *)dict;
 
 @end
 

@@ -96,6 +96,7 @@ NSString *detailText;
     [self.RatreeSamosornApi getFoods];
     
     self.viewController = [PFActivityCalendarViewController new];
+    self.viewController.delegate = self;
     [self.CalendarView addSubview:self.viewController.view];
     
 }
@@ -107,6 +108,25 @@ NSString *detailText;
 
 - (NSUInteger)supportedInterfaceOrientations{
     return UIInterfaceOrientationMaskPortrait;
+}
+
+- (void)PFActivityCalendarViewController:(id)sender didRowSelect:(NSDictionary *)dict {
+
+    [self.delegate HideTabbar];
+    
+    PFActivityDetailViewController *activity = [[PFActivityDetailViewController alloc] init];
+    
+    if(IS_WIDESCREEN){
+        activity = [[PFActivityDetailViewController alloc] initWithNibName:@"PFActivityDetailViewController_Wide" bundle:nil];
+    } else {
+        activity = [[PFActivityDetailViewController alloc] initWithNibName:@"PFActivityDetailViewController" bundle:nil];
+    }
+    self.navItem.title = @" ";
+    activity.obj = dict;
+    activity.delegate = self;
+    [self.navController pushViewController:activity animated:YES];
+
+    
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getFoodsResponse:(NSDictionary *)response {
@@ -602,7 +622,7 @@ NSString *detailText;
     [self.RatreeSamosornApi getGallery];
 }
 
-/*
+
 #pragma mark -
 #pragma mark UIScrollViewDelegate Methods
 
@@ -683,7 +703,6 @@ NSString *detailText;
     self.tableView.frame = CGRectMake(0, 0, 320, self.tableView.frame.size.height);
     [UIView commitAnimations];
 }
-*/
 
 - (void)PFImageViewController:(id)sender viewPicture:(NSString *)link{
     [self.delegate PFImageViewController:self viewPicture:link];
@@ -691,6 +710,10 @@ NSString *detailText;
 
 - (void)PFGalleryViewController:(id)sender sum:(NSMutableArray *)sum current:(NSString *)current{
     [self.delegate PFGalleryViewController:self sum:sum current:current];
+}
+
+- (void)PFActivityDetailViewController:(id)sender viewPicture:(NSString *)link {
+    [self.delegate PFImageViewController:self viewPicture:link];
 }
 
 - (void)PFDetailFoldertypeViewControllerBack {
@@ -703,6 +726,15 @@ NSString *detailText;
 }
 
 - (void)PFFoodAndDrinkDetailViewControllerBack {
+    [self.delegate ShowTabbar];
+    if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
+        self.navItem.title = @"Menu";
+    } else {
+        self.navItem.title = @"รายการ";
+    }
+}
+
+- (void)PFActivityDetailViewControllerBack {
     [self.delegate ShowTabbar];
     if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
         self.navItem.title = @"Menu";

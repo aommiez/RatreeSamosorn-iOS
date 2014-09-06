@@ -33,6 +33,12 @@ BOOL refreshDataUpdate;
 {
     [super viewDidLoad];
     
+    [self.view addSubview:self.waitView];
+    
+    CALayer *popup = [self.popupwaitView layer];
+    [popup setMasksToBounds:YES];
+    [popup setCornerRadius:7.0f];
+    
     // Navbar setup
     UIColor *firstColor = [UIColor colorWithRed:255.0f/255.0f green:0.0f/255.0f blue:107.0f/255.0f alpha:1.0f];
     UIColor *secondColor = [UIColor colorWithRed:255.0f/255.0f green:102.0f/255.0f blue:0.0f/255.0f alpha:1.0f];
@@ -136,6 +142,8 @@ BOOL refreshDataUpdate;
 - (void)PFRatreeSamosornApi:(id)sender getFeedsResponse:(NSDictionary *)response {
     //NSLog(@"%@",response);
     
+    [self.waitView removeFromSuperview];
+    
     if (!refreshDataUpdate) {
         for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
             [self.arrObj addObject:[[response objectForKey:@"data"] objectAtIndex:i]];
@@ -155,6 +163,8 @@ BOOL refreshDataUpdate;
 
 - (void)PFRatreeSamosornApi:(id)sender getFeedsErrorResponse:(NSString *)errorResponse {
     NSLog(@"%@",errorResponse);
+    
+    [self.waitView removeFromSuperview];
     
     if (!refreshDataUpdate) {
         for (int i=0; i<[[[self.feedOffline objectForKey:@"feedArray"] objectForKey:@"data"] count]; ++i) {
