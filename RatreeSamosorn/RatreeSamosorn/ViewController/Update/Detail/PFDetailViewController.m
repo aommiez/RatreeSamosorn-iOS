@@ -50,6 +50,8 @@ BOOL newMediaDetail;
     
     [self.detailView.layer setCornerRadius:5.0f];
     
+    self.navigationItem.title = [self.obj objectForKey:@"name"];
+    
     self.titlenews.text = [self.obj objectForKey:@"name"];
     
     self.detailnews.text = [self.obj objectForKey:@"detail"];
@@ -468,8 +470,8 @@ BOOL newMediaDetail;
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,tableView.frame.size.width,30)];
     UIImageView *imgViewPrev = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 300, 3)];
     UIImageView *imgViewLine = [[UIImageView alloc] initWithFrame:CGRectMake(10, 43, 300, 3)];
-    imgViewLine.image = [UIImage imageNamed:@"LineCommentBoxIp5.png"];
-    imgViewPrev.image = [self imageRotatedByDegrees:[UIImage imageNamed:@"FootCommentBoxEndIp5@2x"] deg:180];;
+    imgViewLine.image = [UIImage imageNamed:@"LineCommentBoxNeIp5.png"];
+    imgViewPrev.image = [self imageRotatedByDegrees:[UIImage imageNamed:@"FootCommentBoxNeIp5@2x"] deg:180];;
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button addTarget:self
                action:@selector(loadComment)
@@ -479,7 +481,7 @@ BOOL newMediaDetail;
     button.frame = CGRectMake(10, 3, 300, 40);
     [button setContentMode:UIViewContentModeScaleAspectFit];
     [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    [button setBackgroundImage:[UIImage imageNamed:@"linePrev.png"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"linePrevNe.png"] forState:UIControlStateNormal];
     [headerView addSubview:button];
     [headerView addSubview:imgViewPrev];
     [headerView addSubview:imgViewLine];
@@ -565,39 +567,39 @@ BOOL newMediaDetail;
         if (indexPath.row == 0 ) {
             if ([self.arrObj count] > 1 ) {
                 UIImage *image2 = [self imageRotatedByDegrees:[UIImage imageNamed:@"FootCommentBoxEndIp5@2x"] deg:180];
-                cell.lineImg.image = [UIImage imageNamed:@"LineCommentBoxIp5"];
+                cell.lineImg.image = [UIImage imageNamed:@"LineCommentBoxNeIp5"];
                 //cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxIp5"];;
                 cell.headImg.image = image2;
             } else {
                 //cell.headImg.image = [UIImage imageNamed:@"HeadCommentBoxIp5"];
-                cell.lineImg.image = [UIImage imageNamed:@"FootCommentBoxEndIp5"];
-                UIImage *image2 = [self imageRotatedByDegrees:[UIImage imageNamed:@"FootCommentBoxEndIp5"] deg:180];
+                cell.lineImg.image = [UIImage imageNamed:@"FootCommentBoxNeIp5"];
+                UIImage *image2 = [self imageRotatedByDegrees:[UIImage imageNamed:@"FootCommentBoxNeIp5"] deg:180];
                 cell.headImg.image = image2;
             }
         } else if ([indexPath section] == sectionsAmount - 1 && [indexPath row] == rowsAmount - 1) {
-            cell.lineImg.image = [UIImage imageNamed:@"FootCommentBoxEndIp5"];
-            cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxIp5"];
+            cell.lineImg.image = [UIImage imageNamed:@"FootCommentBoxNeIp5"];
+            cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxNeIp5"];
         } else {
-            cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxIp5"];
+            cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxNeIp5"];
         }
     } else {
         if (indexPath.row == 0 ) {
             if ([self.arrObj count] > 1 ) {
                 //UIImage *image2 = [self imageRotatedByDegrees:[UIImage imageNamed:@"FootCommentBoxEndIp5@2x"] deg:180];
-                cell.lineImg.image = [UIImage imageNamed:@"LineCommentBoxIp5"];
-                cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxIp5"];;
+                cell.lineImg.image = [UIImage imageNamed:@"LineCommentBoxNeIp5"];
+                cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxNeIp5"];;
                 //cell.headImg.image = [UIImage imageNamed:@"HeadCommentBoxIp5"];
             } else {
                 //cell.headImg.image = [UIImage imageNamed:@"HeadCommentBoxIp5"];
-                cell.lineImg.image = [UIImage imageNamed:@"FootCommentBoxEndIp5"];
+                cell.lineImg.image = [UIImage imageNamed:@"FootCommentBoxNeIp5"];
                 //UIImage *image2 = [self imageRotatedByDegrees:[UIImage imageNamed:@"FootCommentBoxEndIp5"] deg:180];
-                cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxIp5"];;
+                cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxNeIp5"];;
             }
         } else if ([indexPath section] == sectionsAmount - 1 && [indexPath row] == rowsAmount - 1) {
-            cell.lineImg.image = [UIImage imageNamed:@"FootCommentBoxEndIp5"];
-            cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxIp5"];
+            cell.lineImg.image = [UIImage imageNamed:@"FootCommentBoxNeIp5"];
+            cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxNeIp5"];
         } else {
-            cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxIp5"];
+            cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxNeIp5"];
         }
     }
 

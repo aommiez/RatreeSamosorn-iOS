@@ -13,7 +13,7 @@
 
 #import "PFRatreeSamosornApi.h"
 
-#import "PFDetailCell.h"
+#import "PFDetailAcCell.h"
 #import "PFLoginViewController.h"
 #import "PFSeeprofileViewController.h"
 
@@ -43,7 +43,7 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
-@property (weak, nonatomic) IBOutlet UILabel *titlenews;
+@property (weak, nonatomic) IBOutlet UILabel_UILabelDynamicHeight *titlenews;
 @property (weak, nonatomic) IBOutlet UILabel *timenews;
 @property (weak, nonatomic) IBOutlet UILabel_UILabelDynamicHeight *detailnews;
 @property (weak, nonatomic) IBOutlet UIImageView *detailthumb;

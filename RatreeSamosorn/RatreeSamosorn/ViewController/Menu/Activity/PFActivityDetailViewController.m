@@ -48,12 +48,25 @@ BOOL newMediaDetail;
     noDataDetail = NO;
     refreshDataDetail = NO;
     
+    self.navigationItem.title = [self.obj objectForKey:@"name"];
+    
     self.titlenews.text = [self.obj objectForKey:@"name"];
     
-    //NSString *myString = [self.obj objectForKey:@"datetime"];
-    //NSString *mySmallerString = [myString substringToIndex:10];
+    NSString *myString = [self.obj objectForKey:@"datetime"];
+    NSString *mySmallerString = [myString substringToIndex:10];
     
-    self.timenews.text = [self.obj objectForKey:@"datetime"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd MMM yyyy"];
+    
+    NSDate *date = [dateFormatter dateFromString: mySmallerString];
+    
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd MMM yyyy"];
+    
+    NSString *convertedString = [dateFormatter stringFromDate:date];
+    NSLog(@"Converted String : %@",convertedString);
+    
+    self.timenews.text = mySmallerString;
     
     self.detailnews.text = [self.obj objectForKey:@"detail"];
     CGRect frame = self.detailnews.frame;
@@ -61,14 +74,14 @@ BOOL newMediaDetail;
     [self.detailnews sizeOfMultiLineLabel];
     
     [self.detailnews setFrame:frame];
-    int lines = self.detailnews.frame.size.height/15;
+    int lines = self.detailnews.frame.size.height/12;
     self.detailnews.numberOfLines = lines;
     
     UILabel *descText = [[UILabel alloc] initWithFrame:frame];
     descText.text = self.detailnews.text;
     descText.numberOfLines = lines;
-    [descText setFont:[UIFont systemFontOfSize:15]];
-    [descText setTextColor:[UIColor whiteColor]];
+    [descText setFont:[UIFont systemFontOfSize:12]];
+    [descText setTextColor:[UIColor colorWithRed:128.0/255.0 green:130.0/255.0 blue:133.0/255.0 alpha:1.0]];
     self.detailnews.alpha = 0;
     [self.headerView addSubview:descText];
     
@@ -466,8 +479,8 @@ BOOL newMediaDetail;
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,tableView.frame.size.width,30)];
     UIImageView *imgViewPrev = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 300, 3)];
     UIImageView *imgViewLine = [[UIImageView alloc] initWithFrame:CGRectMake(10, 43, 300, 3)];
-    imgViewLine.image = [UIImage imageNamed:@"LineCommentBoxIp5.png"];
-    imgViewPrev.image = [self imageRotatedByDegrees:[UIImage imageNamed:@"FootCommentBoxEndIp5@2x"] deg:180];;
+    imgViewLine.image = [UIImage imageNamed:@"LineCommentBoxAcIp5.png"];
+    imgViewPrev.image = [self imageRotatedByDegrees:[UIImage imageNamed:@"FootCommentBoxAcIp5@2x"] deg:180];;
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button addTarget:self
                action:@selector(loadComment)
@@ -477,7 +490,7 @@ BOOL newMediaDetail;
     button.frame = CGRectMake(10, 3, 300, 40);
     [button setContentMode:UIViewContentModeScaleAspectFit];
     [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    [button setBackgroundImage:[UIImage imageNamed:@"linePrev.png"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"linePrevAc.png"] forState:UIControlStateNormal];
     [headerView addSubview:button];
     [headerView addSubview:imgViewPrev];
     [headerView addSubview:imgViewLine];
@@ -514,9 +527,9 @@ BOOL newMediaDetail;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PFDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PFDetailCell"];
+    PFDetailAcCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PFDetailAcCell"];
     if(cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PFDetailCell" owner:self options:nil];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PFDetailAcCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
     
@@ -562,40 +575,40 @@ BOOL newMediaDetail;
     if ([self.arrObj count] < 4 ) {
         if (indexPath.row == 0 ) {
             if ([self.arrObj count] > 1 ) {
-                UIImage *image2 = [self imageRotatedByDegrees:[UIImage imageNamed:@"FootCommentBoxEndIp5@2x"] deg:180];
-                cell.lineImg.image = [UIImage imageNamed:@"LineCommentBoxIp5"];
+                UIImage *image2 = [self imageRotatedByDegrees:[UIImage imageNamed:@"FootCommentBoxAcIp5@2x"] deg:180];
+                cell.lineImg.image = [UIImage imageNamed:@"LineCommentBoxAcIp5"];
                 //cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxIp5"];;
                 cell.headImg.image = image2;
             } else {
                 //cell.headImg.image = [UIImage imageNamed:@"HeadCommentBoxIp5"];
-                cell.lineImg.image = [UIImage imageNamed:@"FootCommentBoxEndIp5"];
-                UIImage *image2 = [self imageRotatedByDegrees:[UIImage imageNamed:@"FootCommentBoxEndIp5"] deg:180];
+                cell.lineImg.image = [UIImage imageNamed:@"FootCommentBoxAcIp5"];
+                UIImage *image2 = [self imageRotatedByDegrees:[UIImage imageNamed:@"FootCommentBoxAcIp5"] deg:180];
                 cell.headImg.image = image2;
             }
         } else if ([indexPath section] == sectionsAmount - 1 && [indexPath row] == rowsAmount - 1) {
-            cell.lineImg.image = [UIImage imageNamed:@"FootCommentBoxEndIp5"];
-            cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxIp5"];
+            cell.lineImg.image = [UIImage imageNamed:@"FootCommentBoxAcIp5"];
+            cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxAcIp5"];
         } else {
-            cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxIp5"];
+            cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxAcIp5"];
         }
     } else {
         if (indexPath.row == 0 ) {
             if ([self.arrObj count] > 1 ) {
                 //UIImage *image2 = [self imageRotatedByDegrees:[UIImage imageNamed:@"FootCommentBoxEndIp5@2x"] deg:180];
-                cell.lineImg.image = [UIImage imageNamed:@"LineCommentBoxIp5"];
-                cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxIp5"];;
+                cell.lineImg.image = [UIImage imageNamed:@"LineCommentBoxAcIp5"];
+                cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxAcIp5"];;
                 //cell.headImg.image = [UIImage imageNamed:@"HeadCommentBoxIp5"];
             } else {
                 //cell.headImg.image = [UIImage imageNamed:@"HeadCommentBoxIp5"];
-                cell.lineImg.image = [UIImage imageNamed:@"FootCommentBoxEndIp5"];
+                cell.lineImg.image = [UIImage imageNamed:@"FootCommentBoxAcIp5"];
                 //UIImage *image2 = [self imageRotatedByDegrees:[UIImage imageNamed:@"FootCommentBoxEndIp5"] deg:180];
-                cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxIp5"];;
+                cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxAcIp5"];;
             }
         } else if ([indexPath section] == sectionsAmount - 1 && [indexPath row] == rowsAmount - 1) {
-            cell.lineImg.image = [UIImage imageNamed:@"FootCommentBoxEndIp5"];
-            cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxIp5"];
+            cell.lineImg.image = [UIImage imageNamed:@"FootCommentBoxAcIp5"];
+            cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxAcIp5"];
         } else {
-            cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxIp5"];
+            cell.headImg.image = [UIImage imageNamed:@"BodyCommentBoxAcIp5"];
         }
     }
     

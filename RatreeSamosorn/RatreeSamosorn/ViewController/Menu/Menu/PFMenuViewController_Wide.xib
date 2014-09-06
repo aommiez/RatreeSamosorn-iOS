@@ -7,12 +7,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PFMenuViewController">
             <connections>
                 <outlet property="CalendarView" destination="DMG-1T-mab" id="SfV-yS-9Qj"/>
-                <outlet property="act" destination="T5V-36-zJf" id="6Jd-ra-IuR"/>
                 <outlet property="activityBt" destination="ff6-7i-OD3" id="9A8-K3-6GM"/>
                 <outlet property="drinksBt" destination="sZU-gi-ivw" id="jY3-c4-dke"/>
                 <outlet property="foodsBt" destination="2Uq-i8-UP5" id="fem-Uo-zTB"/>
                 <outlet property="galleryBt" destination="jaK-9m-fnJ" id="OgG-Uh-eLg"/>
-                <outlet property="loadLabel" destination="BlR-SE-rmi" id="AyA-Nl-rgB"/>
                 <outlet property="navBar" destination="ZcN-n3-pU2" id="Lnf-0E-7nd"/>
                 <outlet property="navController" destination="otp-b0-sQE" id="Y4x-19-UWi"/>
                 <outlet property="navItem" destination="M21-kj-5pk" id="5mN-As-Nch"/>
@@ -50,19 +48,6 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BlR-SE-rmi">
-                    <rect key="frame" x="70" y="116" width="225" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="T5V-36-zJf">
-                    <rect key="frame" x="45" y="115" width="20" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </activityIndicatorView>
-            </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

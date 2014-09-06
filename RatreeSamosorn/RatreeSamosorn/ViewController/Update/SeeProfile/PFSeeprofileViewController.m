@@ -90,7 +90,7 @@
 
 - (void)PFRatreeSamosornApi:(id)sender getUserSettingResponse:(NSDictionary *)response {
     self.objUsersetting = response;
-    NSLog(@"getUserSetting %@",response);
+    //NSLog(@"getUserSetting %@",response);
     
     int count = [[response objectForKey:@"show_facebook"] intValue]+[[response objectForKey:@"show_email"] intValue]+[[response objectForKey:@"show_website"] intValue]+[[response objectForKey:@"show_mobile"] intValue]+[[response objectForKey:@"show_gender"] intValue]+[[response objectForKey:@"show_birth_date"] intValue];
     self.rowCount = [NSString stringWithFormat:@"%d",count];
