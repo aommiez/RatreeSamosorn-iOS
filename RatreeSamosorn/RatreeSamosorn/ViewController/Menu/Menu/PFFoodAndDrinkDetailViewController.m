@@ -149,7 +149,7 @@
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getFoodsAndDrinkByURLResponse:(NSDictionary *)response {
-    NSLog(@"%@",response);
+    //NSLog(@"%@",response);
     [self.DetailOffline setObject:response forKey:@"DetailArray"];
     [self.DetailOffline synchronize];
     
@@ -370,6 +370,7 @@
         webView = [[PFOrderViewController alloc] initWithNibName:@"PFOrderViewController" bundle:nil];
     }
     webView.delegate = self;
+    webView.product_id = [self.obj objectForKey:@"id"];
     [self.navigationController pushViewController:webView animated:YES];
 }
 

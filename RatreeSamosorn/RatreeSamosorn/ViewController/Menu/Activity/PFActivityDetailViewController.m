@@ -50,26 +50,55 @@ BOOL newMediaDetail;
     
     self.navigationItem.title = [self.obj objectForKey:@"name"];
     
+    //title
+    
     self.titlenews.text = [self.obj objectForKey:@"name"];
+    CGRect frametitle = self.titlenews.frame;
+    
+    frametitle.size = [self.titlenews sizeOfMultiLineLabel];
+    [self.titlenews sizeOfMultiLineLabel];
+    
+    [self.titlenews setFrame:frametitle];
+    int linestitle = self.titlenews.frame.size.height/15;
+    self.titlenews.numberOfLines = linestitle;
+    
+    UILabel *descTextTitle = [[UILabel alloc] initWithFrame:frametitle];
+    descTextTitle.text = self.titlenews.text;
+    descTextTitle.numberOfLines = linestitle;
+    [descTextTitle setFont:[UIFont boldSystemFontOfSize:15]];
+    [descTextTitle setTextColor:[UIColor colorWithRed:255.0/255.0 green:0.0/255.0 blue:107.0/255.0 alpha:1.0]];
+    self.titlenews.alpha = 0;
+    descTextTitle.frame = CGRectMake(descTextTitle.frame.origin.x, descTextTitle.frame.origin.y, 200, descTextTitle.frame.size.height);
+    [self.headerView addSubview:descTextTitle];
+    
+    //time
+    
     
     NSString *myString = [self.obj objectForKey:@"datetime"];
     NSString *mySmallerString = [myString substringToIndex:10];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd MMM yyyy"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     
     NSDate *date = [dateFormatter dateFromString: mySmallerString];
     
     dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd MMM yyyy"];
+    [dateFormatter setDateFormat:@"dd MMMM yyyy"];
     
     NSString *convertedString = [dateFormatter stringFromDate:date];
-    NSLog(@"Converted String : %@",convertedString);
     
-    self.timenews.text = mySmallerString;
+    NSString *newStr = [myString substringWithRange:NSMakeRange(myString.length -8, 5)];
+    
+    NSString *dateStr = [[NSString alloc] initWithFormat:@"%@%@%@",convertedString,@"\n",newStr];
+    
+    self.timenews.text = dateStr;
+    self.timenews.frame = CGRectMake(self.timenews.frame.origin.x, self.timenews.frame.origin.y+descTextTitle.frame.size.height-20, self.timenews.frame.size.width, self.timenews.frame.size.height);
+    
+    //detail
     
     self.detailnews.text = [self.obj objectForKey:@"detail"];
-    CGRect frame = self.detailnews.frame;
+    CGRect frame = CGRectMake(self.detailnews.frame.origin.x, self.detailnews.frame.origin.y+descTextTitle.frame.size.height-20, self.detailnews.frame.size.width, self.detailnews.frame.size.height);
+    
     frame.size = [self.detailnews sizeOfMultiLineLabel];
     [self.detailnews sizeOfMultiLineLabel];
     
@@ -103,7 +132,7 @@ BOOL newMediaDetail;
     
     //
     
-    self.headerView.frame = CGRectMake(self.headerView.frame.origin.x, self.headerView.frame.origin.y, self.headerView.frame.size.width, self.headerView.frame.size.height+self.detailnews.frame.size.height-13);
+    self.headerView.frame = CGRectMake(self.headerView.frame.origin.x, self.headerView.frame.origin.y, self.headerView.frame.size.width, self.headerView.frame.size.height+self.detailnews.frame.size.height+descTextTitle.frame.size.height-13);
     self.tableView.tableHeaderView = self.headerView;
     UIView *fv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
     self.tableView.tableFooterView = fv;
@@ -416,7 +445,7 @@ BOOL newMediaDetail;
     }
     
     NSString *urlString = [[NSString alloc]init];
-    urlString = [[NSString alloc] initWithFormat:@"%@",[[self.obj objectForKey:@"node"] objectForKey:@"share_url"]];
+    urlString = [[NSString alloc] initWithFormat:@"%@",[[self.obj objectForKey:@"node"] objectForKey:@"share"]];
     
     SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
     [controller addURL:[NSURL URLWithString:urlString]];

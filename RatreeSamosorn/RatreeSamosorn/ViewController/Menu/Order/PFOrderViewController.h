@@ -29,7 +29,7 @@
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 
 @property (strong, nonatomic) NSString *token;
-@property (strong, nonatomic) NSString *reward_id;
+@property (strong, nonatomic) NSString *product_id;
 @property (strong, nonatomic) NSString *user_id;
 
 @end

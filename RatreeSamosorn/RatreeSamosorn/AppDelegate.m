@@ -170,16 +170,47 @@ BOOL newMedia;
     NSString *dt = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     dt = [dt stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSLog(@"My token is : %@", dt);
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:dt forKey:@"deviceToken"];
+    [defaults synchronize];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
 	NSLog(@"Failed to get token, error: %@", error);
+    
+    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    
+    NSMutableString *randomString = [NSMutableString stringWithCapacity:63];
+    
+    for (int i=0; i<63; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform(36) % [letters length]]];
+    }
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([[defaults objectForKey:@"deviceToken"] length] == 0) {
+        [defaults setObject:randomString forKey:@"deviceToken"];
+    }
+    [defaults synchronize];
 }
 
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[[userInfo objectForKey:@"aps"] objectForKey:@"badge"] forKey:@"badge"];
+    [defaults synchronize];
+	NSLog(@"Received notification: %@", [[userInfo objectForKey:@"aps"] objectForKey:@"badge"]);
+}
 
+- (void)PFRatreeSamosornApi:(id)sender checkBadgeResponse:(NSDictionary *)response {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[response objectForKey:@"length"] forKey:@"badge"];
+    [defaults synchronize];
+}
+
+- (void)PFRatreeSamosornApi:(id)sender checkBadgeErrorResponse:(NSString *)errorResponse {
+    NSLog(@"%@",errorResponse);
 }
 
 - (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window

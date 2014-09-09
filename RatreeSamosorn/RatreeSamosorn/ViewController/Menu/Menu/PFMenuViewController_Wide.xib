@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PFMenuViewController">
             <connections>
                 <outlet property="CalendarView" destination="DMG-1T-mab" id="SfV-yS-9Qj"/>
+                <outlet property="NoInternetView" destination="Wm7-Wl-CTd" id="K5W-bK-3eE"/>
                 <outlet property="activityBt" destination="ff6-7i-OD3" id="9A8-K3-6GM"/>
                 <outlet property="drinksBt" destination="sZU-gi-ivw" id="jY3-c4-dke"/>
                 <outlet property="foodsBt" destination="2Uq-i8-UP5" id="fem-Uo-zTB"/>
@@ -14,8 +15,10 @@
                 <outlet property="navBar" destination="ZcN-n3-pU2" id="Lnf-0E-7nd"/>
                 <outlet property="navController" destination="otp-b0-sQE" id="Y4x-19-UWi"/>
                 <outlet property="navItem" destination="M21-kj-5pk" id="5mN-As-Nch"/>
+                <outlet property="popupwaitView" destination="Crp-gh-Vhv" id="H7o-jl-jg0"/>
                 <outlet property="tableView" destination="URA-gI-Xuu" id="P6L-9q-Y7t"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="waitView" destination="RR4-dr-QpL" id="uwf-oL-jto"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -156,5 +159,20 @@
                 </viewController>
             </viewControllers>
         </navigationController>
+        <view alpha="0.75" contentMode="scaleToFill" id="Wm7-Wl-CTd">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Network Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iT5-04-Qlm">
+                    <rect key="frame" x="10" y="5" width="300" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
     </objects>
 </document>

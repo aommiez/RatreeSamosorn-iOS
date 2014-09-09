@@ -18,6 +18,9 @@ BOOL loadMenu;
 BOOL noDataMenu;
 BOOL refreshDataMenu;
 
+int menuInt;
+NSTimer *timmer;
+
 NSString *totalImg;
 NSString *titleText;
 NSString *detailText;
@@ -38,6 +41,12 @@ NSString *detailText;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.view addSubview:self.waitView];
+    
+    CALayer *popup = [self.popupwaitView layer];
+    [popup setMasksToBounds:YES];
+    [popup setCornerRadius:7.0f];
     
     // Navbar setup
     UIColor *firstColor = [UIColor colorWithRed:255.0f/255.0f green:0.0f/255.0f blue:107.0f/255.0f alpha:1.0f];
@@ -134,6 +143,10 @@ NSString *detailText;
     
     self.menu = @"Foods";
     
+    [self.waitView removeFromSuperview];
+    [self.NoInternetView removeFromSuperview];
+    self.checkinternet = @"connect";
+    
     if (!refreshDataMenu) {
         for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
             [self.arrObjFood addObject:[[response objectForKey:@"data"] objectAtIndex:i]];
@@ -156,6 +169,14 @@ NSString *detailText;
     
     self.menu = @"Foods";
     
+    [self.waitView removeFromSuperview];
+    self.checkinternet = @"error";
+    self.NoInternetView.frame = CGRectMake(0, 99, self.NoInternetView.frame.size.width, self.NoInternetView.frame.size.height);
+    [self.view addSubview:self.NoInternetView];
+    
+    menuInt = 5;
+    timmer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
+    
     if (!refreshDataMenu) {
         for (int i=0; i<[[[self.foodOffline objectForKey:@"foodArray"] objectForKey:@"data"] count]; ++i) {
             [self.arrObjFood addObject:[[[self.foodOffline objectForKey:@"foodArray"] objectForKey:@"data"] objectAtIndex:i]];
@@ -174,6 +195,10 @@ NSString *detailText;
     //NSLog(@"%@",response);
     
     self.menu = @"Drinks";
+    
+    [self.waitView removeFromSuperview];
+    [self.NoInternetView removeFromSuperview];
+    self.checkinternet = @"connect";
     
     if (!refreshDataMenu) {
         for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
@@ -197,6 +222,14 @@ NSString *detailText;
     
     self.menu = @"Drinks";
     
+    [self.waitView removeFromSuperview];
+    self.checkinternet = @"error";
+    self.NoInternetView.frame = CGRectMake(0, 99, self.NoInternetView.frame.size.width, self.NoInternetView.frame.size.height);
+    [self.view addSubview:self.NoInternetView];
+    
+    menuInt = 5;
+    timmer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
+    
     if (!refreshDataMenu) {
         for (int i=0; i<[[[self.drinkOffline objectForKey:@"drinkArray"] objectForKey:@"data"] count]; ++i) {
             [self.arrObjDrink addObject:[[[self.drinkOffline objectForKey:@"drinkArray"] objectForKey:@"data"] objectAtIndex:i]];
@@ -215,6 +248,10 @@ NSString *detailText;
     //NSLog(@"%@",response);
     
     self.menu = @"Gallery";
+    
+    [self.waitView removeFromSuperview];
+    [self.NoInternetView removeFromSuperview];
+    self.checkinternet = @"connect";
     
     if (!refreshDataMenu) {
         for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
@@ -238,6 +275,14 @@ NSString *detailText;
     
     self.menu = @"Gallery";
     
+    [self.waitView removeFromSuperview];
+    self.checkinternet = @"error";
+    self.NoInternetView.frame = CGRectMake(0, 99, self.NoInternetView.frame.size.width, self.NoInternetView.frame.size.height);
+    [self.view addSubview:self.NoInternetView];
+    
+    menuInt = 5;
+    timmer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
+    
     if (!refreshDataMenu) {
         for (int i=0; i<[[[self.galleryOffline objectForKey:@"galleryArray"] objectForKey:@"data"] count]; ++i) {
             [self.arrObjGalleryAlbum addObject:[[[self.galleryOffline objectForKey:@"galleryArray"] objectForKey:@"data"] objectAtIndex:i]];
@@ -250,6 +295,13 @@ NSString *detailText;
     }
     
     [self.tableView reloadData];
+}
+
+- (void)countDown {
+    menuInt -= 1;
+    if (menuInt == 0) {
+        [self.NoInternetView removeFromSuperview];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -436,6 +488,8 @@ NSString *detailText;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self.NoInternetView removeFromSuperview];
     
     if ([self.menu isEqualToString:@"Foods"]) {
         

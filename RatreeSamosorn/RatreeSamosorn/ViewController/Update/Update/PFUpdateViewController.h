@@ -18,6 +18,7 @@
 
 #import "PFLoginViewController.h"
 #import "PFAccountViewController.h"
+#import "PFNotificationViewController.h"
 
 @protocol PFUpdateViewControllerDelegate <NSObject>
 
@@ -41,6 +42,9 @@
 @property (strong, nonatomic) IBOutlet UIView *waitView;
 @property (strong, nonatomic) IBOutlet UIView *popupwaitView;
 
+@property (strong, nonatomic) IBOutlet UIView *NoInternetView;
+@property (strong, nonatomic) NSString *checkinternet;
+
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *act;
 @property (strong, nonatomic) IBOutlet UILabel *loadLabel;
 
@@ -51,5 +55,8 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSMutableArray *arrObj;
+@property (strong, nonatomic) NSDictionary *obj;
+
+@property (retain, nonatomic) NSString *paging;
 
 @end

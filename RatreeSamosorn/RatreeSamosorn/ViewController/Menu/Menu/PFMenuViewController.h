@@ -35,14 +35,13 @@
 @property (assign, nonatomic) id delegate;
 @property (strong, nonatomic) PFRatreeSamosornApi *RatreeSamosornApi;
 
-//@property (strong, nonatomic) TKCalendarMonthTableViewController *viewController;
 @property (strong, nonatomic) PFActivityCalendarViewController *viewController;
 
 @property (strong, nonatomic) IBOutlet UIView *waitView;
 @property (strong, nonatomic) IBOutlet UIView *popupwaitView;
 
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *act;
-@property (strong, nonatomic) IBOutlet UILabel *loadLabel;
+@property (strong, nonatomic) IBOutlet UIView *NoInternetView;
+@property (strong, nonatomic) NSString *checkinternet;
 
 @property (strong, nonatomic) IBOutlet UINavigationController *navController;
 @property (strong, nonatomic) IBOutlet CRGradientNavigationBar *navBar;

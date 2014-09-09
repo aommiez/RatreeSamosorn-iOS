@@ -44,6 +44,9 @@
 - (void)PFRatreeSamosornApi:(id)sender getFeedsResponse:(NSDictionary *)response;
 - (void)PFRatreeSamosornApi:(id)sender getFeedsErrorResponse:(NSString *)errorResponse;
 
+- (void)PFRatreeSamosornApi:(id)sender getFeedByIdResponse:(NSDictionary *)response;
+- (void)PFRatreeSamosornApi:(id)sender getFeedByIdErrorResponse:(NSString *)errorResponse;
+
 - (void)PFRatreeSamosornApi:(id)sender getNewsCommentObjIdResponse:(NSDictionary *)response;
 - (void)PFRatreeSamosornApi:(id)sender getNewsCommentObjIdErrorResponse:(NSString *)errorResponse;
 
@@ -52,6 +55,12 @@
 
 - (void)PFRatreeSamosornApi:(id)sender getUserByIdResponse:(NSDictionary *)response;
 - (void)PFRatreeSamosornApi:(id)sender getUserByIdErrorResponse:(NSString *)errorResponse;
+
+- (void)PFRatreeSamosornApi:(id)sender NotificationResponse:(NSDictionary *)response;
+- (void)PFRatreeSamosornApi:(id)sender NotificationErrorResponse:(NSString *)errorResponse;
+
+- (void)PFRatreeSamosornApi:(id)sender checkBadgeResponse:(NSDictionary *)response;
+- (void)PFRatreeSamosornApi:(id)sender checkBadgeErrorResponse:(NSString *)errorResponse;
 
 #pragma mark - Menu Protocal Delegate
 - (void)PFRatreeSamosornApi:(id)sender getFoodsResponse:(NSDictionary *)response;
@@ -152,11 +161,14 @@
 - (void)changePassword:(NSString *)old_password new_password:(NSString *)new_password;
 
 #pragma mark - Update
-- (void)getFeeds;
+- (void)getFeeds:(NSString *)limit link:(NSString *)link;
+- (void)getFeedById:(NSString *)news_id;
 - (void)getNewsCommentObjId:(NSString *)feed_id padding:(NSString *)padding;
 - (void)commentObjId:(NSString *)obj_id content:(NSString *)content;
 - (void)profile:(NSString *)userId;
 - (void)getUserSettingById:(NSString *)user_id;
+- (void)Notification:(NSString *)limit link:(NSString *)link;
+- (void)checkBadge;
 
 #pragma mark - Menu
 - (void)getFoods;

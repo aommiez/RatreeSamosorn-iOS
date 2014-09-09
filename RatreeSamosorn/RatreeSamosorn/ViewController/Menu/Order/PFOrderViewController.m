@@ -46,13 +46,14 @@
     self.token = [self.RatreeSamosornApi getAccessToken];
     self.user_id = [self.RatreeSamosornApi getUserId];
     
-    NSString *url = [[NSString alloc] initWithFormat:@"%@",@"http://www.google.com"];
+    NSString *url = [[NSString alloc] initWithFormat:@"%@%@%@%@%@",@"http://app.pla2.com/rtsms/weborder/index/1/",self.product_id,@"/",self.user_id,self.token];
+    
     NSURLRequest *req = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     self.webView.delegate = self;
     self.webView.scalesPageToFit = YES;
     [self.webView loadRequest:req];
     
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.google.com"]];
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
     if (data) {
         [self.NoInternetView removeFromSuperview];
     } else {

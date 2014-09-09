@@ -50,6 +50,16 @@
 
 #pragma mark - Log out
 - (void)logOut {
+    
+    self.urlStr = [[NSString alloc] initWithFormat:@"%@oauth/logout",API_URL];
+    NSDictionary *parameters = @{@"access_token":[self getAccessToken],@"ios_device_token":[self.userDefaults objectForKey:@"deviceToken"]};
+    
+    [self.manager POST:self.urlStr parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",[error localizedDescription]);
+    }];
+    
     [self.userDefaults removeObjectForKey:@"access_token"];
     [self.userDefaults removeObjectForKey:@"user_id"];
 }
@@ -205,12 +215,27 @@
 }
 
 #pragma mark - Update
-- (void)getFeeds {
-    self.urlStr = [[NSString alloc] initWithFormat:@"%@feed",API_URL];
+- (void)getFeeds:(NSString *)limit link:(NSString *)link {
+    
+    if ([link isEqualToString:@"NO"] ) {
+        self.urlStr = [[NSString alloc] initWithFormat:@"%@feed?limit=%@",API_URL,limit];
+    } else if ([limit isEqualToString:@"NO"]) {
+        self.urlStr = link;
+    }
+    
     [self.manager GET:self.urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.delegate PFRatreeSamosornApi:self getFeedsResponse:responseObject];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.delegate PFRatreeSamosornApi:self getFeedsErrorResponse:[error localizedDescription]];
+    }];
+}
+
+- (void)getFeedById:(NSString *)news_id {
+    NSString *urlStr = [[NSString alloc] initWithFormat:@"%@news/%@",API_URL,news_id];
+    [self.manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self getFeedByIdResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self getFeedByIdErrorResponse:[error localizedDescription]];
     }];
 }
 
@@ -262,9 +287,47 @@
     }];
 }
 
+- (void)Notification:(NSString *)limit link:(NSString *)link {
+    
+    if ([link isEqualToString:@"NO"] ) {
+        self.urlStr = [[NSString alloc] initWithFormat:@"%@user/notify?limit=%@",API_URL,limit];
+    } else if ([limit isEqualToString:@"NO"]) {
+        self.urlStr = link;
+    }
+    
+    NSDictionary *parameters = @{@"access_token":[self getAccessToken]};
+    self.manager = [AFHTTPRequestOperationManager manager];
+    self.manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    self.manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [self.manager.requestSerializer setValue:nil forHTTPHeaderField:@"X-Auth-Token"];
+    [self.manager GET:self.urlStr parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.delegate PFRatreeSamosornApi:self NotificationResponse:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.delegate PFRatreeSamosornApi:self NotificationErrorResponse:[error localizedDescription]];
+    }];
+}
+
+- (void)checkBadge {
+    
+    if (![[self.userDefaults objectForKey:@"deviceToken"] length] == 0) {
+        NSDictionary *parameters = @{@"access_token":[self getAccessToken]};
+        NSString *strUrl = [[NSString alloc] initWithFormat:@"%@user/notify/unopened",API_URL];
+        self.manager = [AFHTTPRequestOperationManager manager];
+        self.manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        self.manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [self.manager.requestSerializer setValue:nil forHTTPHeaderField:@"X-Auth-Token"];
+        [self.manager  GET:strUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [self.delegate PFRatreeSamosornApi:self checkBadgeResponse:responseObject];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [self.delegate PFRatreeSamosornApi:self checkBadgeErrorResponse:[error localizedDescription]];
+        }];
+    }
+    
+}
+
 #pragma mark - Menu
 - (void)getFoods {
-    self.urlStr = [[NSString alloc] initWithFormat:@"%@node/food",API_URL];
+    self.urlStr = [[NSString alloc] initWithFormat:@"%@node/food?limit=100",API_URL];
     [self.manager GET:self.urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.delegate PFRatreeSamosornApi:self getFoodsResponse:responseObject];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -282,7 +345,7 @@
 }
 
 - (void)getDrinks {
-    self.urlStr = [[NSString alloc] initWithFormat:@"%@node/drink",API_URL];
+    self.urlStr = [[NSString alloc] initWithFormat:@"%@node/drink?limit=100",API_URL];
     [self.manager GET:self.urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.delegate PFRatreeSamosornApi:self getDrinksResponse:responseObject];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -300,7 +363,7 @@
 }
 
 - (void)getActivityByID:(NSString *)activity_id {
-    NSString *urlStr = [[NSString alloc] initWithFormat:@"%@%@",API_URL,activity_id];
+    NSString *urlStr = [[NSString alloc] initWithFormat:@"%@activity/%@",API_URL,activity_id];
     [self.manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.delegate PFRatreeSamosornApi:self getActivityByIDResponse:responseObject];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -335,7 +398,7 @@
 }
 
 - (void)getGallery {
-    self.urlStr = [[NSString alloc] initWithFormat:@"%@node/gallery",API_URL];
+    self.urlStr = [[NSString alloc] initWithFormat:@"%@node/gallery?limit=100",API_URL];
     [self.manager GET:self.urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.delegate PFRatreeSamosornApi:self getGalleryResponse:responseObject];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -383,7 +446,7 @@
 }
 
 - (void)history {
-    self.urlStr = [[NSString alloc] initWithFormat:@"%@user/history/%@",API_URL,[self getUserId]];
+    self.urlStr = [[NSString alloc] initWithFormat:@"%@user/history/%@?limit=100",API_URL,[self getUserId]];
     [self.manager GET:self.urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.delegate PFRatreeSamosornApi:self getHistoryResponse:responseObject];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -392,7 +455,7 @@
 }
 
 - (void)getReward {
-    self.urlStr = [[NSString alloc] initWithFormat:@"%@reward",API_URL];
+    self.urlStr = [[NSString alloc] initWithFormat:@"%@reward?limit=100",API_URL];
     [self.manager GET:self.urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.delegate PFRatreeSamosornApi:self getRewardResponse:responseObject];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
