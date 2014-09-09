@@ -91,8 +91,6 @@ BOOL refreshDataNoti;
     [self.notifyOffline setObject:response forKey:@"notificationArray"];
     [self.notifyOffline synchronize];
     
-    NSLog(@"row = %d",[self.arrObj count]);
-    
     [self.tableView reloadData];
 }
 

@@ -102,7 +102,9 @@ NSTimer *timmer;
 
 -(void)checkN:(NSTimer *)timer
 {
-    [self.RatreeSamosornApi checkBadge];
+    if ([self.RatreeSamosornApi checkLogin] == 1){
+        [self.RatreeSamosornApi checkBadge];
+    }
 }
 
 - (void)PFRatreeSamosornApi:(id)sender checkBadgeResponse:(NSDictionary *)response {
