@@ -190,7 +190,7 @@
         self.detail.numberOfLines = lines;
         
         UILabel *descText = [[UILabel alloc] initWithFrame:frame];
-        descText.textColor = RGB(139, 94, 60);
+        descText.textColor = RGB(255, 255, 255);
         descText.text = self.detail.text;
         descText.numberOfLines = lines;
         [descText setFont:[UIFont systemFontOfSize:15]];

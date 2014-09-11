@@ -96,7 +96,7 @@
                 <view contentMode="scaleToFill" id="7u6-1n-DdT">
                     <rect key="frame" x="0.0" y="45" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.78213389598540151" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.83137254901960778" green="0.83529411764705885" blue="0.85098039215686272" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
