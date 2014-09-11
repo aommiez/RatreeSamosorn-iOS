@@ -57,7 +57,7 @@
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getFolderTypeByURLResponse:(NSDictionary *)response {
-    //NSLog(@"%@",response);
+    NSLog(@"folder %@",response);
     
     [self.waitView removeFromSuperview];
     
@@ -161,28 +161,53 @@
     
     if ([[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"type"] isEqualToString:@"folder"]) {
         
-        PFDetailFoldertypeViewController *foldertypeView = [[PFDetailFoldertypeViewController alloc] init];
-        if(IS_WIDESCREEN) {
-            foldertypeView = [[PFDetailFoldertypeViewController alloc] initWithNibName:@"PFDetailFoldertypeViewController_Wide" bundle:nil];
-        } else {
-            foldertypeView = [[PFDetailFoldertypeViewController alloc] initWithNibName:@"PFDetailFoldertypeViewController" bundle:nil];
-        }
-        self.navigationItem.title = @" ";
-        foldertypeView.obj = [self.arrObj objectAtIndex:indexPath.row];
-        foldertypeView.delegate = self;
-        [self.navigationController pushViewController:foldertypeView animated:YES];
+        NSString *children_length = [[NSString alloc] initWithFormat:@"%@",[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"children_length"]];
         
-    } else {
-        PFFoodAndDrinkDetailViewController *detailView = [[PFFoodAndDrinkDetailViewController alloc] init];
-        if(IS_WIDESCREEN) {
-            detailView = [[PFFoodAndDrinkDetailViewController alloc] initWithNibName:@"PFFoodAndDrinkDetailViewController_Wide" bundle:nil];
+        if ([children_length isEqualToString:@"0"]) {
+            [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                        message:@"Coming soon."
+                                       delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil] show];
+            
         } else {
-            detailView = [[PFFoodAndDrinkDetailViewController alloc] initWithNibName:@"PFFoodAndDrinkDetailViewController" bundle:nil];
+            PFDetailFoldertypeViewController *foldertypeView = [[PFDetailFoldertypeViewController alloc] init];
+            if(IS_WIDESCREEN) {
+                foldertypeView = [[PFDetailFoldertypeViewController alloc] initWithNibName:@"PFDetailFoldertypeViewController_Wide" bundle:nil];
+            } else {
+                foldertypeView = [[PFDetailFoldertypeViewController alloc] initWithNibName:@"PFDetailFoldertypeViewController" bundle:nil];
+            }
+            self.navigationItem.title = @" ";
+            foldertypeView.obj = [self.arrObj objectAtIndex:indexPath.row];
+            foldertypeView.delegate = self;
+            [self.navigationController pushViewController:foldertypeView animated:YES];
         }
-        self.navigationItem.title = @" ";
-        detailView.obj = [self.arrObj objectAtIndex:indexPath.row];
-        detailView.delegate = self;
-        [self.navigationController pushViewController:detailView animated:YES];
+        
+        
+    } else if ([[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"type"] isEqualToString:@"product"]) {
+        
+        NSString *children_length = [[NSString alloc] initWithFormat:@"%@",[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"children_length"]];
+        
+        if ([children_length isEqualToString:@"0"]) {
+            [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                        message:@"Coming soon."
+                                       delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil] show];
+            
+        } else {
+            PFFoodAndDrinkDetailViewController *detailView = [[PFFoodAndDrinkDetailViewController alloc] init];
+            if(IS_WIDESCREEN) {
+                detailView = [[PFFoodAndDrinkDetailViewController alloc] initWithNibName:@"PFFoodAndDrinkDetailViewController_Wide" bundle:nil];
+            } else {
+                detailView = [[PFFoodAndDrinkDetailViewController alloc] initWithNibName:@"PFFoodAndDrinkDetailViewController" bundle:nil];
+            }
+            self.navigationItem.title = @" ";
+            detailView.obj = [self.arrObj objectAtIndex:indexPath.row];
+            detailView.delegate = self;
+            [self.navigationController pushViewController:detailView animated:YES];
+        }
+        
     }
 }
 

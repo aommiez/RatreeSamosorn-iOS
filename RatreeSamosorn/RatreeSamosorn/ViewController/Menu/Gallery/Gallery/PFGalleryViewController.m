@@ -47,9 +47,24 @@ UIImage *theimage;
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
     HeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
-    
-    headerView.title.text = self.titleText;
+
     headerView.detail.text = self.detailText;
+    /*
+    CGRect frame = headerView.frame;
+    frame.size = [headerView.detail sizeOfMultiLineLabel];
+    [headerView.detail sizeOfMultiLineLabel];
+    [headerView.detail setFrame:frame];
+    int lines = headerView.detail.frame.size.height/15;
+    headerView.detail.numberOfLines = lines;
+    UILabel *descText = [[UILabel alloc] initWithFrame:frame];
+    descText.text = headerView.detail.text;
+    descText.numberOfLines = lines;
+    [descText setFont:[UIFont systemFontOfSize:15]];
+    descText.textColor = [UIColor whiteColor];
+    headerView.detail.alpha = 0;
+    [headerView addSubview:descText];
+    headerView.frame = CGRectMake(headerView.frame.origin.x, headerView.frame.origin.y, headerView.frame.size.width, descText.frame.size.height+18);
+     */
     
     return headerView;
 }

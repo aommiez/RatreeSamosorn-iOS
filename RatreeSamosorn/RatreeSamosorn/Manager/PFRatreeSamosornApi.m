@@ -85,7 +85,7 @@
 #pragma mark - Login
 - (void)loginWithFacebookToken:(NSString *)fb_token ios_device_token:(NSString *)ios_device_token {
     self.urlStr = [[NSString alloc] initWithFormat:@"%@oauth/facebook",API_URL];
-    NSDictionary *parameters = @{@"facebook_token":fb_token};
+    NSDictionary *parameters = @{@"facebook_token":fb_token , @"ios_device_token":[self.userDefaults objectForKey:@"deviceToken"]};
     [self.manager POST:self.urlStr parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.delegate PFRatreeSamosornApi:self loginWithFacebookTokenResponse:responseObject];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -96,7 +96,7 @@
 
 - (void)loginWithPassword:(NSString *)username password:(NSString *)password {
     self.urlStr = [[NSString alloc] initWithFormat:@"%@oauth/password",API_URL];
-    NSDictionary *parameters = @{@"username":username , @"password":password};
+    NSDictionary *parameters = @{@"username":username , @"password":password , @"ios_device_token":[self.userDefaults objectForKey:@"deviceToken"]};
     [self.manager POST:self.urlStr parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self.delegate PFRatreeSamosornApi:self loginWithPasswordResponse:responseObject];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -68,7 +68,7 @@ BOOL newMediaDetail;
     [descTextTitle setFont:[UIFont boldSystemFontOfSize:15]];
     [descTextTitle setTextColor:[UIColor colorWithRed:255.0/255.0 green:0.0/255.0 blue:107.0/255.0 alpha:1.0]];
     self.titlenews.alpha = 0;
-    descTextTitle.frame = CGRectMake(descTextTitle.frame.origin.x, descTextTitle.frame.origin.y, 200, descTextTitle.frame.size.height);
+    descTextTitle.frame = CGRectMake(descTextTitle.frame.origin.x, descTextTitle.frame.origin.y, 300, descTextTitle.frame.size.height);
     [self.headerView addSubview:descTextTitle];
     
     //time

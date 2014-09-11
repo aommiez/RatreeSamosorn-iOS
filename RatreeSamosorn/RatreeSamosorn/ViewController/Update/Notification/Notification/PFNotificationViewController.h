@@ -17,7 +17,7 @@
 
 @protocol PFNotificationViewControllerDelegate <NSObject>
 
-- (void)PFImageViewController:(id)sender viewPicture:(NSString *)link;
+- (void)PFNotificationViewController:(id)sender viewPicture:(NSString *)link;
 - (void)PFNotificationViewControllerBack;
 
 @end
@@ -38,5 +38,6 @@
 @property (strong, nonatomic) NSMutableArray *arrObj;
 
 @property (retain, nonatomic) NSString *paging;
+@property (strong, nonatomic) NSString *checkinternet;
 
 @end

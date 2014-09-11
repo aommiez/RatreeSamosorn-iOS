@@ -139,7 +139,7 @@ NSString *detailText;
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getFoodsResponse:(NSDictionary *)response {
-    //NSLog(@"%@",response);
+    NSLog(@"food %@",response);
     
     self.menu = @"Foods";
     

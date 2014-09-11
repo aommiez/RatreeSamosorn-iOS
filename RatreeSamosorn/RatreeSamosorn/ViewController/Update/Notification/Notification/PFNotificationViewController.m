@@ -66,9 +66,11 @@ BOOL refreshDataNoti;
 }
 
 - (void)PFRatreeSamosornApi:(id)sender NotificationResponse:(NSDictionary *)response {
-    NSLog(@"%@",response);
+    //NSLog(@"%@",response);
     
     [self.waitView removeFromSuperview];
+    
+    self.checkinternet = @"connect";
     
     if (!refreshDataNoti) {
         for (int i=0; i<[[response objectForKey:@"data"] count]; ++i) {
@@ -98,6 +100,8 @@ BOOL refreshDataNoti;
     //NSLog(@"%@",errorResponse);
     
     [self.waitView removeFromSuperview];
+    
+    self.checkinternet = @"error";
     
     if (!refreshDataNoti) {
         for (int i=0; i<[[[self.notifyOffline objectForKey:@"notificationArray"] objectForKey:@"data"] count]; ++i) {
@@ -263,7 +267,9 @@ BOOL refreshDataNoti;
             self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
             self.RatreeSamosornApi.delegate = self;
             
-            [self.RatreeSamosornApi Notification:@"NO" link:self.paging];
+            if ([self.checkinternet isEqualToString:@"connect"]) {
+                [self.RatreeSamosornApi Notification:@"NO" link:self.paging];
+            }
         }
     }
 }
@@ -275,8 +281,12 @@ BOOL refreshDataNoti;
     [UIView commitAnimations];
 }
 
-- (void)PFImageViewController:(id)sender viewPicture:(NSString *)link{
-    [self.delegate PFImageViewController:self viewPicture:link];
+- (void)PFUpdateDetailViewController:(id)sender viewPicture:(NSString *)link {
+    [self.delegate PFNotificationViewController:self viewPicture:link];
+}
+
+- (void)PFActivityDetailViewController:(id)sender viewPicture:(NSString *)link {
+    [self.delegate PFNotificationViewController:self viewPicture:link];
 }
 
 - (void)PFDetailViewControllerBack {

@@ -469,7 +469,9 @@ NSTimer *timmer;
             self.RatreeSamosornApi = [[PFRatreeSamosornApi alloc] init];
             self.RatreeSamosornApi.delegate = self;
             
-            [self.RatreeSamosornApi getFeeds:@"NO" link:self.paging];
+            if ([self.checkinternet isEqualToString:@"connect"]) {
+                [self.RatreeSamosornApi getFeeds:@"NO" link:self.paging];
+            }
         }
     }
 }
@@ -490,6 +492,10 @@ NSTimer *timmer;
 }
 
 - (void)PFActivityDetailViewController:(id)sender viewPicture:(NSString *)link {
+    [self.delegate PFImageViewController:self viewPicture:link];
+}
+
+- (void)PFNotificationViewController:(id)sender viewPicture:(NSString *)link {
     [self.delegate PFImageViewController:self viewPicture:link];
 }
 
