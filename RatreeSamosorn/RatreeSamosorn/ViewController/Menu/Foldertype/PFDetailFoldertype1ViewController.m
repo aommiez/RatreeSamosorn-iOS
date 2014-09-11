@@ -115,7 +115,7 @@
         cell.thumbnails.contentMode = UIViewContentModeScaleAspectFill;
         
         NSString *img = [[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
-        NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/79/79/"];
+        NSString *urlimg = [[NSString alloc] initWithFormat:@"%@",img];
         
         [DLImageLoader loadImageFromURL:urlimg
                               completed:^(NSError *error, NSData *imgData) {
@@ -140,7 +140,7 @@
         cell.image.contentMode = UIViewContentModeScaleAspectFill;
         
         NSString *img = [[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
-        NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/79/79/"];
+        NSString *urlimg = [[NSString alloc] initWithFormat:@"%@",img];
         
         [DLImageLoader loadImageFromURL:urlimg
                               completed:^(NSError *error, NSData *imgData) {
@@ -148,7 +148,7 @@
                               }];
         
         cell.name.text = [[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"name"];
-        cell.price.text = [[NSString alloc] initWithFormat:@"%@",[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"price"]];
+        cell.price.text = [[NSString alloc] initWithFormat:@"%@%@",[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"price"],@" ฿"];
         cell.detail.text = [[NSString alloc] initWithString:[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"detail"]];
         
         return cell;

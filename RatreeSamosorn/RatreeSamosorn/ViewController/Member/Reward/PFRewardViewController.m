@@ -49,8 +49,6 @@
     
     NSString *url = [[NSString alloc] initWithFormat:@"%@%@%@%@",@"http://app.pla2.com/rtsms/webredeem/index/1/",self.reward_id,@"/",self.user_id];
     
-    NSLog(@"%@",url);
-    
     NSURLRequest *req = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     self.webView.delegate = self;
     self.webView.scalesPageToFit = YES;

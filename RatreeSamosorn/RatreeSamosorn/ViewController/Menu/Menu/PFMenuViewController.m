@@ -94,7 +94,7 @@ NSString *detailText;
     self.sum = [[NSMutableArray alloc] init];
     
     self.foodsBt.backgroundColor = [UIColor clearColor];
-    [self.foodsBt.titleLabel setTextColor:[UIColor whiteColor]];
+    [self.foodsBt.titleLabel setTextColor:RGB(255, 255, 255)];
     self.drinksBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
     [self.drinksBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.activityBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
@@ -139,7 +139,7 @@ NSString *detailText;
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getFoodsResponse:(NSDictionary *)response {
-    NSLog(@"food %@",response);
+    //NSLog(@"food %@",response);
     
     self.menu = @"Foods";
     
@@ -358,7 +358,7 @@ NSString *detailText;
             cell.image.contentMode = UIViewContentModeScaleAspectFill;
             
             NSString *img = [[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
-            NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/100/100/"];
+            NSString *urlimg = [[NSString alloc] initWithFormat:@"%@",img];
             
             [DLImageLoader loadImageFromURL:urlimg
                                   completed:^(NSError *error, NSData *imgData) {
@@ -366,7 +366,7 @@ NSString *detailText;
                                   }];
             
             cell.name.text = [[NSString alloc] initWithString:[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"name"]];
-            cell.price.text = [[NSString alloc] initWithFormat:@"%@",[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"price"]];
+            cell.price.text = [[NSString alloc] initWithFormat:@"%@%@",[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"price"],@" ฿"];
             
             cell.detail.text = [[NSString alloc] initWithString:[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"detail"]];
             
@@ -386,7 +386,7 @@ NSString *detailText;
             cell.thumbnails.contentMode = UIViewContentModeScaleAspectFill;
             
             NSString *img = [[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
-            NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/100/100/"];
+            NSString *urlimg = [[NSString alloc] initWithFormat:@"%@",img];
             
             [DLImageLoader loadImageFromURL:urlimg
                                   completed:^(NSError *error, NSData *imgData) {
@@ -416,7 +416,7 @@ NSString *detailText;
             cell.image.contentMode = UIViewContentModeScaleAspectFill;
             
             NSString *img = [[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
-            NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/100/100/"];
+            NSString *urlimg = [[NSString alloc] initWithFormat:@"%@",img];
             
             [DLImageLoader loadImageFromURL:urlimg
                                   completed:^(NSError *error, NSData *imgData) {
@@ -424,7 +424,7 @@ NSString *detailText;
                                   }];
             
             cell.name.text = [[NSString alloc] initWithString:[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"name"]];
-            cell.price.text = [[NSString alloc] initWithFormat:@"%@",[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"price"]];
+            cell.price.text = [[NSString alloc] initWithFormat:@"%@%@",[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"price"],@" ฿"];
             
             cell.detail.text = [[NSString alloc] initWithString:[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"detail"]];
             
@@ -444,7 +444,7 @@ NSString *detailText;
             cell.thumbnails.contentMode = UIViewContentModeScaleAspectFill;
             
             NSString *img = [[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
-            NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/100/100/"];
+            NSString *urlimg = [[NSString alloc] initWithFormat:@"%@",img];
             
             [DLImageLoader loadImageFromURL:urlimg
                                   completed:^(NSError *error, NSData *imgData) {
@@ -471,7 +471,7 @@ NSString *detailText;
         cell.image.contentMode = UIViewContentModeScaleAspectFill;
         
         NSString *img = [[[self.arrObjGalleryAlbum objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
-        NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/79/79/"];
+        NSString *urlimg = [[NSString alloc] initWithFormat:@"%@",img];
         
         [DLImageLoader loadImageFromURL:urlimg
                               completed:^(NSError *error, NSData *imgData) {
@@ -618,7 +618,7 @@ NSString *detailText;
     self.tableView.hidden = NO;
     self.CalendarView.hidden = YES;
     self.foodsBt.backgroundColor = [UIColor clearColor];
-    [self.foodsBt.titleLabel setTextColor:[UIColor whiteColor]];
+    [self.foodsBt.titleLabel setTextColor:RGB(255, 255, 255)];
     self.drinksBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
     [self.drinksBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.activityBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
@@ -636,7 +636,7 @@ NSString *detailText;
     self.foodsBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
     [self.foodsBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.drinksBt.backgroundColor = [UIColor clearColor];
-    [self.drinksBt.titleLabel setTextColor:[UIColor whiteColor]];
+    [self.drinksBt.titleLabel setTextColor:RGB(255, 255, 255)];
     self.activityBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
     [self.activityBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.galleryBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
@@ -654,7 +654,7 @@ NSString *detailText;
     self.drinksBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
     [self.drinksBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.activityBt.backgroundColor = [UIColor clearColor];
-    [self.activityBt.titleLabel setTextColor:[UIColor whiteColor]];
+    [self.activityBt.titleLabel setTextColor:RGB(255, 255, 255)];
     self.galleryBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
     [self.galleryBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.menu = @"Activity";
@@ -671,7 +671,7 @@ NSString *detailText;
     self.activityBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
     [self.activityBt.titleLabel setTextColor:RGB(109, 110, 113)];
     self.galleryBt.backgroundColor = [UIColor clearColor];
-    [self.galleryBt.titleLabel setTextColor:[UIColor whiteColor]];
+    [self.galleryBt.titleLabel setTextColor:RGB(255, 255, 255)];
     self.menu = @"Gallery";
     [self.RatreeSamosornApi getGallery];
 }

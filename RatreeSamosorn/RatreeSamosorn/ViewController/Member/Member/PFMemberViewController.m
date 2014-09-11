@@ -1544,7 +1544,7 @@ NSTimer *timmer;
     [bgPoint setCornerRadius:7.0f];
     
     NSString *img = [[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"thumb"] objectForKey:@"url"];
-    NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/100/100/"];
+    NSString *urlimg = [[NSString alloc] initWithFormat:@"%@",img];
     
     [DLImageLoader loadImageFromURL:urlimg
                           completed:^(NSError *error, NSData *imgData) {

@@ -106,7 +106,7 @@ NSTimer *timmer;
 - (NSArray *)imageToArray:(NSDictionary *)images {
     int countPicture = [[images objectForKey:@"data"] count];
     for (int i = 0; i < countPicture; i++) {
-        NSString *urlStr = [[NSString alloc] initWithFormat:@"%@%@",[[[images objectForKey:@"data"] objectAtIndex:i] objectForKey:@"url"],@"custom/320/180/"];
+        NSString *urlStr = [[NSString alloc] initWithFormat:@"%@",[[[images objectForKey:@"data"] objectAtIndex:i] objectForKey:@"url"]];
         
         NSURL *url = [[NSURL alloc] initWithString:urlStr];
         NSData *data = [NSData dataWithContentsOfURL : url];

@@ -71,7 +71,7 @@ BOOL newMediaDetail;
     [self.detailView addSubview:descText];
     
     NSString *img = [[self.obj objectForKey:@"thumb"] objectForKey:@"url"];
-    NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/100/100/"];
+    NSString *urlimg = [[NSString alloc] initWithFormat:@"%@",img];
     
     [DLImageLoader loadImageFromURL:urlimg
                           completed:^(NSError *error, NSData *imgData) {
@@ -98,9 +98,9 @@ BOOL newMediaDetail;
     self.tableView.tableFooterView = fv;
     
     if (IS_WIDESCREEN) {
-        self.textCommentView.frame = CGRectMake(0, 464+60, 320, 356);
+        self.textCommentView.frame = CGRectMake(0, 464+60, 320, 400);
     } else {
-        self.textCommentView.frame = CGRectMake(0, 440, 320, 356);
+        self.textCommentView.frame = CGRectMake(0, 440, 320, 400);
     }
     
     self.textComment.delegate = self;
@@ -276,19 +276,21 @@ BOOL newMediaDetail;
     }
     
     [UIView mt_animateViews:@[self.textCommentView] duration:0.33 timingFunction:kMTEaseOutSine animations:^{
-        self.textCommentView.frame = CGRectMake(0, 250+60, self.textCommentView.frame.size.width, self.textCommentView.frame.size.height);
+        self.textCommentView.frame = CGRectMake(0, 206+60, self.textCommentView.frame.size.width, self.textCommentView.frame.size.height);
+
     } completion:^{
         
-        self.tableView.frame = CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, 320, self.tableView.frame.size.height-215);
+        self.tableView.frame = CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, 320, self.tableView.frame.size.height-259);
         //214
         if (IS_WIDESCREEN) {
             
-            self.textCommentView.frame = CGRectMake(0, 250+60, self.textCommentView.frame.size.width, self.textCommentView.frame.size.height);
+            self.textCommentView.frame = CGRectMake(0, 206+60, self.textCommentView.frame.size.width, self.textCommentView.frame.size.height);
+            
             if ([self.arrObj count] > 0)
                 [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.arrObj count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         } else {
             
-            self.textCommentView.frame = CGRectMake(0, 220, self.textCommentView.frame.size.width, self.textCommentView.frame.size.height);
+            self.textCommentView.frame = CGRectMake(0, 176, self.textCommentView.frame.size.width, self.textCommentView.frame.size.height);
             if ([self.arrObj count] > 0)
                 [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.arrObj count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }
@@ -553,7 +555,7 @@ BOOL newMediaDetail;
     cell.userImg.contentMode = UIViewContentModeScaleAspectFill;
     
     NSString *img = [[[[self.arrObj objectAtIndex:indexPath.row] objectForKey:@"user"] objectForKey:@"picture"] objectForKey:@"url"];
-    NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",img,@"custom/60/60/"];
+    NSString *urlimg = [[NSString alloc] initWithFormat:@"%@",img];
     
     [DLImageLoader loadImageFromURL:urlimg
                           completed:^(NSError *error, NSData *imgData) {

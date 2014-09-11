@@ -28,8 +28,8 @@
                     </collectionViewFlowLayout>
                     <cells/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="23"/>
-                        <outlet property="delegate" destination="-1" id="24"/>
+                        <outlet property="dataSource" destination="-1" id="b3a-bL-NNd"/>
+                        <outlet property="delegate" destination="-1" id="S7j-If-Bz3"/>
                     </connections>
                 </collectionView>
             </subviews>

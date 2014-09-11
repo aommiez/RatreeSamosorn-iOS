@@ -71,7 +71,7 @@
     self.detail.text = [self.obj objectForKey:@"detail"];
     
     //1
-    NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",[[self.obj objectForKey:@"thumb"] objectForKey:@"url"],@"?width=800&height=600"];
+    NSString *urlimg = [[NSString alloc] initWithFormat:@"%@",[[self.obj objectForKey:@"thumb"] objectForKey:@"url"]];
     
     [DLImageLoader loadImageFromURL:urlimg
                           completed:^(NSError *error, NSData *imgData) {
@@ -209,7 +209,7 @@
         
         int xOffset = 0;
         
-        NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",[[[response objectForKey:@"data"] objectAtIndex:0] objectForKey:@"url"],@"custom/800/600/"];
+        NSString *urlimg = [[NSString alloc] initWithFormat:@"%@",[[[response objectForKey:@"data"] objectAtIndex:0] objectForKey:@"url"]];
         
         [DLImageLoader loadImageFromURL:urlimg
                               completed:^(NSError *error, NSData *imgData) {
@@ -230,7 +230,7 @@
             
             img.frame = CGRectMake(xOffset, 0, 70, 70);
             
-            NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",[[[response objectForKey:@"data"] objectAtIndex:i] objectForKey:@"url"],@"custom/800/600/"];
+            NSString *urlimg = [[NSString alloc] initWithFormat:@"%@",[[[response objectForKey:@"data"] objectAtIndex:i] objectForKey:@"url"]];
             
             [DLImageLoader loadImageFromURL:urlimg
                                   completed:^(NSError *error, NSData *imgData) {
@@ -311,7 +311,7 @@
         
         int xOffset = 0;
         
-        NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",[[[[self.DetailOffline objectForKey:@"DetailArray"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"url"],@"custom/800/600/"];
+        NSString *urlimg = [[NSString alloc] initWithFormat:@"%@",[[[[self.DetailOffline objectForKey:@"DetailArray"] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"url"]];
         
         [DLImageLoader loadImageFromURL:urlimg
                               completed:^(NSError *error, NSData *imgData) {
@@ -332,7 +332,7 @@
             
             img.frame = CGRectMake(xOffset, 0, 70, 70);
             
-            NSString *urlimg = [[NSString alloc] initWithFormat:@"%@%@",[[[[self.DetailOffline objectForKey:@"DetailArray"] objectForKey:@"data"] objectAtIndex:i] objectForKey:@"url"],@"custom/800/600/"];
+            NSString *urlimg = [[NSString alloc] initWithFormat:@"%@",[[[[self.DetailOffline objectForKey:@"DetailArray"] objectForKey:@"data"] objectAtIndex:i] objectForKey:@"url"]];
             
             [DLImageLoader loadImageFromURL:urlimg
                                   completed:^(NSError *error, NSData *imgData) {
@@ -369,12 +369,13 @@
     } else {
         webView = [[PFOrderViewController alloc] initWithNibName:@"PFOrderViewController" bundle:nil];
     }
+    self.navigationItem.title = @" ";
     webView.delegate = self;
     webView.product_id = [self.obj objectForKey:@"id"];
     [self.navigationController pushViewController:webView animated:YES];
 }
 
-- (void)PFWebViewControllerBack {
+- (void)PFOrderViewControllerBack {
     self.navigationItem.title = [self.obj objectForKey:@"name"];
     
 }

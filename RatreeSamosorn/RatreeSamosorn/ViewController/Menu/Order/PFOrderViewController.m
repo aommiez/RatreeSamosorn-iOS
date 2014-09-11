@@ -46,7 +46,7 @@
     self.token = [self.RatreeSamosornApi getAccessToken];
     self.user_id = [self.RatreeSamosornApi getUserId];
     
-    NSString *url = [[NSString alloc] initWithFormat:@"%@%@%@%@%@",@"http://app.pla2.com/rtsms/weborder/index/1/",self.product_id,@"/",self.user_id,self.token];
+    NSString *url = [[NSString alloc] initWithFormat:@"%@%@%@%@%@%@",@"http://app.pla2.com/rtsms/weborder/index/1/",self.product_id,@"/",self.user_id,@"/",self.token];
     
     NSURLRequest *req = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     self.webView.delegate = self;

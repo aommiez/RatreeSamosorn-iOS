@@ -289,12 +289,6 @@
 		52CA851219BB165A00DC4CE5 /* linePrevNe.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CA850D19BB165A00DC4CE5 /* linePrevNe.png */; };
 		52CB8C1119BEE0D5005969E0 /* PFNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CB8C0319BEE0D5005969E0 /* PFNotificationCell.m */; };
 		52CB8C1219BEE0D5005969E0 /* PFNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52CB8C0419BEE0D5005969E0 /* PFNotificationCell.xib */; };
-		52CB8C1319BEE0D5005969E0 /* NotBoxNoReadIp4.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CB8C0619BEE0D5005969E0 /* NotBoxNoReadIp4.png */; };
-		52CB8C1419BEE0D5005969E0 /* NotBoxNoReadIp4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CB8C0719BEE0D5005969E0 /* NotBoxNoReadIp4@2x.png */; };
-		52CB8C1519BEE0D5005969E0 /* NotBoxNoReadIp5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CB8C0819BEE0D5005969E0 /* NotBoxNoReadIp5@2x.png */; };
-		52CB8C1619BEE0D5005969E0 /* NotBoxReadedIp4.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CB8C0919BEE0D5005969E0 /* NotBoxReadedIp4.png */; };
-		52CB8C1719BEE0D5005969E0 /* NotBoxReadedIp4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CB8C0A19BEE0D5005969E0 /* NotBoxReadedIp4@2x.png */; };
-		52CB8C1819BEE0D5005969E0 /* NotBoxReadedIp5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CB8C0B19BEE0D5005969E0 /* NotBoxReadedIp5@2x.png */; };
 		52CB8C1919BEE0D5005969E0 /* PFNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CB8C0E19BEE0D5005969E0 /* PFNotificationViewController.m */; };
 		52CB8C1B19BEE0D5005969E0 /* PFNotificationViewController_Wide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52CB8C1019BEE0D5005969E0 /* PFNotificationViewController_Wide.xib */; };
 		52CF715A19B85F7300393822 /* BodyCommentBoxIp5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52CF714D19B85F7300393822 /* BodyCommentBoxIp5@2x.png */; };
@@ -790,12 +784,6 @@
 		52CB8C0219BEE0D5005969E0 /* PFNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFNotificationCell.h; sourceTree = "<group>"; };
 		52CB8C0319BEE0D5005969E0 /* PFNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFNotificationCell.m; sourceTree = "<group>"; };
 		52CB8C0419BEE0D5005969E0 /* PFNotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PFNotificationCell.xib; sourceTree = "<group>"; };
-		52CB8C0619BEE0D5005969E0 /* NotBoxNoReadIp4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotBoxNoReadIp4.png; sourceTree = "<group>"; };
-		52CB8C0719BEE0D5005969E0 /* NotBoxNoReadIp4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotBoxNoReadIp4@2x.png"; sourceTree = "<group>"; };
-		52CB8C0819BEE0D5005969E0 /* NotBoxNoReadIp5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotBoxNoReadIp5@2x.png"; sourceTree = "<group>"; };
-		52CB8C0919BEE0D5005969E0 /* NotBoxReadedIp4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotBoxReadedIp4.png; sourceTree = "<group>"; };
-		52CB8C0A19BEE0D5005969E0 /* NotBoxReadedIp4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotBoxReadedIp4@2x.png"; sourceTree = "<group>"; };
-		52CB8C0B19BEE0D5005969E0 /* NotBoxReadedIp5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotBoxReadedIp5@2x.png"; sourceTree = "<group>"; };
 		52CB8C0D19BEE0D5005969E0 /* PFNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFNotificationViewController.h; sourceTree = "<group>"; };
 		52CB8C0E19BEE0D5005969E0 /* PFNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFNotificationViewController.m; sourceTree = "<group>"; };
 		52CB8C1019BEE0D5005969E0 /* PFNotificationViewController_Wide.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PFNotificationViewController_Wide.xib; sourceTree = "<group>"; };
@@ -1843,7 +1831,6 @@
 			isa = PBXGroup;
 			children = (
 				52CB8C0119BEE0D5005969E0 /* Cell */,
-				52CB8C0519BEE0D5005969E0 /* Images */,
 				52CB8C0C19BEE0D5005969E0 /* Notification */,
 			);
 			path = Notification;
@@ -1857,19 +1844,6 @@
 				52CB8C0419BEE0D5005969E0 /* PFNotificationCell.xib */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		52CB8C0519BEE0D5005969E0 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				52CB8C0619BEE0D5005969E0 /* NotBoxNoReadIp4.png */,
-				52CB8C0719BEE0D5005969E0 /* NotBoxNoReadIp4@2x.png */,
-				52CB8C0819BEE0D5005969E0 /* NotBoxNoReadIp5@2x.png */,
-				52CB8C0919BEE0D5005969E0 /* NotBoxReadedIp4.png */,
-				52CB8C0A19BEE0D5005969E0 /* NotBoxReadedIp4@2x.png */,
-				52CB8C0B19BEE0D5005969E0 /* NotBoxReadedIp5@2x.png */,
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		52CB8C0C19BEE0D5005969E0 /* Notification */ = {
@@ -2315,7 +2289,6 @@
 				5221875D19B45AA90064DC86 /* PFLanguageViewController_Wide.xib in Resources */,
 				5230619E198B9621007D2F4F /* stamp.png in Resources */,
 				523061A2198B9707007D2F4F /* button_point.png in Resources */,
-				52CB8C1819BEE0D5005969E0 /* NotBoxReadedIp5@2x.png in Resources */,
 				52CA850F19BB165A00DC4CE5 /* FootCommentBoxNeIp5@2x.png in Resources */,
 				52273EB11988F0400023F87A /* en_menu_off@2x.png in Resources */,
 				52B49C9919AD9F8D0086DFFF /* next.png in Resources */,
@@ -2330,7 +2303,6 @@
 				52273EA31988F0380023F87A /* en_update_off.png in Resources */,
 				527E83AA1989FB7F00797DB3 /* Powered@2x.png in Resources */,
 				52B49C9519AD9F8D0086DFFF /* ic_lock@2x.png in Resources */,
-				52CB8C1719BEE0D5005969E0 /* NotBoxReadedIp4@2x.png in Resources */,
 				5221876319B45B3B0064DC86 /* bt_setting@2x.png in Resources */,
 				52AC986E19B58E53007007D8 /* bt_order.png in Resources */,
 				522396CC19C0303900B3496D /* PFDetailFoldertypeViewController.xib in Resources */,
@@ -2348,7 +2320,6 @@
 				523061B1198B99B5007D2F4F /* line2.png in Resources */,
 				52306195198B9621007D2F4F /* bt_add@2x.png in Resources */,
 				527E83B11989FE0A00797DB3 /* ic_mail.png in Resources */,
-				52CB8C1519BEE0D5005969E0 /* NotBoxNoReadIp5@2x.png in Resources */,
 				522396DE19C0311A00B3496D /* PFEditDetailViewController.xib in Resources */,
 				52B49C9619AD9F8D0086DFFF /* ic_mail@2x.png in Resources */,
 				52306199198B9621007D2F4F /* bt_number@2x.png in Resources */,
@@ -2365,7 +2336,6 @@
 				52306198198B9621007D2F4F /* bt_number.png in Resources */,
 				52B49C9119AD9F8D0086DFFF /* ic_birthday@2x.png in Resources */,
 				52CA850E19BB165A00DC4CE5 /* BodyCommentBoxNeIp5@2x.png in Resources */,
-				52CB8C1419BEE0D5005969E0 /* NotBoxNoReadIp4@2x.png in Resources */,
 				5230619B198B9621007D2F4F /* ic_bt_add@2x.png in Resources */,
 				5245F900198B433800D40E4A /* PFDetailCell.xib in Resources */,
 				5230619A198B9621007D2F4F /* ic_bt_add.png in Resources */,
@@ -2395,7 +2365,6 @@
 				52B49C8E19AD9F8D0086DFFF /* PFAccountCell.xib in Resources */,
 				52306196198B9621007D2F4F /* bt_delete.png in Resources */,
 				52CF715A19B85F7300393822 /* BodyCommentBoxIp5@2x.png in Resources */,
-				52CB8C1319BEE0D5005969E0 /* NotBoxNoReadIp4.png in Resources */,
 				522396C219C02F8D00B3496D /* PFMemberViewController.xib in Resources */,
 				52CB8C1B19BEE0D5005969E0 /* PFNotificationViewController_Wide.xib in Resources */,
 				52273ED11988F04F0023F87A /* th_menu_off@2x.png in Resources */,
@@ -2484,7 +2453,6 @@
 				52DD2E1E198BA00D001B8ABE /* PFRewardViewController_Wide.xib in Resources */,
 				523061AD198B981B007D2F4F /* correct_icon@2x.png in Resources */,
 				522396C819C0300800B3496D /* PFFoodAndDrinkDetailViewController.xib in Resources */,
-				52CB8C1619BEE0D5005969E0 /* NotBoxReadedIp4.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
