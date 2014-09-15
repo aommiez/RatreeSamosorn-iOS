@@ -19,6 +19,10 @@
     return self;
 }
 
+- (IBAction)headerTapped:(id)sender {
+    [self.delegate header];
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

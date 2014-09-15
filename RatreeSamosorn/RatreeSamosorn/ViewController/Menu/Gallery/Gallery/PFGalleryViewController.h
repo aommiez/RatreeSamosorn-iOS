@@ -10,6 +10,8 @@
 #import "DLImageLoader.h"
 #import "MyCell.h"
 
+#import "PFRatreeSamosornApi.h"
+
 @protocol PFGalleryViewControllerDelegate <NSObject>
 
 - (void)PFGalleryViewController:(id)sender sum:(NSMutableArray *)sum current:(NSString *)current;
@@ -22,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @property (assign, nonatomic) id < PFGalleryViewControllerDelegate > delegate;
+@property (strong, nonatomic) PFRatreeSamosornApi *RatreeSamosornApi;
 
 @property (strong, nonatomic) NSMutableArray *arrObj;
 @property (strong, nonatomic) NSMutableArray *sumimg;

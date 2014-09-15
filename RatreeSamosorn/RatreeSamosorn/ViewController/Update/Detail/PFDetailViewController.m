@@ -411,6 +411,8 @@ BOOL newMediaDetail;
     NSString *urlString = [[NSString alloc]init];
     urlString = [[NSString alloc] initWithFormat:@"%@",[[self.obj objectForKey:@"node"] objectForKey:@"share"]];
     
+    NSLog(@"%@",urlString);
+    
     SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
     [controller addURL:[NSURL URLWithString:urlString]];
     [self presentViewController:controller animated:YES completion:Nil];

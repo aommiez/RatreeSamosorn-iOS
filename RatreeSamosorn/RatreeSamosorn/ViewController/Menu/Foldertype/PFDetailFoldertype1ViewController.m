@@ -57,7 +57,7 @@
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getFolderTypeByURLResponse:(NSDictionary *)response {
-    NSLog(@"folder %@",response);
+    //NSLog(@"folder %@",response);
     
     [self.waitView removeFromSuperview];
     
