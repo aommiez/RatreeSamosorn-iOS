@@ -176,6 +176,7 @@
         d = [NSDate dateWithDateComponents:info];
         if([d compare:dateFromString1]==NSOrderedDescending) break;
     }
+    
 }
 
 - (void) generateRandomDataForStartDate:(NSDate*)start endDate:(NSDate*)end{
