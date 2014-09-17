@@ -131,7 +131,6 @@ NSString *detailText;
 
 -(void)checkBar:(NSTimer *)timer
 {
-    NSLog(@"test");
     if ([self.menu isEqualToString:@"Foods"]) {
         self.foodsBt.backgroundColor = [UIColor clearColor];
         [self.foodsBt.titleLabel setTextColor:RGB(255, 255, 255)];

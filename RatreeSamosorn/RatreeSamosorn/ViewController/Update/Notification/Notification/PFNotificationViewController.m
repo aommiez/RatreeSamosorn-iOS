@@ -303,6 +303,7 @@ BOOL refreshDataNoti;
         // 'Back' button was pressed.  We know this is true because self is no longer
         // in the navigation stack.
         if([self.delegate respondsToSelector:@selector(PFNotificationViewControllerBack)]){
+            [self.RatreeSamosornApi Notification:@"15" link:@"NO"];
             [self.delegate PFNotificationViewControllerBack];
         }
     }
