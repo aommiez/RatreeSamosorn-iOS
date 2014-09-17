@@ -67,15 +67,23 @@ NSString *detailText;
     if (![[self.RatreeSamosornApi getLanguage] isEqualToString:@"TH"]) {
         self.navItem.title = @"Menu";
         [self.foodsBt setTitle:@"Foods" forState:UIControlStateNormal];
+        [self.foodsBt.titleLabel setTextColor:RGB(255, 255, 255)];
         [self.drinksBt setTitle:@"Drinks" forState:UIControlStateNormal];
+        [self.drinksBt.titleLabel setTextColor:RGB(109, 110, 113)];
         [self.activityBt setTitle:@"Activity" forState:UIControlStateNormal];
+        [self.activityBt.titleLabel setTextColor:RGB(109, 110, 113)];
         [self.galleryBt setTitle:@"Gallery" forState:UIControlStateNormal];
+        [self.galleryBt.titleLabel setTextColor:RGB(109, 110, 113)];
     } else {
         self.navItem.title = @"รายการ";
         [self.foodsBt setTitle:@"อาหาร" forState:UIControlStateNormal];
+        [self.foodsBt.titleLabel setTextColor:RGB(255, 255, 255)];
         [self.drinksBt setTitle:@"เครื่องดื่ม" forState:UIControlStateNormal];
+        [self.drinksBt.titleLabel setTextColor:RGB(109, 110, 113)];
         [self.activityBt setTitle:@"กิจกรรม" forState:UIControlStateNormal];
+        [self.activityBt.titleLabel setTextColor:RGB(109, 110, 113)];
         [self.galleryBt setTitle:@"อัลบั้ม" forState:UIControlStateNormal];
+        [self.galleryBt.titleLabel setTextColor:RGB(109, 110, 113)];
     }
     
     UIView *hv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 35)];
@@ -108,6 +116,8 @@ NSString *detailText;
     self.viewController.delegate = self;
     [self.CalendarView addSubview:self.viewController.view];
     
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkBar:) userInfo:nil repeats:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -117,6 +127,51 @@ NSString *detailText;
 
 - (NSUInteger)supportedInterfaceOrientations{
     return UIInterfaceOrientationMaskPortrait;
+}
+
+-(void)checkBar:(NSTimer *)timer
+{
+    NSLog(@"test");
+    if ([self.menu isEqualToString:@"Foods"]) {
+        self.foodsBt.backgroundColor = [UIColor clearColor];
+        [self.foodsBt.titleLabel setTextColor:RGB(255, 255, 255)];
+        self.drinksBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+        [self.drinksBt.titleLabel setTextColor:RGB(109, 110, 113)];
+        self.activityBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+        [self.activityBt.titleLabel setTextColor:RGB(109, 110, 113)];
+        self.galleryBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+        [self.galleryBt.titleLabel setTextColor:RGB(109, 110, 113)];
+    }
+    if ([self.menu isEqualToString:@"Drinks"]) {
+        self.foodsBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+        [self.foodsBt.titleLabel setTextColor:RGB(109, 110, 113)];
+        self.drinksBt.backgroundColor = [UIColor clearColor];
+        [self.drinksBt.titleLabel setTextColor:RGB(255, 255, 255)];
+        self.activityBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+        [self.activityBt.titleLabel setTextColor:RGB(109, 110, 113)];
+        self.galleryBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+        [self.galleryBt.titleLabel setTextColor:RGB(109, 110, 113)];
+    }
+    if ([self.menu isEqualToString:@"Activity"]) {
+        self.foodsBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+        [self.foodsBt.titleLabel setTextColor:RGB(109, 110, 113)];
+        self.drinksBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+        [self.drinksBt.titleLabel setTextColor:RGB(109, 110, 113)];
+        self.activityBt.backgroundColor = [UIColor clearColor];
+        [self.activityBt.titleLabel setTextColor:RGB(255, 255, 255)];
+        self.galleryBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+        [self.galleryBt.titleLabel setTextColor:RGB(109, 110, 113)];
+    }
+    if ([self.menu isEqualToString:@"Gallery"]) {
+        self.foodsBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+        [self.foodsBt.titleLabel setTextColor:RGB(109, 110, 113)];
+        self.drinksBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+        [self.drinksBt.titleLabel setTextColor:RGB(109, 110, 113)];
+        self.activityBt.backgroundColor = [UIColor colorWithRed:242 green:242 blue:242 alpha:1];
+        [self.activityBt.titleLabel setTextColor:RGB(109, 110, 113)];
+        self.galleryBt.backgroundColor = [UIColor clearColor];
+        [self.galleryBt.titleLabel setTextColor:RGB(255, 255, 255)];
+    }
 }
 
 - (void)PFActivityCalendarViewController:(id)sender didRowSelect:(NSDictionary *)dict {

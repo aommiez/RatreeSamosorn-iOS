@@ -56,9 +56,10 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
         <navigationController definesPresentationContext="YES" id="otp-b0-sQE">
+            <tabBarItem key="tabBarItem" title="Item" id="bp1-ia-5h3"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
-            <nil key="simulatedBottomBarMetrics"/>
+            <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZcN-n3-pU2" customClass="CRGradientNavigationBar">
