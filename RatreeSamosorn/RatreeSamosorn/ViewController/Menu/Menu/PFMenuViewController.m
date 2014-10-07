@@ -246,7 +246,7 @@ NSString *detailText;
 }
 
 - (void)PFRatreeSamosornApi:(id)sender getDrinksResponse:(NSDictionary *)response {
-    //NSLog(@"%@",response);
+    //NSLog(@"drink %@",response);
     
     self.menu = @"Drinks";
     
@@ -547,10 +547,11 @@ NSString *detailText;
     
     if ([self.menu isEqualToString:@"Foods"]) {
         
-        self.navItem.title = @" ";
-        [self.delegate HideTabbar];
         
         if ([[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"type"] isEqualToString:@"product"]) {
+            
+            self.navItem.title = @" ";
+            [self.delegate HideTabbar];
             
             PFFoodAndDrinkDetailViewController *detailView = [[PFFoodAndDrinkDetailViewController alloc] init];
             if(IS_WIDESCREEN) {
@@ -564,25 +565,39 @@ NSString *detailText;
             
         } else {
             
-            PFDetailFoldertypeViewController *foldertypeView = [[PFDetailFoldertypeViewController alloc] init];
-            if(IS_WIDESCREEN) {
-                foldertypeView = [[PFDetailFoldertypeViewController alloc] initWithNibName:@"PFDetailFoldertypeViewController_Wide" bundle:nil];
+            NSString *children_length = [[NSString alloc] initWithFormat:@"%@",[[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"children_length"]];
+            
+            if ([children_length isEqualToString:@"0"]) {
+                [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                            message:@"Coming soon."
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil] show];
+                
             } else {
+                
+                self.navItem.title = @" ";
+                [self.delegate HideTabbar];
+            
+                PFDetailFoldertypeViewController *foldertypeView = [[PFDetailFoldertypeViewController alloc] init];
+                if(IS_WIDESCREEN) {
+                    foldertypeView = [[PFDetailFoldertypeViewController alloc] initWithNibName:@"PFDetailFoldertypeViewController_Wide" bundle:nil];
+                } else {
                 foldertypeView = [[PFDetailFoldertypeViewController alloc] initWithNibName:@"PFDetailFoldertypeViewController" bundle:nil];
+                }
+                foldertypeView.obj = [self.arrObjFood objectAtIndex:indexPath.row];
+                foldertypeView.folder_id = [[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"id"];
+                foldertypeView.delegate = self;
+                [self.navController pushViewController:foldertypeView animated:YES];
             }
-            foldertypeView.obj = [self.arrObjFood objectAtIndex:indexPath.row];
-            foldertypeView.folder_id = [[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"id"];
-            foldertypeView.delegate = self;
-            [self.navController pushViewController:foldertypeView animated:YES];
-        
         }
     }
     if ([self.menu isEqualToString:@"Drinks"]) {
         
-        self.navItem.title = @" ";
-        [self.delegate HideTabbar];
-        
         if ([[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"type"] isEqualToString:@"product"]) {
+            
+            self.navItem.title = @" ";
+            [self.delegate HideTabbar];
             
             PFFoodAndDrinkDetailViewController *detailView = [[PFFoodAndDrinkDetailViewController alloc] init];
             if(IS_WIDESCREEN) {
@@ -596,16 +611,31 @@ NSString *detailText;
             
         } else {
             
-            PFDetailFoldertypeViewController *foldertypeView = [[PFDetailFoldertypeViewController alloc] init];
-            if(IS_WIDESCREEN) {
-                foldertypeView = [[PFDetailFoldertypeViewController alloc] initWithNibName:@"PFDetailFoldertypeViewController_Wide" bundle:nil];
+            NSString *children_length = [[NSString alloc] initWithFormat:@"%@",[[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"children_length"]];
+            
+            if ([children_length isEqualToString:@"0"]) {
+                [[[UIAlertView alloc] initWithTitle:@"ราตรีสโมสร"
+                                            message:@"Coming soon."
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil] show];
+                
             } else {
-                foldertypeView = [[PFDetailFoldertypeViewController alloc] initWithNibName:@"PFDetailFoldertypeViewController" bundle:nil];
+                
+                self.navItem.title = @" ";
+                [self.delegate HideTabbar];
+            
+                PFDetailFoldertypeViewController *foldertypeView = [[PFDetailFoldertypeViewController alloc] init];
+                if(IS_WIDESCREEN) {
+                foldertypeView = [[PFDetailFoldertypeViewController alloc] initWithNibName:@"PFDetailFoldertypeViewController_Wide" bundle:nil];
+                } else {
+                    foldertypeView = [[PFDetailFoldertypeViewController alloc] initWithNibName:@"PFDetailFoldertypeViewController" bundle:nil];
+                }
+                foldertypeView.obj = [self.arrObjDrink objectAtIndex:indexPath.row];
+                foldertypeView.folder_id = [[self.arrObjDrink objectAtIndex:indexPath.row] objectForKey:@"id"];
+                foldertypeView.delegate = self;
+                [self.navController pushViewController:foldertypeView animated:YES];
             }
-            foldertypeView.obj = [self.arrObjFood objectAtIndex:indexPath.row];
-            foldertypeView.folder_id = [[self.arrObjFood objectAtIndex:indexPath.row] objectForKey:@"id"];
-            foldertypeView.delegate = self;
-            [self.navController pushViewController:foldertypeView animated:YES];
             
         }
         

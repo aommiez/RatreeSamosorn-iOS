@@ -56,6 +56,7 @@ BOOL refreshDataHistory;
     [self.conditionnomember setFrame:frame];
     int lines = self.conditionnomember.frame.size.height/15;
     self.conditionnomember.numberOfLines = lines;
+    
     UILabel *descText = [[UILabel alloc] initWithFrame:frame];
     descText.text = self.conditionnomember.text;
     descText.numberOfLines = lines;

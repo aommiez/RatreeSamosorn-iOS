@@ -60,6 +60,7 @@
         NSLog(@"%@",[error localizedDescription]);
     }];
     
+    [self.userDefaults removeObjectForKey:@"historyArray"];
     [self.userDefaults removeObjectForKey:@"access_token"];
     [self.userDefaults removeObjectForKey:@"user_id"];
 }

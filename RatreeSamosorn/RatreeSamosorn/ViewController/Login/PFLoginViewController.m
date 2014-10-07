@@ -74,8 +74,8 @@ NSString *password;
         [self.emailSignUp setPlaceholder:@"E-mail"];
         [self.passwordSignUp setPlaceholder:@"Password"];
         [self.confirmSignUp setPlaceholder:@"Confirm Password"];
-        [self.dateOfBirthSignUp setPlaceholder:@"Date of Birth"];
-        [self.gender setPlaceholder:@"Gender"];
+        [self.dateOfBirthSignUp setPlaceholder:@"Date of Birth (optional)"];
+        [self.gender setPlaceholder:@"Gender (optional)"];
         [self.create_bt setTitle:@"Create New Account" forState:UIControlStateNormal];
 
     } else {
@@ -88,8 +88,8 @@ NSString *password;
         [self.emailSignUp setPlaceholder:@"E-mail"];
         [self.passwordSignUp setPlaceholder:@"รหัสผ่าน"];
         [self.confirmSignUp setPlaceholder:@"ยืนยัน รหัสผ่าน"];
-        [self.dateOfBirthSignUp setPlaceholder:@"วันเกิด"];
-        [self.gender setPlaceholder:@"เพศ"];
+        [self.dateOfBirthSignUp setPlaceholder:@"วันเกิด (ไม่จำเป็น)"];
+        [self.gender setPlaceholder:@"เพศ (ไม่จำเป็น)"];
         [self.create_bt setTitle:@"ลงทะเบียนผู้ใช้" forState:UIControlStateNormal];
     }
     

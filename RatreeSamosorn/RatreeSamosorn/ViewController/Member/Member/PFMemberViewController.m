@@ -235,7 +235,7 @@ NSTimer *timmer;
             
             self.nomemberView.frame = CGRectMake(self.nomemberView.frame.origin.x, self.nomemberView.frame.origin.y, self.nomemberView.frame.size.width, self.nomemberView.frame.size.height+descText.frame.size.height-35);
             
-            self.conditionnomemberView.frame = CGRectMake(self.conditionnomemberView.frame.origin.x, self.conditionnomemberView.frame.origin.y, self.conditionnomemberView.frame.size.width, self.conditionnomemberView.frame.size.height+descText.frame.size.height-25);
+            self.conditionnomemberView.frame = CGRectMake(self.conditionnomemberView.frame.origin.x, self.conditionnomemberView.frame.origin.y, self.conditionnomemberView.frame.size.width, self.conditionnomemberView.frame.size.height+descText.frame.size.height-20);
             self.conditionnomemberView.backgroundColor = RGBA(255, 255, 255, 0.3);
             
             self.textnomemberView.frame = CGRectMake(self.textnomemberView.frame.origin.x, self.textnomemberView.frame.origin.y, self.textnomemberView.frame.size.width, self.textnomemberView.frame.size.height+descText.frame.size.height-25);
@@ -324,7 +324,7 @@ NSTimer *timmer;
             
             self.nomemberView.frame = CGRectMake(self.nomemberView.frame.origin.x, self.nomemberView.frame.origin.y, self.nomemberView.frame.size.width, self.nomemberView.frame.size.height+descText.frame.size.height-35);
             
-            self.conditionnomemberView.frame = CGRectMake(self.conditionnomemberView.frame.origin.x, self.conditionnomemberView.frame.origin.y, self.conditionnomemberView.frame.size.width, self.conditionnomemberView.frame.size.height+descText.frame.size.height-25);
+            self.conditionnomemberView.frame = CGRectMake(self.conditionnomemberView.frame.origin.x, self.conditionnomemberView.frame.origin.y, self.conditionnomemberView.frame.size.width, self.conditionnomemberView.frame.size.height+descText.frame.size.height-20);
             self.conditionnomemberView.backgroundColor = RGBA(255, 255, 255, 0.3);
             
             self.textnomemberView.frame = CGRectMake(self.textnomemberView.frame.origin.x, self.textnomemberView.frame.origin.y, self.textnomemberView.frame.size.width, self.textnomemberView.frame.size.height+descText.frame.size.height-25);
@@ -1704,7 +1704,7 @@ NSTimer *timmer;
         [self viewDidLoad];
         [self.delegate ShowTabbar];
     } else {
-        refreshheader = NO;
+        refreshheader = YES;
         [self viewDidLoad];
         [self.delegate ShowTabbar];
     }

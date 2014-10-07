@@ -157,8 +157,10 @@ NSTimer *timmer;
     frame.size = [self.contentTxt sizeOfMultiLineLabel];
     [self.contentTxt sizeOfMultiLineLabel];
     [self.contentTxt setFrame:frame];
+    
     int lines = self.contentTxt.frame.size.height/15;
     self.contentTxt.numberOfLines = lines;
+    
     UILabel *descText = [[UILabel alloc] initWithFrame:frame];
     descText.text = self.contentTxt.text;
     descText.numberOfLines = lines;
